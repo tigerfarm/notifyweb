@@ -1,0 +1,89 @@
+<html>
+    <!-- link rel="manifest" href="/manifest.json"/ -->
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="notify_actions.js"></script>
+        <title>Notify Firebase Cloud Notifications</title>
+    </head>
+    <body>
+        <h1>Quick Start Notify</h1>
+
+        <!-- --------------------------------------------------------------- -->
+        <h2>Create Binding</h2>
+        <form id="binding_form">
+            <table>
+                <tr>
+                    <td>Identity:</td>
+                    <td><input type="text" name="identity_field"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" onclick="GetMessagingToken()" value="Get Firebase FCM message token"></td>
+                    <td style="height:60px"><span id="fcmToken"></span></td>
+                </tr>
+                <tr>
+                    <td><input type="button" onclick="createBinding()" value="Create Binding"></td>
+                    <td><span id="bindingSid"></span></td>
+                </tr>
+            </table>
+        </form>
+
+        <!-- --------------------------------------------------------------- -->
+        <script>
+            // firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+            // Initialize Firebase
+            // tignotifyweb:
+            var config = {
+                apiKey: "AI...Q",
+                projectId: "example",
+                messagingSenderId: "7...6"
+            };
+            console.log('+ firebase.initializeApp(config), ' + config.projectId);
+            //
+            // Retrieve Firebase Messaging object.
+            firebase.initializeApp(config);
+            //
+            // Listener for incomming notifications.
+            firebase.messaging().onMessage(function (payload) {
+                console.log('Message received. ', payload);
+                alert(payload.data.twi_body);
+            });
+            // Get a Firebase token to identify this client.
+            var firebaseFcmToken = "";
+            function GetMessagingToken() {
+                if (firebase && firebase.messaging()) {
+                    // requesting permission to use push notifications
+                    firebase.messaging().requestPermission().then(() => {
+                        // getting FCM token
+                        firebase.messaging().getToken().then((fcmToken) => {
+                            firebaseFcmToken = fcmToken;
+                            document.getElementById("fcmToken").innerText = fcmToken;
+                            console.log('+ Device web application address, Firebase FCM token ', firebaseFcmToken);
+                        }).catch((err) => {
+                            alert("Error: Can't get token: " + err);
+                        });
+                    }).catch((err) => {
+                        alert("Error: Can't request permission or permission hasn't been granted to the web app by the user." + err);
+                    });
+                } else {
+                    alert("Error: Firebase library not initialized.");
+                }
+            }
+            // Get a Firebase token to identify this client.
+            function createBinding() {
+                var identity = document.forms["binding_form"]["identity_field"].value;
+                if (identity === "") {
+                    alert('Identity must be specified');
+                    return false;
+                }
+                if (firebaseFcmToken === "") {
+                    alert('Firebase FCM token must be specified');
+                    return false;
+                }
+                // register(identity, address);
+                registerBinding(identity, firebaseFcmToken);
+            }
+        </script>
+    </body>
+</html>
