@@ -156,7 +156,7 @@ $ node listBindings.js
 When sending, include:
 + The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
 + The app user's identity(davew), which matches to the binding(BSfa42ee4f47545e16bd8f32891f807c71), 
-which has the device id(e2fFuMEwN78:APA9...dXV).
+which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was created in the browser.
 + The notification message('Hello there 1') to send.
 
 ````
@@ -169,7 +169,7 @@ client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.creat
 The above information is stored with Twilio. It is the link between:
 + Your sending program,
 + To Twilio, to the Google(FCM) network.
-+ Google(FCM) network to the app(identity:address) on the specific device.
++ Google(FCM) network to the app with the Firebase token on the specific device.
 
 Use the send notification program to send a notification to the app user.
 In the file, sendNotification.js, set identity to the identity you used in the web application.
