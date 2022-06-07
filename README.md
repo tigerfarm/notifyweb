@@ -3,13 +3,6 @@
 Following, are the steps I used to set up required configurations and run a sample Twilio web notification application.
 This allows notifications to be sent from my computer, and received on the web browser that is running the notification application.
 
-General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
-steps I followed.
-[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
-to create the Twilio Notification credentials.
-My application sample is a modified:
-[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
-
 #### Create a Notify Service
 
 Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services) 
@@ -23,7 +16,7 @@ Note, I used the same Notify service as when I implemented the Android Notify ap
 #### Create a Google Firebase Project to Use
 
 Configuring Android Push Notifications
-documentation [link](https://www.twilio.com/docs/notify/configure-android-push-notifications).
+documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
 
 Create a Google Firebase [project](https://console.firebase.google.com/)
 that will will map to the Notify web application. I used my personal Google account.
@@ -62,18 +55,16 @@ Setting the projectId is optional. I used it to echo the Firebase project I was 
 
 #### Add the Firebase Server Key into the Twilio Notify Push Credentials
 
-https://www.twilio.com/docs/notify/quickstart/firebase-web#find-your-firebase-secret-key
-
-This is, [Step 3 - Upload your API Key to Twilio](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-3-upload-your-api-key-to-twilio)
-in the [Push Notifications on Web](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
+This is, [Find your Firebase secret key](https://www.twilio.com/docs/notify/quickstart/firebase-web#find-your-firebase-secret-key)
+in the [Web Push Quickstart: Firebase and Twilio Notify](https://www.twilio.com/docs/notify/quickstart/firebase-web)
 documentation.
 
 Get the [Google project](https://console.firebase.google.com/)
-tignotifyweb's Project Settings/Cloud messaging, key/Server key Token.
+tignotify's Project Settings/Cloud messaging, key/Server key Token.
 
 Add the key value into a newly [created/added Push Credential](https://www.twilio.com/console/notify/credentials/create):
 ````
-Friendly Name: tignotifyweb
+Friendly Name: tignotify
 Type: FCM
 FCM Secret: AI..._vr... (the value of the attribute apiKey, from Firebase Project Settings/General)
 Click Save.
@@ -82,11 +73,6 @@ In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotifywe
 
 Its listed under the "Cloud Messaging" settings.
 
-Note, if using Node.
-````
-$ npm install firebase
-````
-
 Click, Continue to Console.
 ````
 Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
@@ -94,17 +80,27 @@ Note, the above sample code, is listed here under the "General" settings.
 The code has your Web API Key(as above, apiKey: "AI..._vr...").
 ````
 
-#### Create the web application to receive Notifications
+#### Download the Web Application to Receive Notifications
 
-[Step 4 - Pass the API Credential Sid in your Access Token](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-4-pass-the-api-credential-sid-in-your-access-token)
-in the [Push Notifications on Web](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
-documentation.
+Install modules.
+````
+$ npm install --save express
+````
+Run the web server. Default port is hardcoded to 8000.
+````
+$ node websever.js
+````
+In a web browser, goto the [link](http://localhost:8000/)
+````
+Enter an Identity such as dave.
+Click "Get Firebase FCM message token".
+The token is displayed.
+Click "Create Twilio Notify binding".
+The Twilio Notify Binding id is displayed.
+````
+Sample run:
 
-[Step 5 - Initialize Firebase in your web app](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-5-initialize-firebase-in-your-web-app)
-
-[Step 6 - Request push permissions from the user and get your FCM token](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-5-initialize-firebase-in-your-web-app)
-
-[Step 7 - Pass the FCM token to the Conversations JS SDK and register an event listener for new push arrival](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-5-initialize-firebase-in-your-web-app)
+<img src="ChatClient.jpg" width="400"/>
 
 #### Send a notification:
 
@@ -194,6 +190,16 @@ Click, Continue to Console.
 Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
 Note, the above sample code, is listed here under the "General" settings.
 The code has your Web API Key(as above, apiKey: "AI..._vr...").
+
+--------------------------------------------------------------------------------
+#### For Reference
+
+General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
+steps I followed.
+[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
+to create the Twilio Notification credentials.
+My application sample is a modified:
+[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
 
 --------------------------------------------------------------------------------
 
