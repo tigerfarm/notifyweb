@@ -48,51 +48,43 @@ In the index.html file,
 set the value for messagingSenderId, to the "Project number".
 Set the value for apiKey, to the "Web API Key".
 Both are listed under the Firebase project settings: "General".
-Setting the projectId is optional. I used it to echo the Firebase project I was using.
+Setting the projectId is optional. I use it to echo the Firebase project I was using.
 ````
             var config = {
                 apiKey: "AI...Q",
-                projectId: "Example",
+                projectId: "tignotify",
                 messagingSenderId: "5...1"
             };
 ````
 
 #### Add the Firebase Server Key into the Twilio Notify Push Credentials
 
-This is, [Find your Firebase secret key](https://www.twilio.com/docs/notify/quickstart/firebase-web#find-your-firebase-secret-key)
-in the [Web Push Quickstart: Firebase and Twilio Notify](https://www.twilio.com/docs/notify/quickstart/firebase-web)
-documentation.
-
 Get the [Google project](https://console.firebase.google.com/)
-tignotify's Project Settings/Cloud messaging, key/Server key Token.
+tignotify's Project Settings/Cloud messaging, Server key Token.
 
-Add the key value into a newly [created/added Push Credential](https://www.twilio.com/console/notify/credentials/create):
+Add the Server key Token value into a newly 
+[created/added Push Credential](https://www.twilio.com/console/notify/credentials/create):
 ````
 Friendly Name: tignotify
 Type: FCM
-FCM Secret: AI..._vr... (the value of the attribute apiKey, from Firebase Project Settings/General)
+FCM Secret: AAAA...Tx
 Click Save.
 ````
-In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotifyweb. Click Save.
-
-Its listed under the "Cloud Messaging" settings.
-
-Click, Continue to Console.
-````
-Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
-Note, the above sample code, is listed here under the "General" settings.
-The code has your Web API Key(as above, apiKey: "AI..._vr...").
-````
+In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotify. Click Save.
 
 #### Download the Web Application to Receive Notifications
 
-Install modules.
+Install the Express module.
 ````
 $ npm install --save express
 ````
 Run the web server. Default port is hardcoded to 8000.
 ````
 $ node websever.js
++++ Notify web application server is starting up.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
++ Twilio client object created for Twilio account: ACa...3
++ Listening on port: 8000
 ````
 In a web browser, goto the [link](http://localhost:8000/)
 ````
