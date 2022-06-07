@@ -18,7 +18,7 @@ Project Name: tignotify
 Disable:  Enable Google Analytics for this project.
 Click Create Project, Your new project is ready. Click Continue.
 Get started by adding Firebase to your app ... Click Android icon.
-Use the Android package name that is used in the cloned app: "com.twilio.notify.quickstart".
+Use an Android package name such as: "com.twilio.notify.quickstart".
 Click register app.
 ````
 
