@@ -6,26 +6,27 @@ browser running the web notification application.
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
-#### Create a Notify Service
+## Create a Notify Service
 
-Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services) 
-([Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web)). 
-Example SID:
+Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
+
+Example Notify Service SID:
 ````
 IS0e9b3863450252891f81f312a6e3a7d7
 ````
 Note, I used the same Notify service as when I implemented the Android Notify app to receive notifications.
 
-#### Create a Google Firebase Project to Use
+## Create a Google Firebase Project to Use
 
 Configuring Android Push Notifications
-documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
+[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
 
 Create a Google Firebase [project](https://console.firebase.google.com/)
-that will will map to the Notify web application. I used my personal Google account.
+that will will map to the Notify web application.
+I used my personal Google account.
 ````
-Click Add project
-Project Name: tignotifyweb
+Click Add project.
+Project Name: tignotify
 Disable:  Enable Google Analytics for this project.
 Click Create Project, Your new project is ready. Click Continue.
 Get started by adding Firebase to your app ... Click ???
@@ -33,7 +34,7 @@ Register app, app nickname: tignotifyweb.
 Click register app.
 ````
 
-#### Use the Google Firebase Project Information in the Web Application
+### Use the Google Firebase Project Information in the Web Application
 
 In this web application, in firebase-messaging-sw.js,
 set the value for messagingSenderId, to the "Project number".
@@ -197,6 +198,8 @@ steps I followed.
 to create the Twilio Notification credentials.
 My application sample is a modified:
 [TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
+
+[Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
 
 --------------------------------------------------------------------------------
 
