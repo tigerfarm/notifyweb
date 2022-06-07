@@ -1,7 +1,10 @@
 # Twilio Notify Web Quickstart Implementation Steps
 
-Following, are the steps I used to set up required configurations and run a sample Twilio web notification application.
-This allows notifications to be sent from my computer, and received on the web browser that is running the notification application.
+These are the steps to set up, configure, and run a sample Twilio web notification application.
+Once running, you can use a command line program to send notifications to the
+browser running the web notification application.
+
+<img src="notifyWebNotification.jpg" width="600"/>
 
 #### Create a Notify Service
 
