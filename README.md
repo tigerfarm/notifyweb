@@ -112,7 +112,7 @@ Install the Express and Twilio modules.
 $ npm install --save express
 $ npm install --save twilio
 ````
-Set environment variables. Or, hardcode them into the files: websever.js.
+Set environment variables. Or, hardcode them into the program: websever.js.
 ````
 $ export MASTER_NOTIFY_SID=IS0e9b3863450252891f81f312a6e3a7d7
 $ export MASTER_ACCOUNT_SID=AC...
@@ -158,10 +158,17 @@ When sending, include:
 + The app user's identity, which matches to the binding, which as the identity + the device id.
 + The notification message to send.
 
-The above information stored with Twilio, is the link between:
+````
+client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.create({
+    identity: 'davew',
+    body: 'Hello there 1'
+})
+````
+
+The above information is stored with Twilio. It is the link between:
 + Your sending program,
-+ To the Google(FCM) network. Or Apple(APN) networks if the app in on an iOS device.
-+ To app on the specific device.
++ To Twilio, to the Google(FCM) network.
++ Google(FCM) network to the app(identity<address>) on the specific device.
 
 Use the send notification program to send a notification to the app user.
 In the file, sendNotification.js, set identity to the identity you used in the web application.
