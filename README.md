@@ -154,9 +154,10 @@ $ node listBindings.js
 ## Send a notification:
 
 When sending, include:
-+ The Notify service SID, which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
-+ The app user's identity, which matches to the binding, which as the identity + the device id.
-+ The notification message to send.
++ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
++ The app user's identity, which matches to the binding(BSfa42ee4f47545e16bd8f32891f807c71), 
+which as the identity(davew) + the device id(e2fFuMEwN78:APA9...dXV).
++ The notification message('Hello there 1') to send.
 
 ````
 client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.create({
