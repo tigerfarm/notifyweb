@@ -210,6 +210,8 @@ My application sample is a modified:
 
 [Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
 
+[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
+
 [Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
 
 --------------------------------------------------------------------------------
