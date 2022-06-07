@@ -68,7 +68,7 @@ $ git clone https://github.com/tigerfarm/notifyweb
 $ cd notifyweb/
 ````
 
-Or, download the ZIP into a working directory.
+Or, download the ZIP into a working directory, and unzip it.
 ````
 cd /Users/<user>/Projects/
 $ mkdir notifyweb
@@ -79,13 +79,14 @@ After downloading, rename "docroot/indexShow.html" to "docroot/index.html"
 
 #### Files
 
-- [docroot/indexShow.html](docroot/indexShow.html) : Client HTML
+- [docroot/index.html](docroot/indexShow.html) : Client HTML
 - [docroot/notify_actions.js](docroot/notify_actions.js) : Client JavaScript functions
+- [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : JavaScript used by the Firebase JavaScript libraries
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
 
 #### Use the Google Firebase Project Information in the Web Application
 
-In in the file: firebase-messaging-sw.js,
+In the file: firebase-messaging-sw.js,
 set the value for messagingSenderId, to the Firebase "Project number".
 Its listed under the Firebase project settings: "General".
 ````
@@ -119,7 +120,7 @@ $ node websever.js
 + Twilio client object created for Twilio account: ACa...3
 + Listening on port: 8000
 ````
-In a web browser, goto the [link](http://localhost:8000/)
+In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
 Enter an Identity such as "davew".
 Click "Get Firebase FCM message token".
