@@ -1,13 +1,14 @@
 # Twilio Notify Web Quickstart Implementation Steps
 
-Following, are the steps I used to set up required configurations and run the sample Twilio web notification application.
+Following, are the steps I used to set up required configurations and run a sample Twilio web notification application.
 This allows notifications to be sent from my computer, and received on the web browser that is running the notification application.
 
-Set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
-I'm following.
-My application sample is a modifi: 
-[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush)
-
+General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
+steps I followed.
+[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
+to create the Twilio Notification credentials.
+My application sample is a modified:
+[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
 
 #### Create a Notify Service
 
@@ -19,7 +20,7 @@ IS0e9b3863450252891f81f312a6e3a7d7
 ````
 Note, I used the same Notify service as when I implemented the Android Notify app to receive notifications.
 
-#### Create a Google App Mapping to the Notify App
+#### Create a Google Firebase Project to Use
 
 Configuring Android Push Notifications
 documentation [link](https://www.twilio.com/docs/notify/configure-android-push-notifications).
@@ -31,43 +32,36 @@ Click Add project
 Project Name: tignotifyweb
 Disable:  Enable Google Analytics for this project.
 Click Create Project, Your new project is ready. Click Continue.
-Get started by adding Firebase to your app ... Click web icon ("</>").
+Get started by adding Firebase to your app ... Click ???
 Register app, app nickname: tignotifyweb.
 Click register app.
 ````
-Firebase Step (2) Add Firebase SDK sample code snippet:
-````
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AI...",
-  authDomain: "tignotifyweb.firebaseapp.com",
-  projectId: "tignotifyweb",
-  storageBucket: "tignotifyweb.appspot.com",
-  messagingSenderId: "70...",
-  appId: "1:70...6:web:de03..."
-};
+#### Use the Google Firebase Project Information in the Web Application
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+In this web application, in firebase-messaging-sw.js,
+set the value for messagingSenderId, to the "Project number".
+Its listed under the Firebase project settings: "General".
 ````
-Note, if using Node.
+firebase.initializeApp({
+    'messagingSenderId': "5...1"
+});
 ````
-$ npm install firebase
+In the index.html file,
+set the value for messagingSenderId, to the "Project number".
+Set the value for apiKey, to the "Web API Key".
+Both are listed under the Firebase project settings: "General".
+Setting the projectId is optional. I used it to echo the Firebase project I was using.
 ````
-Click, Continue to Console.
+            var config = {
+                apiKey: "AI...Q",
+                projectId: "Example",
+                messagingSenderId: "5...1"
+            };
 ````
-Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
-Note, the above sample code, is listed here under the "General" settings.
-The code has your Web API Key(as above, apiKey: "AI..._vr...").
-````
-#### Add the Google FCM token into the Twilio Notify Push Credentials
 
-https://www.twilio.com/docs/notify/quickstart/firebase-web
+#### Add the Firebase Server Key into the Twilio Notify Push Credentials
+
 https://www.twilio.com/docs/notify/quickstart/firebase-web#find-your-firebase-secret-key
 
 This is, [Step 3 - Upload your API Key to Twilio](https://www.twilio.com/docs/conversations/javascript/push-notifications-web#step-3-upload-your-api-key-to-twilio)
@@ -85,6 +79,20 @@ FCM Secret: AI..._vr... (the value of the attribute apiKey, from Firebase Projec
 Click Save.
 ````
 In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotifyweb. Click Save.
+
+Its listed under the "Cloud Messaging" settings.
+
+Note, if using Node.
+````
+$ npm install firebase
+````
+
+Click, Continue to Console.
+````
+Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
+Note, the above sample code, is listed here under the "General" settings.
+The code has your Web API Key(as above, apiKey: "AI..._vr...").
+````
 
 #### Create the web application to receive Notifications
 
@@ -139,6 +147,53 @@ curl -X POST https://notify.twilio.com/v1/Services/IS6b86...8a/Notifications \
 ````
 
 The notification will be received on the phone that is running the notification app.
+
+--------------------------------------------------------------------------------
+#### The following Firebase steps failed
+
+The steps are based on the Twilio Conversations
+[documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web).
+
+Create a Google Firebase [project](https://console.firebase.google.com/)
+that will will map to the Notify web application. I used my personal Google account.
+````
+Click Add project
+Project Name: tignotifyweb
+Disable:  Enable Google Analytics for this project.
+Click Create Project, Your new project is ready. Click Continue.
+Get started by adding Firebase to your app ... Click web icon ("</>").
+Register app, app nickname: tignotifyweb.
+Click register app.
+````
+Firebase Step (2) Add Firebase SDK sample code snippet:
+````
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AI...",
+  authDomain: "tignotifyweb.firebaseapp.com",
+  projectId: "tignotifyweb",
+  storageBucket: "tignotifyweb.appspot.com",
+  messagingSenderId: "70...",
+  appId: "1:70...6:web:de03..."
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+````
+Note, if using Node.
+````
+$ npm install firebase
+````
+Click, Continue to Console.
+````
+Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
+Note, the above sample code, is listed here under the "General" settings.
+The code has your Web API Key(as above, apiKey: "AI..._vr...").
 
 --------------------------------------------------------------------------------
 
