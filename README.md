@@ -72,7 +72,7 @@ Click Save.
 ````
 In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotify. Click Save.
 
-#### Download the Web Application to Receive Notifications
+## Download the Web Application to Receive Notifications
 
 Install the Express module.
 ````
@@ -98,7 +98,7 @@ Sample run:
 
 <img src="notifyWebApplication.jpg" width="400"/>
 
-#### Send a notification:
+## Send a notification:
 
 When sending, include:
 + The Notify service SID, which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
