@@ -100,7 +100,7 @@ The Twilio Notify Binding id is displayed.
 ````
 Sample run:
 
-<img src="ChatClient.jpg" width="400"/>
+<img src="notifyWebApplication.jpg" width="400"/>
 
 #### Send a notification:
 
