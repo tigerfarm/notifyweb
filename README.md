@@ -112,6 +112,12 @@ Install the Express and Twilio modules.
 $ npm install --save express
 $ npm install --save twilio
 ````
+Set environment variables. Or, hardcode them into the files: websever.js.
+````
+$ export MASTER_NOTIFY_SID=IS0e9b3863450252891f81f312a6e3a7d7
+$ export MASTER_ACCOUNT_SID=AC...
+$ export MASTER_AUTH_TOKEN=...
+````
 Run the web server. Default port is hardcoded to 8000.
 ````
 $ node websever.js
@@ -133,6 +139,7 @@ Sample run:
 <img src="notifyWebApplication.jpg" width="400"/>
 
 Use a command line program to list the newly created binding.
+Note the above environment variables are required.
 
 Sample run:
 ````

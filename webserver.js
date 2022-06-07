@@ -4,6 +4,7 @@
 // Easy to use.
 // Install modules.
 //  $ npm install --save express
+//  $ npm install --save twilio
 //  
 // Run the web server. Default port is hardcoded to 8000.
 //  $ node websever.js
@@ -14,8 +15,8 @@ console.log("+++ Notify web application server is starting up.");
 var NOTIFY_SID = process.env.MASTER_NOTIFY_SID;
 console.log("+ Notify service SID: " + NOTIFY_SID);
 //
-var client = require('twilio')(process.env.CONVERSATIONS_ACCOUNT_SID, process.env.CONVERSATIONS_ACCOUNT_AUTH_TOKEN);
-console.log("+ Twilio client object created for Twilio account: " + process.env.CONVERSATIONS_ACCOUNT_SID);
+var client = require('twilio')(process.env.MASTER_ACCOUNT_SID, process.env.MASTER_AUTH_TOKEN);
+console.log("+ Twilio client object created for Twilio account: " + process.env.MASTER_ACCOUNT_SID);
 //
 // -----------------------------------------------------------------------------
 var returnMessage = '';
