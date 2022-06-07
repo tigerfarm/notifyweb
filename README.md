@@ -1,17 +1,15 @@
 # Twilio Notify Web Application Implementation
 
-These are the steps to set up, configure, and run a sample Twilio web notification application.
+These are the steps to set up, configure, and run 
+a sample Twilio Notify notification web application.
 Once running, you can use a command line program to send notifications to the
-browser running the web notification application.
+browser that is running the web notification application.
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
 ## Create a Google Firebase Project to Use
 
-Configuring Android Push Notifications
-[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
-
-Create a Google Firebase [project](https://console.firebase.google.com/)
+Create a [Google Firebase project](https://console.firebase.google.com/)
 that will will map to the Notify web application.
 I used my personal Google account.
 ````
@@ -19,8 +17,8 @@ Click Add project.
 Project Name: tignotify
 Disable:  Enable Google Analytics for this project.
 Click Create Project, Your new project is ready. Click Continue.
-Get started by adding Firebase to your app ... Click ???
-Register app, app nickname: tignotifyweb.
+Get started by adding Firebase to your app ... Click Android icon.
+Use the Android package name that is used in the cloned app: "com.twilio.notify.quickstart".
 Click register app.
 ````
 
@@ -61,6 +59,21 @@ Side note, I used the same Firebase Server key Token
 as when I implemented the Android Notify app to receive notifications.
 
 ## Download this Web Application that can Receive Twilio Notify Notifications
+
+If you have the GitHub tools installed, you can clone this repository to your disk.
+````
+cd /Users/<user>/Projects/
+$ git clone https://github.com/tigerfarm/notifyweb
+...
+$ cd notifyweb/
+````
+
+Or, download the ZIP into a working directory.
+````
+cd /Users/<user>/Projects/
+$ mkdir notifyweb
+$ cd notifyweb/
+````
 
 After downloading, rename "docroot/indexShow.html" to "docroot/index.html"
 
@@ -216,10 +229,15 @@ The code has your Web API Key(as above, apiKey: "AI..._vr...").
 --------------------------------------------------------------------------------
 ### Documentation Links
 
+Configuring Android Push Notifications
+[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
+
 General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
 steps I followed.
+
 [Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
 to create the Twilio Notification credentials.
+
 My application sample is a modified:
 [TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
 
