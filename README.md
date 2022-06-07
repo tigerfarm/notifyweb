@@ -1,20 +1,10 @@
-# Twilio Notify Web Quickstart Implementation Steps
+# Twilio Notify Web Application Implementation
 
 These are the steps to set up, configure, and run a sample Twilio web notification application.
 Once running, you can use a command line program to send notifications to the
 browser running the web notification application.
 
 <img src="notifyWebNotification.jpg" width="600"/>
-
-## Create a Notify Service
-
-Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
-
-Example Notify Service SID:
-````
-IS0e9b3863450252891f81f312a6e3a7d7
-````
-Note, I used the same Notify service as when I implemented the Android Notify app to receive notifications.
 
 ## Create a Google Firebase Project to Use
 
@@ -34,10 +24,56 @@ Register app, app nickname: tignotifyweb.
 Click register app.
 ````
 
-### Use the Google Firebase Project Information in the Web Application
+### Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
-In this web application, in firebase-messaging-sw.js,
-set the value for messagingSenderId, to the "Project number".
+Get the [Google project](https://console.firebase.google.com/)
+tignotify's Project Settings/Cloud messaging, Server key Token.
+
+Add the Server key Token value into a newly created/added
+[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
+
+For example:
+````
+Friendly Name: tignotifyweb
+Type: FCM
+FCM Secret: AAAA...Tx (Firebase Server key Token)
+````
+Click Save.
+
+## Create a Notify Service
+
+Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
+
+For example:
+````
+FRIENDLY NAME: tignotifyweb
+FCM CREDENTIAL SID: tignotifyweb (the above newly created credential entry)
+Logging: enabled
+````
+Click Save.
+
+Example Notify Service SID:
+````
+IS0e9b3863450252891f81f312a6e3a7d7
+````
+
+Side note, I used the same Firebase Server key Token 
+as when I implemented the Android Notify app to receive notifications.
+
+## Download this Web Application that can Receive Twilio Notify Notifications
+
+After downloading, rename "docroot/indexShow.html" to "docroot/index.html"
+
+#### Files
+
+- [docroot/indexShow.html](docroot/indexShow.html) : Client HTML
+- [docroot/notify_actions.js](docroot/notify_actions.js) : Client JavaScript functions
+- [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
+
+#### Use the Google Firebase Project Information in the Web Application
+
+In in the file: firebase-messaging-sw.js,
+set the value for messagingSenderId, to the Firebase "Project number".
 Its listed under the Firebase project settings: "General".
 ````
 firebase.initializeApp({
@@ -57,26 +93,10 @@ Setting the projectId is optional. I use it to echo the Firebase project I was u
             };
 ````
 
-#### Add the Firebase Server Key into the Twilio Notify Push Credentials
-
-Get the [Google project](https://console.firebase.google.com/)
-tignotify's Project Settings/Cloud messaging, Server key Token.
-
-Add the Server key Token value into a newly 
-[created/added Push Credential](https://www.twilio.com/console/notify/credentials/create):
-````
-Friendly Name: tignotify
-Type: FCM
-FCM Secret: AAAA...Tx
-Click Save.
-````
-In the tignotify Notify Service Instance, select FCM CREDENTIAL SID: tignotify. Click Save.
-
-## Download the Web Application to Receive Notifications
-
-Install the Express module.
+Install the Express and Twilio modules.
 ````
 $ npm install --save express
+$ npm install --save twilio
 ````
 Run the web server. Default port is hardcoded to 8000.
 ````
@@ -97,6 +117,18 @@ The Twilio Notify Binding id is displayed.
 Sample run:
 
 <img src="notifyWebApplication.jpg" width="400"/>
+
+Use a command line program to list the newly created binding.
+
+Sample run:
+````
+$ node listBindings.js 
++++ List bindings for a Notify service.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
++ The listing:
+++ Binding-SID bindingType(fcm,apn):identity<address>)
+++ BSfa42ee4f47545e16bd8f32891f807c71 fcm:davew<e2fFuMEwN78:APA9...dXV>
+````
 
 ## Send a notification:
 
@@ -182,7 +214,7 @@ Note, the above sample code, is listed here under the "General" settings.
 The code has your Web API Key(as above, apiKey: "AI..._vr...").
 
 --------------------------------------------------------------------------------
-#### For Reference
+### Documentation Links
 
 General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
 steps I followed.
