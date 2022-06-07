@@ -153,29 +153,27 @@ $ node listBindings.js
 
 ## Send a notification:
 
+Use the send notification program(sendNotification.js) to send a notification to the app user.
+
 When sending, include:
 + The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
 + The app user's identity(davew), which matches to the binding(BSfa42ee4f47545e16bd8f32891f807c71), 
 which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was created in the browser.
 + The notification message('Hello there 1') to send.
 
-````
-client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.create({
-    identity: 'davew',
-    body: 'Hello there 1'
-})
-````
-
 The above information is stored with Twilio. It is the link between:
 + Your sending program,
 + To Twilio, to the Google(FCM) network.
 + Google(FCM) network to the app with the Firebase token on the specific device.
 
-Use the send notification program to send a notification to the app user.
 In the file, sendNotification.js, set identity to the identity you used in the web application.
+
 For example:
 ````
-identity: 'davew',
+client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.create({
+    identity: 'davew',
+    body: 'Hello there 1'
+})
 ````
 
 Sample program run:
@@ -196,53 +194,6 @@ The notification will be received on the phone that is running the notification 
 <img src="notifyWebNotification.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
-#### The following Firebase steps failed
-
-The steps are based on the Twilio Conversations
-[documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web).
-
-Create a Google Firebase [project](https://console.firebase.google.com/)
-that will will map to the Notify web application. I used my personal Google account.
-````
-Click Add project
-Project Name: tignotifyweb
-Disable:  Enable Google Analytics for this project.
-Click Create Project, Your new project is ready. Click Continue.
-Get started by adding Firebase to your app ... Click web icon ("</>").
-Register app, app nickname: tignotifyweb.
-Click register app.
-````
-Firebase Step (2) Add Firebase SDK sample code snippet:
-````
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AI...",
-  authDomain: "tignotifyweb.firebaseapp.com",
-  projectId: "tignotifyweb",
-  storageBucket: "tignotifyweb.appspot.com",
-  messagingSenderId: "70...",
-  appId: "1:70...6:web:de03..."
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-````
-Note, if using Node.
-````
-$ npm install firebase
-````
-Click, Continue to Console.
-````
-Under "Firebase", beside Project Overview, click the settings icon and select: Project Settings.
-Note, the above sample code, is listed here under the "General" settings.
-The code has your Web API Key(as above, apiKey: "AI..._vr...").
-
---------------------------------------------------------------------------------
 ### Documentation Links
 
 Configuring Android Push Notifications
@@ -258,6 +209,8 @@ My application sample is a modified:
 [TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
 
 [Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
+
+[Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
 
 --------------------------------------------------------------------------------
 
