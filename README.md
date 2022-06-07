@@ -169,7 +169,7 @@ client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.creat
 The above information is stored with Twilio. It is the link between:
 + Your sending program,
 + To Twilio, to the Google(FCM) network.
-+ Google(FCM) network to the app(identity<address>) on the specific device.
++ Google(FCM) network to the app(identity:address) on the specific device.
 
 Use the send notification program to send a notification to the app user.
 In the file, sendNotification.js, set identity to the identity you used in the web application.
