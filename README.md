@@ -92,7 +92,7 @@ $ node websever.js
 ````
 In a web browser, goto the [link](http://localhost:8000/)
 ````
-Enter an Identity such as dave.
+Enter an Identity such as "davew".
 Click "Get Firebase FCM message token".
 The token is displayed.
 Click "Create Twilio Notify binding".
@@ -114,13 +114,14 @@ The above information stored with Twilio, is the link between:
 + To the Google(FCM) network. Or Apple(APN) networks if the app in on an iOS device.
 + To app on the specific device.
 
-Use the send notification Function to send a notification to the app user.
+Use the send notification program to send a notification to the app user.
+In the file, sendNotification.js, set identity to the identity you used in the web application.
+For example:
 ````
-https://about-time-2357.twil.io/send-notification?identity=user1&body=Hello
-```
-Or, use the following Node program to send a notification, [sendNotification.js](sendNotification.js)
+identity: 'davew',
+````
 
-Sample run:
+Sample program run:
 ````
 $ node sendNotification.js 
 +++ Start sending notifications to an identity.
@@ -128,21 +129,14 @@ $ node sendNotification.js
 ````
 Or, use a curl command.
 ````
-curl -X POST https://notify.twilio.com/v1/Services/IS6b86...8a/Notifications \
-    -d 'Identity=davea' \
-    -d 'Body=Hello 13' \
+curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications \
+    -d 'Identity=davew' \
+    -d 'Body=Hello there 1' \
     -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
 ````
-
-````
-curl -X POST https://notify.twilio.com/v1/Services/IS6b86...8a/Notifications \
-    -d 'Identity=davea' \
-    -d 'Body=Hello 14' \
-    -d 'Title=Dave here' \
-    -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
-````
-
 The notification will be received on the phone that is running the notification app.
+
+<img src="notifyWebNotification.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
 #### The following Firebase steps failed
