@@ -16,13 +16,14 @@ function GetMessagingToken() {
                 document.getElementById("fcmToken").innerText = fcmToken;
                 console.log('+ Device web application address, Firebase FCM token ', firebaseFcmToken);
             }).catch((err) => {
-                alert("Error: Can't get token: " + err);
+                logger("- Error: Can't get token: " + err);
             });
         }).catch((err) => {
-            alert("Error: Can't request permission or permission hasn't been granted to the web app by the user." + err);
+            logger("- Error: user has not granted permission.");
+            logger(err);
         });
     } else {
-        alert("Error: Firebase library not initialized.");
+        logger("- Error: Firebase library not initialized.");
     }
 }
 
@@ -31,11 +32,11 @@ function GetMessagingToken() {
 function createBinding() {
     var identity = document.forms["binding_form"]["identity_field"].value;
     if (identity === "") {
-        alert('Identity must be specified');
+        logger('- Error: Identity must be specified');
         return false;
     }
     if (firebaseFcmToken === "") {
-        alert('Firebase FCM token must be specified');
+        logger('- Error: Firebase FCM token must be specified');
         return false;
     }
     // register(identity, address);
@@ -56,5 +57,15 @@ function registerBinding(identity, address) {
     });
 }
 
+// -----------------------------------------------------------------
+function logger(message) {
+    var aTextarea = document.getElementById('log');
+    aTextarea.value += "\n> " + message;
+    aTextarea.scrollTop = aTextarea.scrollHeight;
+}
+function clearTextAreas() {
+    log.value = "+ Ready";
+}
+// 
 // -----------------------------------------------------------------
 // eof

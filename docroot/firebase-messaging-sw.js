@@ -12,10 +12,10 @@ firebase.initializeApp({
     'messagingSenderId': "572828197431"
 });
 
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
+// Retrieve an instance of Firebase Messaging so that it can handle background messages.
 const messaging = firebase.messaging();
-// [END initialize_firebase_in_sw]
+
+console.log('+ Running: firebase-messaging-sw.js');
 
 messaging.setBackgroundMessageHandler(function(payload) {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
