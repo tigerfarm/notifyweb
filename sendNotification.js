@@ -5,7 +5,7 @@ const notifyServiceSid = process.env.MASTER_NOTIFY_SID;
 console.log("+ Notify service SID: " + notifyServiceSid);
 client.notify.services(notifyServiceSid).notifications.create({
     // DeliveryCallbackUrl: 'https://example.com/notify',
-    identity: 'stacyw',      // davew stacyw 
-    body: 'Hello there 4'
+    identity: 'davec',      // davec davew stacyw 
+    body: 'Hello there 1c'
 }).then(notification => console.log("+ Sent: " + notification.sid))
         .catch(error => console.log(error));
