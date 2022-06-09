@@ -70,7 +70,9 @@ IS0e9b3863450252891f81f312a6e3a7d7
 Side note, I used the same Firebase Server key Token 
 as when I implemented the Android Notify app to receive notifications.
 
-## Download this Web Application that can Receive Twilio Notify Notifications
+## Impliment the Web Application
+
+### Download the Web Application that can Receive Twilio Notify Notifications
 
 If you have the GitHub tools installed, you can clone this repository to your disk.
 ````
@@ -138,6 +140,9 @@ $ node websever.js
 + Twilio client object created for Twilio account: ACa...3
 + Listening on port: 8000
 ````
+
+## Register a Twilio Notify Bindin
+
 In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
 Click "Get Firebase FCM message token".
@@ -146,7 +151,7 @@ Enter an Identity such as "davew".
 Click "Create Twilio Notify binding".
     The Twilio Notify Binding id is displayed.
 ````
-The binding is created using the identity and the FCM message token(device address).
+The binding is created using the identity and the FCM message token.
 
 Sample run:
 
@@ -162,23 +167,12 @@ $ node listBindings.js
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
 + The listing:
 ++ Binding-SID bindingType(fcm,apn):identity<address>)
-++ BSfa42ee4f47545e16bd8f32891f807c71 fcm:davew<e2fFuMEwN78:APA9...dXV>
+++ BS6d939d5c2e0a18b2297443406de4f77e fcm:davew<e2fFuMEwN78:APA9...dXV>
 ````
 
 ## Send a notification:
 
 Use the send notification program(sendNotification.js) to send a notification to the app user.
-
-When sending, include:
-+ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
-+ The app user's identity(davew), which matches to the binding(BSfa42ee4f47545e16bd8f32891f807c71), 
-which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was created in the browser.
-+ The notification message('Hello there 1') to send.
-
-The above information is stored with Twilio. It is the link between:
-+ Your sending program,
-+ To Twilio, to the Google(FCM) network.
-+ Google(FCM) network to the app with the Firebase token on the specific device.
 
 In the file, sendNotification.js, set identity to the identity you used in the web application.
 
@@ -221,7 +215,18 @@ $ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a
 The notification will be received on the device that is running the notification app.
 Either handled in the application, or handled by the OS in the background.
 
-<img src="notifyWebNotification.jpg" width="600"/>
+### About the Send
+
+When sending, include:
++ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
++ The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
+which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was created in the browser.
++ The notification message('Hello there 1') to send.
+
+The above information is stored with Twilio. It is the link between:
++ Your sending program,
++ To Twilio, to the Google(FCM) network.
++ Google(FCM) network to the app with the Firebase token on the specific device.
 
 --------------------------------------------------------------------------------
 ### Documentation Links
