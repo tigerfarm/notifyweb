@@ -154,7 +154,8 @@ Click "Create Twilio Notify binding".
     The Twilio Notify Binding id is displayed.
 ````
 The binding is created using the identity and the FCM message token.
-The binding could also be created using the program: createBindings.js.
+The binding could also be created using the program: createBindings.js,
+by copying the address into the theAddress value.
 
 Sample run:
 
