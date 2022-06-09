@@ -7,8 +7,8 @@ browser that is running the web notification application.
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
-Once this application is run in the browser and tested,
-Notifications can be sent to the device using the identity or identities registered.
+Once this application is run in the browser and Twilio Notify binding is created,
+notifications can be sent to the device using the identity or identities registered.
 ````
 if the web application is running in the browser, 
     notifications will be handled by the application (see above).
@@ -19,10 +19,12 @@ Background notification:
 
 <img src="notifyWebBackgroundNotification.jpg" width="400"/>
 
-## Create a Google Firebase Project to Use
+## First, Create a Google Firebase Project
 
 Create a [Google Firebase project](https://console.firebase.google.com/)
-that will will map to the Notify web application.
+to handle the communications between the Google network (FCM) and the device (computer or phone)
+you will running the web application client.
+
 I used my personal Google account.
 ````
 Click Add project.
@@ -141,7 +143,7 @@ $ node websever.js
 + Listening on port: 8000
 ````
 
-## Register a Twilio Notify Bindin
+## Register a Twilio Notify Binding
 
 In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
@@ -174,7 +176,7 @@ $ node listBindings.js
 
 Use the send notification program(sendNotification.js) to send a notification to the app user.
 
-In the file, sendNotification.js, set identity to the identity you used in the web application.
+In the file, sendNotification.js, set identity to the Twilio Notify registered identity.
 
 For example:
 ````
