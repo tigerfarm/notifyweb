@@ -11,9 +11,9 @@ Once this application is run in the browser and tested,
 Notifications can be sent to the device using the identity or identities registered.
 ````
 if the web application is running in the browser, 
-    notifications will be handled by the application.
+    notifications will be handled by the application (see above).
 if the web application tab is closed, or the browser is closed,
-    notifications will be handled by the device.
+    notifications will be handled by the device (see below).
 ````
 Background notification:
 
@@ -140,15 +140,17 @@ $ node websever.js
 ````
 In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
-Enter an Identity such as "davew".
 Click "Get Firebase FCM message token".
-The token is displayed.
+    The token is displayed.
+Enter an Identity such as "davew".
 Click "Create Twilio Notify binding".
-The Twilio Notify Binding id is displayed.
+    The Twilio Notify Binding id is displayed.
 ````
+The binding is created using the identity and the FCM message token(device address).
+
 Sample run:
 
-<img src="notifyWebApplication.jpg" width="400"/>
+<img src="notifyWebNotification.jpg" width="400"/>
 
 Use a command line program to list the newly created binding.
 Note the above environment variables are required.
@@ -216,7 +218,8 @@ $ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a
 }
 /Users/dave/conversations
 ````
-The notification will be received on the phone that is running the notification app.
+The notification will be received on the device that is running the notification app.
+Either handled in the application, or handled by the OS in the background.
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
