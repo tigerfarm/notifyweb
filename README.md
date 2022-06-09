@@ -190,7 +190,7 @@ Sample program run:
 ````
 $ node sendNotification.js 
 +++ Start sending notifications to an identity.
-+ Sent: NT3f22872f3635ed14e3c4295cca45ac21
++ Sent: NTea47fb9ca9bc391f923dd2c999153a06
 ````
 Or, use a curl command.
 ````
@@ -214,21 +214,23 @@ $ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a
 }
 /Users/dave/conversations
 ````
-The notification will be received on the device that is running the notification app.
+The notification will be received on the device where the Twilio Notify binding was registered.
 Either handled in the application, or handled by the OS in the background.
 
 ### About the Send
 
-When sending, include:
-+ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), which has the FCM CREDENTIAL SID (FCM Credential information: SID, type: FCM, and FCM SECRET)
-+ The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
-which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was created in the browser.
-+ The notification message('Hello there 1') to send.
+Notification flow:
++ From your sending program
++ To Twilio
++ To Google(FCM) network
++ To the destination device.
 
-The above information is stored with Twilio. It is the link between:
-+ Your sending program,
-+ To Twilio, to the Google(FCM) network.
-+ Google(FCM) network to the app with the Firebase token on the specific device.
+The sending program includes:
++ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), 
+      which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
++ The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
+      which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
++ The notification message('Hello there 1') to send.
 
 --------------------------------------------------------------------------------
 ### Documentation Links

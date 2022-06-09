@@ -19,9 +19,9 @@ console.log('+ Running: firebase-messaging-sw.js');
 messaging.setBackgroundMessageHandler(function(payload) {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     // Customize notification here
-    const notificationTitle = 'Notification Web Application';   // Background Message Title.
+    const notificationTitle = 'Notification Web Application';   // Notification background Message Title.
     const notificationOptions = {
-        body: payload.data.twi_body                             // Background Message body.
+        body: payload.data.twi_body                             // Notification background Message body.
     };
     return self.registration.showNotification(notificationTitle,
         notificationOptions);
