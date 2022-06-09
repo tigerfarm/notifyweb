@@ -7,6 +7,18 @@ browser that is running the web notification application.
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
+Once this application is run in the browser and tested,
+Notifications can be sent to the device using the identity or identities registered.
+````
+if the web application is running in the browser, 
+    notifications will be handled by the application.
+if the web application tab is closed, or the browser is closed,
+    notifications will be handled by the device.
+````
+Background notification:
+
+<img src="notifyWebBackgroundNotification.jpg" width="400"/>
+
 ## Create a Google Firebase Project to Use
 
 Create a [Google Firebase project](https://console.firebase.google.com/)
@@ -188,6 +200,21 @@ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e
     -d 'Identity=davew' \
     -d 'Body=Hello there 1' \
     -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
+$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications     -d 'Identity=davew'     -d 'Body=Hello there 1'     -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
+{
+"account_sid": "ACa...3", 
+"sid": "NTea47fb9ca9bc391f923dd2c999153a06", 
+"service_sid": "IS0e9b3863450252891f81f312a6e3a7d7", 
+"identities": ["davew"],
+"body": "Hello there 1", 
+"sms": null, "gcm": null, "fcm": null, "apn": null, "alexa": null, "facebook_messenger": null, 
+"ttl": 2419200,
+"priority": "high", 
+"data": null, 
+"action": null, "date_created": "2022-06-09T20:23:10Z", 
+"sound": null, "tags": [], "title": null, "segments": [], 
+}
+/Users/dave/conversations
 ````
 The notification will be received on the phone that is running the notification app.
 
