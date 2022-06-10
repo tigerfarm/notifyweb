@@ -16,11 +16,15 @@ if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device (see below).
 ````
 
-#### Background notification:
+#### Background Notifications
+
+Once you run this application in a browser (on a device) and get a Firebase token,
+the token can be used to send notification to device whether the browser is still running or not.
+If the browser is not running, the notification would be handled in the background.
 
 <img src="notifyWebBackgroundNotification.jpg" width="400"/>
 
-Note, when using a Mac with screen mirroring (which I'm using),
+Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
 to receive background notifications, 
 ````
 Go to the option: Apple/System Preferences.../Notifications & Focus.
