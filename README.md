@@ -16,11 +16,12 @@ if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device (see below).
 ````
 
-#### Background Notifications
+### Background Notifications
 
 Once you run this application in a browser (on a device) and get a Firebase token,
-the token can be used to send notification to device whether the browser is still running or not.
-If the browser is not running, the notification would be handled in the background.
+the token can be used to send notification to the device whether the browser is still running or not.
+If application is not running in the browser, 
+the notification would be handled in the background.
 
 <img src="notifyWebBackgroundNotification.jpg" width="400"/>
 
