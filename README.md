@@ -15,9 +15,18 @@ if the web application is running in the browser,
 if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device (see below).
 ````
-Background notification:
+
+#### Background notification:
 
 <img src="notifyWebBackgroundNotification.jpg" width="400"/>
+
+Note, when using a Mac with screen mirroring (which I'm using),
+to receive background notifications, 
+````
+Go to the option: Apple/System Preferences.../Notifications & Focus.
+Select the browser, for example: Firefox.
+Enable: Allow notifications: When mirroring or sharing the display.
+````
 
 ## First, Create a Google Firebase Project
 
@@ -143,7 +152,7 @@ $ node websever.js
 + Listening on port: 8000
 ````
 
-## Register a Twilio Notify Binding
+## Register/Create a Twilio Notify Binding
 
 In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
@@ -218,6 +227,15 @@ $ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a
 ````
 The notification will be received on the device where the Twilio Notify binding was registered.
 Either handled in the application, or handled by the OS in the background.
+
+Sample send where the NOtify request was successful, but nothing was sent.
+````
+$ node sendNotification.js 
++++ Start sending notifications to an identity.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
++ Sent: NT10483e690f1df0fc20dca87447b59ede
+````
+If the logs do not show any thing for a Notify log id (Twilio Console: No rows to display), then the binding may not exist.
 
 ### About the Send
 
