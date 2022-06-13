@@ -1,5 +1,4 @@
 <html>
-    <!-- link rel="manifest" href="/manifest.json"/ -->
     <head>
         <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
@@ -10,8 +9,6 @@
     </head>
     <body>
         <h1>Notification Web Application</h1>
-
-        <!-- --------------------------------------------------------------- -->
         <h2>Register a Binding</h2>
         <form id="binding_form">
             <table>
@@ -44,16 +41,15 @@
                 </table>
             </div>
         </div>
-
-        <!-- --------------------------------------------------------------- -->
         <script>
-            // firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
-            // Initialize Firebase
-            // tignotifyweb:
+            // -----------------------------------------------------------------
+            // Firebase project, using the Project settings:
+            // + Web API Key as apiKey.
+            // + Project number as messagingSenderId. This value was also used in firebase-messaging-sw.js.
             var config = {
-                apiKey: "AI...Q",
-                projectId: "example",
-                messagingSenderId: "7...6"
+                apiKey: " AIzaSyDF_F11EDPBk6wP7GXzHD9mWFArgUhULdQ ",
+                projectId: "tignotify",
+                messagingSenderId: "572828197431"
             };
             logger('+ firebase.initializeApp(config), Firebase Project: ' + config.projectId);
             //
@@ -68,8 +64,8 @@
             //      in firebase-messaging-sw.js.
             messaging.onMessage(function (payload) {
                 console.log('+ Message received payload.', payload);
-                logger('+ Payload message received:       ' + payload.data.twi_body);
-                logger('+ Payload message from sender id: ' + payload.from);
+                logger('+ Payload notification message received:       ' + payload.data.twi_body);
+                logger('+ Payload notification message from sender id: ' + payload.from);
             });
             // GetMessagingToken();
         </script>

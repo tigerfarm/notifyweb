@@ -1,0 +1,23 @@
+// Firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js');
+
+// Initialize the Firebase app in the service worker with the Firebase project number(messagingSenderId).
+firebase.initializeApp({
+    'messagingSenderId': "572828197431"     // Matches the value in index.html.
+});
+
+// Retrieve a Firebase Messaging instance to handle background messages.
+const messaging = firebase.messaging();
+
+messaging.setBackgroundMessageHandler(function (payload) {
+    // [firebase-messaging-sw.js] Received background message.
+    // Customize the background notification:
+    const notificationTitle = 'Minimum Notification Web Application';   // Notification background Message Title.
+    const notificationOptions = {
+        body: payload.data.twi_body                                     // Notification background Message body.
+    };
+    return self.registration.showNotification(
+            notificationTitle,
+            notificationOptions);
+});

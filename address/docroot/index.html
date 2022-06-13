@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+        <title>FCM Notifications</title>
+        <script>
+            // -----------------------------------------------------------------
+            // Get a Firebase Cloud Messaging(FCM) token to identify this client.
+            // Token is the device address.
+            function GetMessagingToken() {
+                if (firebase && firebase.messaging()) {
+                    // requesting permission to use push notifications
+                    firebase.messaging().requestPermission().then(() => {
+                        // getting FCM token
+                        firebase.messaging().getToken().then((fcmToken) => {
+                            firebaseFcmToken = fcmToken;
+                            document.getElementById("fcmToken").innerText = fcmToken;
+                            console.log('+ Device web application address, Firebase FCM token ', firebaseFcmToken);
+                        }).catch((err) => {
+                            logger("- Error: Can't get token: " + err);
+                        });
+                    }).catch((err) => {
+                        logger("- Error: user has not granted permission.");
+                        logger(err);
+                    });
+                } else {
+                    logger("- Error: Firebase library not initialized.");
+                }
+            }
+            // -----------------------------------------------------------------
+            function logger(message) {
+                var aTextarea = document.getElementById('log');
+                aTextarea.value += "\n> " + message;
+                aTextarea.scrollTop = aTextarea.scrollHeight;
+            }
+            function clearTextAreas() {
+                log.value = "+ Ready";
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Minimum Notification Web Application</h2>
+        <table>
+            <tr>
+                <td><input style="width: 260px" class="abutton" type="button" onclick="GetMessagingToken()" value="Get Firebase FCM message token"></td>
+                <td style="height:60px"><span id="fcmToken"></span></td>
+            </tr>
+        </table>
+        <div id="logBox">
+            <div class="panelTitle">
+                Log messages
+            </div>
+            <div class="panelArea">
+                <textarea id="log" style="height: 290px; width: 624px;"></textarea>
+            </div>
+            <div class="panelArea">
+                <table>
+                    <tr>
+                        <td><button class="abutton" id="clearLog" onclick="clearTextAreas();">Clear</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            // -----------------------------------------------------------------
+            // Firebase project tignotify worked, using the Project settings:
+            // + Web API Key as apiKey.
+            // + Project number as messagingSenderId. This value was also used in firebase-messaging-sw.js.
+            var config = {
+                apiKey: "AIzaSyDF_F11EDPBk6wP7GXzHD9mWFArgUhULdQ",
+                messagingSenderId: "572828197431"
+            };
+            logger('+ firebase.initializeApp(config)');
+            //
+            // Retrieve Firebase Messaging object.
+            firebase.initializeApp(config);
+            //
+            // FCM message listener for incomming notifications.
+            // This works when this is running in the browser.
+            //  If not running in the browser, the following is used to handle incomming notifications:
+            //      messaging.setBackgroundMessageHandler( ... )
+            //      in firebase-messaging-sw.js.
+            firebase.messaging().onMessage(function (payload) {
+                console.log('+ Message received payload.', payload);
+                logger('+ Payload notification message received:       ' + payload.data.twi_body);
+                logger('+ Payload notification message from sender id: ' + payload.from);
+            });
+        </script>
+    </body>
+</html>
