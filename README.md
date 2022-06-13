@@ -67,7 +67,7 @@ You now have generated all the Google FCM codes required for notifications.
 + Sender ID
 + Web Push certificates: key pair.
 
-<img src="address/notifyFirebase.jpg" width="600"/>
+<img src="notifyFirebase.jpg" width="600"/>
 
 ## Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
