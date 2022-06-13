@@ -1,19 +1,34 @@
 # Twilio Notify Web Application Implementation
 
-These are the steps to set up, configure, and run sample web applications 
-to receive Twilio Notify notifications.
+This repository has 2 sample web applications to receive Twilio Notify notifications.
++ Directory [address](address) has a basic minimum sample web application.
++ Directory [bindings](bindings) has a web application sample that 
+includes the "address" application funcationality, and uses Twilio Notify Bindings.
 
-+ Directory [address](address) as a basic minimum sample.
-+ Directory [bindings](bindings) as a web application sample that 
-includes using Twilio Notify Bindings.
+### Background Notifications
 
-For both projects:
-+ Create and configure a Google Firebase Project
+If application is not running in the browser when a notification is received,
+the notification is handled in the background.
+
+<img src="address/notifyw2.jpg" width="400"/>
+
+Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
+to receive background notifications, 
+````
+Go to the option: Apple/System Preferences.../Notifications & Focus.
+Select the browser, for example: Firefox.
+Enable: Allow notifications: When mirroring or sharing the display.
+````
+
+### Setup 
+
+Here, I've included the steps to set up, configure, and run the sample web applications.
+Before working with applications:
++ Create and configure a Google Firebase Project.
 + Create a Twilio Notify service and credentials.
 The credentials use the Google Firebase project Server key Token.
 
-After completing the following steps, implement one of the web applicaions:
-[address](address), [bindings](bindings).
+After completing the following steps in this readme file, implement one of the web applicaions.
 
 --------------------------------------------------------------------------------
 

@@ -3,7 +3,7 @@
 These are the steps to set up, configure, and run
 a simple sample web application to receive Twilio Notify notifications.
 Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
-You can use a Twilio Notify command line program to send a notification
+You can use the included Twilio Notify command line program to send a notification
 that will be received by the browser application, or in the background.
 
 Notification received and displayed in the browser application:
@@ -18,90 +18,6 @@ if the web application is running in the browser,
 if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device's OS (see below).
 ````
-
-### Background Notifications
-
-If application is not running in the browser when a notification is received,
-the notification is handled in the background.
-
-<img src="notifyw2.jpg" width="400"/>
-
-Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
-to receive background notifications, 
-````
-Go to the option: Apple/System Preferences.../Notifications & Focus.
-Select the browser, for example: Firefox.
-Enable: Allow notifications: When mirroring or sharing the display.
-````
-
-## First, Create a Google Firebase Project
-
-Create a [Google Firebase project](https://console.firebase.google.com/)
-to handle the communications between the Google network (FCM) and the device (computer or phone)
-you will running the web application client.
-
-I used my personal Google account and went through the following steps.
-````
-+ Click Add project.
-+ Enter your project name, for example: twilionotify. 
-A unique identifier is created, for example: twilionotify-2ab35.
-Click Continue.
-+ Disable Google Analytics for this project.
-Click Create Project.
-Your project will be created: "Your new project is ready".
-Click Continue.
-+ On the left, under Firebase, beside Project Overview, click the settings icon.
-````
-You are now in the project General settings.
-````
-+ Under Project settings, click Cloud Messaging.
-+ Beside "Cloud Messaging API (Legacy) Disabled", click the right 3 dots.
-A new tab will open on a new page.
-+ Under Cloud Messaging, click Enable.
-You will be forward to another page: API APIs & Services.
-Close this tab.
-+ Back to the Project settings/Cloud Messaging and refresh the page.
-The Server key Token is now displayed.
-+ Farther down the page, under Web configuration/Web Push certificates, click Generate key pair.
-````
-You now have generated all the Google FCM codes required for notifications.
-
-### Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
-
-Get the Server key Token from the [Google project](https://console.firebase.google.com/):
-Project Settings/Cloud messaging.
-
-Add the Server key Token value into a newly created
-[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
-
-For example:
-````
-Friendly Name: tignotifyweb
-Type: FCM
-FCM Secret: AAAA...Tx (Firebase Server key Token)
-````
-Click Save.
-
-## Create a Notify Service
-
-Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services)
-and include the above credentials.
-
-For example:
-````
-FRIENDLY NAME: tignotifyweb
-FCM CREDENTIAL SID: tignotifyweb (the above credential entry)
-Logging: enabled
-````
-Click Save.
-
-Example Notify Service SID:
-````
-IS0e9b3863450252891f81f312a6e3a7d7
-````
-
-Side note, I used the same Firebase Server key Token 
-as when I implemented the Android Notify app to receive notifications.
 
 ## Impliment the Web Application
 
