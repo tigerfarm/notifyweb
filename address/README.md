@@ -1,8 +1,8 @@
 # Twilio Notify Web Application Implementation
 
-These are the steps to set up, configure, and run 
+These are the steps to set up, configure, and run
 a simple sample web application to receive Twilio Notify notifications.
-Using the web application, retrieve a Firebase Cloud Messaging(FCM) token in the browser.
+Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
 You can use a Twilio Notify command line program to send a notification
 that will be received by the browser application, or in the background.
 
