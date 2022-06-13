@@ -33,16 +33,17 @@ v17.9.0
 If you have the GitHub tools installed, you can clone this repository to your disk.
 ````
 cd /Users/<user>/Projects/
-$ git clone https://github.com/tigerfarm/notifyw
+$ git clone https://github.com/tigerfarm/notifyweb
 ...
-$ cd notifyw/
+$ cd notifyweb/address
 ````
 
 Or, download the ZIP into a working directory, and unzip it.
 ````
 cd /Users/<user>/Projects/
-$ mkdir notifyw
-$ cd notifyw/
+$ mkdir notifyweb
+$ mkdir notifyweb/address
+$ cd notifyweb/address
 ````
 
 #### Files
@@ -92,6 +93,9 @@ In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/
 Click "Get Firebase FCM message token".
     The token is displayed, for example: "cw...YX".
 ````
+The program passes the Firebase Sender ID and Web Push certificate key pair value
+to the Google Firebase library which returns the token.
+
 ## Send a notification:
 
 Use the send notification program: [sendNotification.js](sendNotification.js), to send a notification to the device.
@@ -162,34 +166,11 @@ Notification flow:
 + To the destination device.
 
 The sending program includes:
-+ Message: the notification message('Hello there 1') to send.
-+ Destination: The app user's Firebase token(cw...YX) that was retrieved in the browser(firebase.messaging().getToken()).
-+ Google FCM credentials: the Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), 
-      which has the FCM CREDENTIAL SID, type: FCM, and FCM SECRET(Google Firebase Server key Token).
-
---------------------------------------------------------------------------------
-### Documentation Links
-
-[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
-to create the Twilio Notification credentials.
-
-[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
-
-Configuring Android Push Notifications
-[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
-
-General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
-steps I followed.
-
-My application sample was initial based on:
-[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
-
-[Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
-
-[Sending Notifications](https://www.twilio.com/docs/notify/api/notification-resource),
-[using an FCM token address](https://www.twilio.com/docs/notify/api/notification-resource?code-sample=code-send-a-notification-to-bindings-in-the-request&code-language=curl&code-sdk-version=json)
-
-[Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
++ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), 
+      which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
++ The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
+      which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
++ The notification message('Hello there 1') to send.
 
 --------------------------------------------------------------------------------
 

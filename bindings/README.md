@@ -18,23 +18,6 @@ if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device (see below).
 ````
 
-### Background Notifications
-
-Once you run this application in a browser (on a device) and get a Firebase token,
-the token can be used to send notification to the device whether the browser is still running or not.
-If application is not running in the browser, 
-the notification would be handled in the background.
-
-<img src="notifyWebBackgroundNotification.jpg" width="400"/>
-
-Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
-to receive background notifications, 
-````
-Go to the option: Apple/System Preferences.../Notifications & Focus.
-Select the browser, for example: Firefox.
-Enable: Allow notifications: When mirroring or sharing the display.
-````
-
 ## Impliment the Web Application
 
 ### Download the Web Application that can Receive Twilio Notify Notifications
@@ -44,14 +27,15 @@ If you have the GitHub tools installed, you can clone this repository to your di
 cd /Users/<user>/Projects/
 $ git clone https://github.com/tigerfarm/notifyweb
 ...
-$ cd notifyweb/
+$ cd notifyweb/bindings
 ````
 
 Or, download the ZIP into a working directory, and unzip it.
 ````
 cd /Users/<user>/Projects/
 $ mkdir notifyweb
-$ cd notifyweb/
+$ mkdir notifyweb/bindings
+$ cd notifyweb/bindings
 ````
 
 #### Files
@@ -79,7 +63,7 @@ Setting the projectId is optional. I use it to echo the Firebase project I was u
 ````
             var config = {
                 apiKey: "AI...Q",
-                projectId: "tignotify",
+                projectId: "twilionotify",
                 messagingSenderId: "5...1"
             };
 ````
@@ -141,7 +125,8 @@ $ node createBinding.js
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
 + Create FCM binding, Identity: davec, address:cwQhDssdwkg:APA91bE-AdXdSt7IacpFwj5giTjrShp4ni0rZ1BqcerB8wYRDYI-dpOCUqMtUxsPfIVFDCwxtO_zHNLAcGeQe04o1Qjf474t_fP_71D87YxjVfumQOarHU0uLFWKRnn-BiS-MkwkdBYX:
 + Created : BSea26846742d5286f319ed971542e99cc
-$ node listBindings.js 
+
+$ node listBindings.js
 +++ List bindings for a Notify service.
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
 + The listing:
@@ -203,7 +188,8 @@ $ node sendNotification.js
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
 + Sent: NT10483e690f1df0fc20dca87447b59ede
 ````
-If the logs do not show any thing for a Notify log id (Twilio Console: No rows to display), then the binding may not exist.
+If the logs do not show any thing for a Notify log id (Twilio Console: No rows to display), 
+then the binding may not exist.
 
 ### About the Send
 
@@ -219,27 +205,6 @@ The sending program includes:
 + The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
       which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
 + The notification message('Hello there 1') to send.
-
---------------------------------------------------------------------------------
-### Documentation Links
-
-Configuring Android Push Notifications
-[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
-
-General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
-steps I followed.
-
-[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
-to create the Twilio Notification credentials.
-
-My application sample is a modified:
-[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
-
-[Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
-
-[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
-
-[Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
 
 --------------------------------------------------------------------------------
 

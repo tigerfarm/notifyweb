@@ -22,8 +22,9 @@ Enable: Allow notifications: When mirroring or sharing the display.
 
 ### Setup 
 
-Here, I've included the steps to set up, configure, and run the sample web applications.
-Before working with applications:
+Do the following before working with samples applications.
+Create and configure a Google Project and the matching Twilio configurations.
+
 + Create and configure a Google Firebase Project.
 + Create a Twilio Notify service and credentials.
 The credentials use the Google Firebase project Server key Token.
@@ -101,6 +102,30 @@ Example Notify Service SID:
 ````
 IS0e9b3863450252891f81f312a6e3a7d7
 ````
+
+--------------------------------------------------------------------------------
+### Documentation Links
+
+[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
+to create the Twilio Notification credentials.
+
+[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
+
+Configuring Android Push Notifications
+[documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
+
+General set up [documentation](https://www.twilio.com/docs/conversations/javascript/push-notifications-web)
+steps I followed.
+
+My application sample was initial based on:
+[TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
+
+[Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
+
+[Sending Notifications](https://www.twilio.com/docs/notify/api/notification-resource),
+[using an FCM token address](https://www.twilio.com/docs/notify/api/notification-resource?code-sample=code-send-a-notification-to-bindings-in-the-request&code-language=curl&code-sdk-version=json)
+
+[Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
 
 --------------------------------------------------------------------------------
 
