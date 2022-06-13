@@ -63,6 +63,11 @@ The Server key Token is now displayed.
 + Farther down the page, under Web configuration/Web Push certificates, click Generate key pair.
 ````
 You now have generated all the Google FCM codes required for notifications.
++ Firebase Server key Token
++ Sender ID
++ Web Push certificates: key pair.
+
+<img src="address/notifyw2.jpg" width="600"/>
 
 ## Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
