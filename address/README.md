@@ -42,14 +42,29 @@ you will running the web application client.
 
 I used my personal Google account and went through the following steps.
 ````
-Click Add project.
-Project Name: tignotify
-Disable:  Enable Google Analytics for this project.
-Click Create Project, Your new project is ready. Click Continue.
-Get started by adding Firebase to your app ... Click Android icon.
-Use an Android package name such as: "com.twilio.notify.quickstart".
-Click register app.
++ Click Add project.
++ Enter your project name, for example: twilionotify. 
+A unique identifier is created, for example: twilionotify-2ab35.
+Click Continue.
++ Disable Google Analytics for this project.
+Click Create Project.
+Your project will be created: "Your new project is ready".
+Click Continue.
++ On the left, under Firebase, beside Project Overview, click the settings icon.
 ````
+You are now in the project General settings.
+````
++ Under Project settings, click Cloud Messaging.
++ Beside "Cloud Messaging API (Legacy) Disabled", click the right 3 dots.
+A new tab will open on a new page.
++ Under Cloud Messaging, click Enable.
+You will be forward to another page: API APIs & Services.
+Close this tab.
++ Back to the Project settings/Cloud Messaging and refresh the page.
+The Server key Token is now displayed.
++ Farther down the page, under Web configuration/Web Push certificates, click Generate key pair.
+````
+You now have generated all the Google FCM codes required for notifications.
 
 ### Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
