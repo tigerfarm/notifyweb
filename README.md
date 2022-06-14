@@ -151,7 +151,7 @@ Firebase IDs used when retrieving a user token.
 }
 ````
 
-Following is the same in the web application, "getToken()" to get the user FCM ID.
+Following is the same in the web application, the metod "getToken()", is used to get the user FCM ID.
 ````
 .../app/src/main/java/com/twilio/notify/quickstart/fcm/NotifyFirebaseInstanceIDService.java
 ...
@@ -165,7 +165,11 @@ Following is the same in the web application, "getToken()" to get the user FCM I
         sendRegistrationToServer(refreshedToken);
     }
 ...
+````
 
+Once the FCM ID is retrieved, an HTTP request is sent
+to the registration Twilio Function to create a Notify Binding.
+````
 .../com/twilio/notify/quickstart/notifyapi/TwilioFunctionsAPI.java
 ...
 public final static String BASE_SERVER_URL = "https://about-time-2357.twil.io";
@@ -174,7 +178,8 @@ public final static String BASE_SERVER_URL = "https://about-time-2357.twil.io";
 ...
 ````
 
-Set the Twilio Functions Environment Variable to the same Notify SID used in the web applications:
+Set the Twilio Functions Environment Variable to the same Notify SID used in the web applications.
+Then, can use the sample program listBindings.js, to get the Android device's FCM id.
 ````
 TWILIO_NOTIFICATION_SERVICE_SID = IS0e9b3863450252891f81f312a6e3a7d7
 ````
@@ -205,10 +210,14 @@ exports.handler = function(context, event, callback) {
      });
  });
 };
-
+````
+Sample run log messages:
+````
 event:{"Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V","BindingType":"fcm","identity":"davea"}:
 + Binding SID:BS315f33c816d1f8485db6f80253978a5a:
-
+````
+View the Twilio Notify binding:
+````
 $ node listBindings.js 
 +++ List bindings for a Notify service.
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
