@@ -32,7 +32,6 @@ The credentials use the Google Firebase project Server key Token.
 After completing the following steps in this readme file, implement one of the web applicaions.
 
 --------------------------------------------------------------------------------
-
 ## Create a Google Firebase Project
 
 Create a [Google Firebase project](https://console.firebase.google.com/)
@@ -126,6 +125,98 @@ My application sample was initial based on:
 [using an FCM token address](https://www.twilio.com/docs/notify/api/notification-resource?code-sample=code-send-a-notification-to-bindings-in-the-request&code-language=curl&code-sdk-version=json)
 
 [Sending and Receiving Notifications](https://www.twilio.com/docs/notify/send-notifications)
+
+--------------------------------------------------------------------------------
+## Twilio Notify Android Quickstart
+
+Firebase IDs used when retrieving a user token.
+````
+...notifications-quickstart-android/app/google-services.json
+{
+  "project_info": {
+    "project_number": "572828197431",
+  ...
+  },
+  "client": [
+    {
+      ...,
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF_F11EDPBk6wP7GXzHD9mWFArgUhULdQ"
+        }
+      ],
+      ...
+    }
+    ...
+}
+````
+
+Following is the same in the web application, "getToken()" to get the user FCM ID.
+````
+.../app/src/main/java/com/twilio/notify/quickstart/fcm/NotifyFirebaseInstanceIDService.java
+...
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        sendRegistrationToServer(refreshedToken);
+    }
+...
+
+.../com/twilio/notify/quickstart/notifyapi/TwilioFunctionsAPI.java
+...
+public final static String BASE_SERVER_URL = "https://about-time-2357.twil.io";
+...
+"/register-binding"
+...
+````
+
+Set the Twilio Functions Environment Variable to the same Notify SID used in the web applications:
+````
+TWILIO_NOTIFICATION_SERVICE_SID = IS0e9b3863450252891f81f312a6e3a7d7
+````
+
+Twilio Functions register: https://about-time-2357.twil.io/register-binding
+````
+exports.handler = function(context, event, callback) {
+    const twilioClient = context.getTwilioClient();
+    const service = twilioClient.notify.services(
+       context.TWILIO_NOTIFICATION_SERVICE_SID
+   );
+   console.log("event:" + JSON.stringify(event) + ":");
+   const binding = {
+       'identity':event.identity,
+       'bindingType':event.BindingType,
+       'address':event.Address
+   }
+   service.bindings.create(binding).then((binding) => {
+       console.log("+ Binding SID:" + binding.sid + ":");
+       console.log("+ Binding:" + binding);
+       // Send a JSON response indicating success
+       callback(null, {message: 'Binding created!'});
+   }).catch((error) => {
+       console.log(error);
+       callback(error, {
+       error: error,
+       message: 'Failed to create binding: ' + error,
+     });
+ });
+};
+
+event:{"Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V","BindingType":"fcm","identity":"davea"}:
++ Binding SID:BS315f33c816d1f8485db6f80253978a5a:
+
+$ node listBindings.js 
++++ List bindings for a Notify service.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
++ The listing:
+++ Binding-SID bindingType(fcm,apn):identity<address>)
+...
+++ BS41dbd62a57839201ba892cf40cf97264 fcm:davea<faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V>
+````
 
 --------------------------------------------------------------------------------
 
