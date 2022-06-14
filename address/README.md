@@ -165,12 +165,12 @@ Notification flow:
 + To Google(FCM) network
 + To the destination device.
 
-The sending program includes:
-+ The Notify service SID(IS0e9b3863450252891f81f312a6e3a7d7), 
+The sending program notification parameters:
++ Message text: 'Hello there 1'.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
       which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
-+ The app user's identity(davew), which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
++ Destination identity: 'davew' which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
       which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
-+ The notification message('Hello there 1') to send.
 
 --------------------------------------------------------------------------------
 

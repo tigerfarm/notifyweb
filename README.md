@@ -129,6 +129,12 @@ My application sample was initial based on:
 --------------------------------------------------------------------------------
 ## Twilio Notify Android Quickstart
 
+[GitHub repository](https://github.com/TwilioDevEd/notifications-quickstart-android)
+
+[Documentation](https://www.twilio.com/docs/notify/quickstart/android)
+
+Following is the Android code that is similar to the notification web application.
+
 Firebase IDs used when retrieving a user token.
 ````
 ...notifications-quickstart-android/app/google-services.json
@@ -151,7 +157,7 @@ Firebase IDs used when retrieving a user token.
 }
 ````
 
-Following is the same in the web application, the metod "getToken()", is used to get the user FCM ID.
+Following is the same in the web application method, "getToken()", that is used to get the user FCM ID.
 ````
 .../app/src/main/java/com/twilio/notify/quickstart/fcm/NotifyFirebaseInstanceIDService.java
 ...
@@ -163,6 +169,31 @@ Following is the same in the web application, the metod "getToken()", is used to
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(refreshedToken);
+    }
+...
+````
+
+````
+.../fcm/NotifyFirebaseMessagingService.java
+...
+    public void onMessageReceived(RemoteMessage message) {
+        /*
+         * The Notify service adds the message body to the remote message data so that we can
+         * show a simple notification.
+         */
+        String from = message.getFrom();
+        Map<String,String> data = message.getData();
+        String title = data.get(NOTIFY_TITLE_DATA_KEY);
+        String body = data.get(NOTIFY_BODY_DATA_KEY);
+        Log.d(TAG, "From: " + from);
+        Log.d(TAG, "Body: " + body);
+        sendNotification(title, body);
+    }
+    private void sendNotification(String title, String message) {
+        ...
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        ...
+        notificationManager.notify(0, notificationBuilder.build());
     }
 ...
 ````
@@ -213,7 +244,7 @@ exports.handler = function(context, event, callback) {
 ````
 Sample run log messages:
 ````
-event:{"Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V","BindingType":"fcm","identity":"davea"}:
+event:{"BindingType":"fcm","identity":"davea","Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V"}:
 + Binding SID:BS315f33c816d1f8485db6f80253978a5a:
 ````
 View the Twilio Notify binding:
