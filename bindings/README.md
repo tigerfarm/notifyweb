@@ -9,22 +9,19 @@ Receiving a notification in the browser application:
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
-Once this application is run in the browser and Twilio Notify binding is created,
-notifications can be sent to the device using the identity or identities registered.
-````
-if the web application is running in the browser, 
-    notifications will be handled by the application (see above).
-if the web application tab is closed, or the browser is closed,
-    notifications will be handled by the device (see below).
-````
-
 ## Impliment the Web Application
+
+To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
+````
+$ node -v
+v17.9.0
+````
 
 ### Download the Web Application that can Receive Twilio Notify Notifications
 
 If you have the GitHub tools installed, you can clone this repository to your disk.
 ````
-cd /Users/<user>/Projects/
+cd /.../Projects/
 $ git clone https://github.com/tigerfarm/notifyweb
 ...
 $ cd notifyweb/bindings
@@ -48,17 +45,17 @@ $ cd notifyweb/bindings
 #### Use the Google Firebase Project Information in the Web Application
 
 In the file: firebase-messaging-sw.js,
-set the value for messagingSenderId, to the Firebase "Project number".
-Its listed under the Firebase project settings: "General".
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+Its listed under the Firebase project settings: "Cloud Messaging".
 ````
 firebase.initializeApp({
     'messagingSenderId': "5...1"
 });
 ````
 In the index.html file,
-set the value for messagingSenderId, to the "Project number".
-Set the value for apiKey, to the "Web API Key".
-Both are listed under the Firebase project settings: "General".
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
+Both are listed under the Firebase project settings: "Cloud Messaging".
 Setting the projectId is optional. I use it to echo the Firebase project I was using.
 ````
             var config = {
@@ -136,6 +133,15 @@ $ node listBindings.js
 ````
 
 ## Send a notification:
+
+Once the FCM token is retrieved and the Twilio binding created,
+notifications can be sent to the device using the binding identity.
+````
+if the web application is running in the browser, 
+    notifications will be handled by the application (see above).
+if the web application tab is closed, or the browser is closed,
+    notifications will be handled by the device's OS (see below).
+````
 
 Use the send notification program(sendNotification.js) to send a notification to the app user.
 

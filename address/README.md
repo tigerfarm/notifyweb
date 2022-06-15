@@ -1,28 +1,20 @@
 # Twilio Notify Web Application Implementation
 
-These are the steps to set up, configure, and run
+These are the steps to:
++ Set up, configure, and run
 a simple sample web application to receive Twilio Notify notifications.
-Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
-You can use the included Twilio Notify command line program to send a notification
-that will be received by the browser application, or in the background.
++ Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
++ You can use the token to send a notication using the included 
+Twilio Notify command line program.
++ The notification will be received by the browser application, or in the background.
 
-Notification received and displayed in the browser application:
+FCM token("cwQ...") and a received notification displayed in the browser application:
 
 <img src="notifyw1.jpg" width="600"/>
 
-Once this application is run in the browser and an FCM token is retrieved,
-notifications can be sent to the device using the FCM token.
-````
-if the web application is running in the browser, 
-    notifications will be handled by the application (see above).
-if the web application tab is closed, or the browser is closed,
-    notifications will be handled by the device's OS (see below).
-````
-
 ## Impliment the Web Application
 
-You will download the [GitHub project](https://github.com/tigerfarm/notifyweb).
-To run it, you will need to Node installed and available. I'm using Node version 17.9.0.
+To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
 ````
 $ node -v
 v17.9.0
@@ -30,9 +22,11 @@ v17.9.0
 
 ### Download the Web Application that can Receive Twilio Notify Notifications
 
+Download the [GitHub project](https://github.com/tigerfarm/notifyweb).
+
 If you have the GitHub tools installed, you can clone this repository to your disk.
 ````
-cd /Users/<user>/Projects/
+cd /.../Projects/
 $ git clone https://github.com/tigerfarm/notifyweb
 ...
 $ cd notifyweb/address
@@ -46,7 +40,7 @@ $ mkdir notifyweb/address
 $ cd notifyweb/address
 ````
 
-#### Files
+#### Files in the "address" directory
 
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
 - [docroot/index.html](docroot/indexShow.html) : Client HTML, includes Client JavaScript functions
@@ -56,17 +50,17 @@ $ cd notifyweb/address
 #### Use the Google Firebase Project Information in the Web Application
 
 In the file: firebase-messaging-sw.js,
-set the messagingSenderId value, to the Firebase "Project number"(example: "5...1").
-Its listed under the Firebase project settings: "General".
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+Its listed under the Firebase project settings: "Cloud Messaging".
 ````
 firebase.initializeApp({
     'messagingSenderId': "5...1"
 });
 ````
 In the index.html file,
-set the messagingSenderId value, to the Firebase "Project number"(example: "5...1").
-Set the value for apiKey, to the "Web API Key"(example: "AI...Q").
-Both are listed under the Firebase project settings: "General".
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
+Both are listed under the Firebase project settings: "Cloud Messaging".
 ````
             var config = {
                 apiKey: "AI...Q",
@@ -97,6 +91,15 @@ The program passes the Firebase Sender ID and Web Push certificate key pair valu
 to the Google Firebase library which returns the token.
 
 ## Send a notification:
+
+Once the FCM token is retrieved,
+notifications can be sent to the device using the FCM token.
+````
+if the web application is running in the browser, 
+    notifications will be handled by the application (see above).
+if the web application tab is closed, or the browser is closed,
+    notifications will be handled by the device's OS (see below).
+````
 
 Use the send notification program: [sendNotification.js](sendNotification.js), to send a notification to the device.
 

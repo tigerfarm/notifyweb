@@ -7,7 +7,7 @@ console.log("+ Twilio Notify service SID: " + notifyServiceSid);
 client.notify.services(notifyServiceSid).notifications.create({
     body: 'Hello there 1',
     toBinding: [
-        JSON.stringify({"binding_type": "fcm", "address": "faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V"})
+        JSON.stringify({"binding_type": "fcm", "address": "cnOdL7XsY4E:APA91bHJsF1ICmQKlQAV6Gh9TZsI81yggGU0hoAZl_mLluex-_k6rdBAQg1wS8t1EyxRo1jYWqXayrNLKMRmfGKu4Eq95QSNdpkpH0cLyejNwyz9L66q6kXSGGZ3us-PaudShvQXaMwL"})
     ]
 }).then(notification => console.log("+ Sent, Twilio Notify log id: " + notification.sid))
         .catch(error => console.log("- Error: " + error));
