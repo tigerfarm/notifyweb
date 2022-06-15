@@ -98,9 +98,9 @@ Once the FCM token is retrieved,
 notifications can be sent to the device using the FCM token.
 ````
 if the web application is running in the browser, 
-    notifications will be handled by the application (see above).
+    notifications will be handled by the application.
 if the web application tab is closed, or the browser is closed,
-    notifications will be handled by the device's OS (see below).
+    notifications will be handled by the device's OS.
 ````
 
 Use the send notification program: [sendNotification.js](sendNotification.js), to send a notification to the device.
@@ -164,18 +164,18 @@ and, however, it was not received, the "address" maybe incorrect.
 
 ### About the Send
 
+The sending program notification parameters:
++ Message text: 'Hello there 1'.
++ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
+    which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
++ Destination address: the application-user Firebase token(e2fFuMEwN78:APA9...dXV)
+    that was retrieved in the browser(firebase.messaging().getToken()).
+
 Notification flow:
 + From your sending program
 + To Twilio
 + To Google(FCM) network
-+ To the destination device.
-
-The sending program notification parameters:
-+ Message text: 'Hello there 1'.
-+ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
-      which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
-+ Destination identity: 'davew' which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
-      which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
++ To the destination device that is(or was) running the application.
 
 --------------------------------------------------------------------------------
 

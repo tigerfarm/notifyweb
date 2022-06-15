@@ -199,18 +199,18 @@ then the binding may not exist.
 
 ### About the Send
 
-Notification flow:
-+ From your sending program
-+ To Twilio
-+ To Google(FCM) network
-+ To the destination device.
-
 The sending program notification parameters:
 + Message text: 'Hello there 1'.
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
       which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
 + Destination identity: 'davew' which matches to the binding(BS6d939d5c2e0a18b2297443406de4f77e), 
       which has the Firebase token(e2fFuMEwN78:APA9...dXV) that was retrieved in the browser(firebase.messaging().getToken()).
+
+Notification flow:
++ From your sending program
++ To Twilio
++ To Google(FCM) network
++ To the destination device that is(or was) running the application.
 
 --------------------------------------------------------------------------------
 
