@@ -4,7 +4,8 @@ This repository has 2 sample web applications to receive Twilio Notify notificat
 + Directory [address](address) has a basic minimum sample web application.
 + Directory [bindings](bindings) has a web application sample that 
 includes the "address" application funcationality, and uses Twilio Notify Bindings.
-+ [Notes](READMEandroid.md) regarding the Twilio Notify Android [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android).
++ [Notes](READMEandroid.md) on how this web application relates to the 
+    Twilio Notify Android [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android).
 
 ### Background Notifications
 
