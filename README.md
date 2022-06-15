@@ -107,10 +107,10 @@ IS0e9b3863450252891f81f312a6e3a7d7
 --------------------------------------------------------------------------------
 ### Documentation Links
 
-[Documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
+[Tutorial docs and documentation](https://www.twilio.com/docs/notify/quickstart/firebase-web)
 to create the Twilio Notification credentials.
 
-[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
+Create a [Notify Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
 
 Configuring Android Push Notifications
 [documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
@@ -120,8 +120,6 @@ steps I followed.
 
 My application sample was initial based on:
 [TwilioDevEd sample](https://github.com/TwilioDevEd/notify-quickstart-webpush).
-
-[Tutorial docs](https://www.twilio.com/docs/notify/quickstart/firebase-web).
 
 [Sending Notifications](https://www.twilio.com/docs/notify/api/notification-resource),
 [using an FCM token address](https://www.twilio.com/docs/notify/api/notification-resource?code-sample=code-send-a-notification-to-bindings-in-the-request&code-language=curl&code-sdk-version=json)

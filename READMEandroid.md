@@ -1,4 +1,4 @@
-# Twilio Notify Android Quickstart Noties
+# Twilio Notify Android Quickstart Notes
 
 Following is the Android code that is similar to the notification web application.
 
