@@ -14,7 +14,7 @@ FCM token("cwQ...") and a received notification displayed in the browser applica
 
 ## Impliment the Web Application
 
-To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
+To run the Web Application, Node needs to be installed and available. I'm using Node version 17.9.0.
 ````
 $ node -v
 v17.9.0
@@ -22,9 +22,10 @@ v17.9.0
 
 ### Download the Web Application that can Receive Twilio Notify Notifications
 
-Download the [GitHub project](https://github.com/tigerfarm/notifyweb).
 
-If you have the GitHub tools installed, you can clone this repository to your disk.
+If you have the GitHub tools installed, you can clone this 
+[GitHub repository](https://github.com/tigerfarm/notifyweb)
+to your disk.
 ````
 cd /.../Projects/
 $ git clone https://github.com/tigerfarm/notifyweb
@@ -32,7 +33,8 @@ $ git clone https://github.com/tigerfarm/notifyweb
 $ cd notifyweb/address
 ````
 
-Or, download the ZIP into a working directory, and unzip it.
+Or, download the [GitHub project Zip file](https://github.com/tigerfarm/notifyweb)
+into a working directory, and unzip it.
 ````
 cd /Users/<user>/Projects/
 $ mkdir notifyweb
