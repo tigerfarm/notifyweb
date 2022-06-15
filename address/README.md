@@ -170,12 +170,14 @@ The sending program notification parameters:
     which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
 + Destination address: the application-user Firebase project token(e2fFuMEwN78:APA9...dXV)
     that was retrieved in the browser(firebase.messaging().getToken()).
-+ Message text: 'Hello there 1'.
++ Message text: 'Hello there 1'
 
 Notification flow:
-+ From your sending program(Twilio account SID and token) to Twilio
-+ From Twilio(FCM access: FCM SECRET) to the Google(FCM) network
-+ To the destination application-user(ID: Firebase project token) that is(or was) running the application.
++ From your sending program(Twilio account SID and token) to Twilio.
++ From Twilio(FCM access: FCM SECRET) to the Google(FCM) network.
++ From Google(FCM) network to the destination application-user(ID: Firebase project token)
+    that is(or was) running the application.
++ Notification message text is processed on the device.
 
 --------------------------------------------------------------------------------
 
