@@ -1,5 +1,6 @@
 // -----------------------------------------------------------------------------
-// Chat web server
+// Notify notification testing web server
+// + Twilio client is created and used to add a Notify binding.
 // 
 // Easy to use.
 // Install modules.
@@ -12,25 +13,9 @@
 // -----------------------------------------------------------------------------
 console.log("+++ Notify web application server is starting up.");
 //
-var NOTIFY_SID = process.env.MASTER_NOTIFY_SID;
-console.log("+ Notify service SID: " + NOTIFY_SID);
-//
-var client = require('twilio')(process.env.MASTER_ACCOUNT_SID, process.env.MASTER_AUTH_TOKEN);
-console.log("+ Twilio client object created for Twilio account: " + process.env.MASTER_ACCOUNT_SID);
-//
-// -----------------------------------------------------------------------------
-var returnMessage = '';
-function sayMessage(message) {
-    returnMessage = returnMessage + message + "<br>";
-    console.log(message);
-}
-
-// -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 // Web server interface to call functions.
-// -----------------------------------------------------------------------------
 // 
-// $ npm install express --save
 const express = require('express');
 const path = require('path');
 const url = require("url");
@@ -40,27 +25,39 @@ const url = require("url");
 const PORT = process.env.PORT || 8000;
 
 var app = express();
+
 // -----------------------------------------------------------------------------
+// + Get environment variable.
+// + Create a Twilio client object.
+// + Process a request to create a Notify binding.
+
+var NOTIFY_SID = process.env.MASTER_NOTIFY_SID;
+console.log("+ Notify service SID: " + NOTIFY_SID);
+//
+var client = require('twilio')(process.env.MASTER_ACCOUNT_SID, process.env.MASTER_AUTH_TOKEN);
+console.log("+ Twilio client object created for Twilio account: " + process.env.MASTER_ACCOUNT_SID);
+//
+// Process a request to create a Notify binding.
 app.get('/registerBinding', function (req, res) {
     var theParameters = "";
     var theParametersError = "";
-    sayMessage("+ Twilio Notify Quickstart, Register binding.");
+    console.log("+ Twilio Notify Quickstart, Register binding.");
     if (req.query.identity) {
         theParameters = " identity:" + req.query.identity + ":";
     } else {
-        sayMessage("- Parameter required: identity.");
+        console.log("- Parameter required: identity.");
         theParametersError = " identity";
     }
     if (req.query.bindingType) {
         theParameters = theParameters + " bindingType:" + req.query.bindingType + ":";
     } else {
-        sayMessage("- Parameter required: bindingType.");
+        console.log("- Parameter required: bindingType.");
         theParametersError = " bindingType";
     }
     if (req.query.address) {
         theParameters = theParameters + " address:" + req.query.address + ":";
     } else {
-        sayMessage("- Parameter required: address.");
+        console.log("- Parameter required: address.");
         theParametersError = " address";
     }
     if (theParametersError !== "") {
@@ -79,8 +76,8 @@ app.get('/registerBinding', function (req, res) {
             NOTIFY_SID
             );
     service.bindings.create(binding).then((bindingResult) => {
+        // console.log("+ Binding result:" + JSON.stringify(bindingResult));
         console.log("+ Binding SID:" + bindingResult.sid + ":");
-        // console.log("+ Binding:" + JSON.stringify(bindingResult));
         res.send("+ Binding SID: " + bindingResult.sid);
     }).catch((error) => {
         console.log(error);

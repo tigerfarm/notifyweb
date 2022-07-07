@@ -1,10 +1,12 @@
 // -----------------------------------------------------------------------------
-// Chat web server
+// Notify notification testing web server
+// + No Twilio requests made from this web server.
 // 
 // Easy to use.
 // Install modules.
 //  $ npm install --save express
 //  
+// 
 // Run the web server. Default port is hardcoded to 8000.
 //  $ node websever.js
 // 
@@ -13,9 +15,7 @@ console.log("+++ Minimum Notification Web Application server is starting up.");
 //
 // -----------------------------------------------------------------------------
 // Web server interface to call functions.
-// -----------------------------------------------------------------------------
 // 
-// $ npm install express --save
 const express = require('express');
 const path = require('path');
 const url = require("url");
@@ -23,6 +23,7 @@ const url = require("url");
 // When deploying to Heroku, must use the keyword, "PORT".
 // This allows Heroku to override the value and use port 80. And when running locally can use other ports.
 const PORT = process.env.PORT || 8000;
+
 var app = express();
 
 // -----------------------------------------------------------------------------
