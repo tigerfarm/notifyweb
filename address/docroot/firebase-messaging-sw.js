@@ -1,4 +1,13 @@
-// Firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+// -----------------------------------------------------------------------------
+// For handling messages when this client is in the background or no longer in the browser.
+// 
+// Uses Firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+// -----------------------------------------------------------------------------
+// [START initialize_firebase_in_sw]
+// Give the service worker access to Firebase Messaging.
+// Note that you can only use Firebase Messaging here, other Firebase libraries
+// are not available in the service worker.
+
 importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js');
 

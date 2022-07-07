@@ -1,22 +1,27 @@
-// firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+// -----------------------------------------------------------------------------
+// For handling messages when this client is in the background or no longer in the browser.
+// 
+// Uses Firebase sample code snippets from https://firebase.google.com/docs/cloud-messaging/js/client
+// -----------------------------------------------------------------------------
 // [START initialize_firebase_in_sw]
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
+
 importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js');
 
-// Initialize the Firebase app in the service worker by passing in the messagingSenderId.
+// Initialize the Firebase app in the service worker with the Firebase project number(messagingSenderId).
 firebase.initializeApp({
     'messagingSenderId': "572828197431"     // Matches the value in index.html.
 });
 
-// Retrieve an instance of Firebase Messaging so that it can handle background messages.
+// Retrieve a Firebase Messaging instance to handle background messages.
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
     // [firebase-messaging-sw.js] Received background message.
-    // Customize notification here.
+    // Customize the background notification:
     const notificationTitle = 'Notification Web Application';   // Notification background Message Title.
     const notificationOptions = {
         body: payload.data.twi_body                             // Notification background Message body.

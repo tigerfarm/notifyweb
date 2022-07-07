@@ -3,7 +3,7 @@
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
 - [sendAddress.js](sendAddress.js) : a NodeJS command line program to send a Twilio Notify notification using the device application address.
 - [docroot/index.html](docroot/indexShow.html) : Client HTML, includes Client JavaScript functions
-- [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : JavaScript used by the Firebase JavaScript libraries
+- [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
 
 # Twilio Notify Web Application Implementation
 
