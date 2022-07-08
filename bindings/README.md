@@ -1,3 +1,11 @@
+#### Files in the "address" directory
+
+- [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
+- [sendNotification.js](sendNotification.js) : a NodeJS command line program to send a Twilio Notify notification using the binding identity.
+- [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
+- [docroot/notify_actions.html](docroot/notify_actions.html) : Client HTML, includes Client JavaScript functions
+- [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
+
 # Twilio Notify Web Application Implementation
 
 These are the steps to set up, configure, and run 

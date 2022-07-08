@@ -2,7 +2,7 @@
 // Initialize Firebase
 // 
 // -----------------------------------------------------------------
-// Get a Firebase token to identify this client.
+// Get a Firebase token to identify this client: device application address token.
 //
 var firebaseFcmToken = "";
 //
@@ -39,15 +39,9 @@ function createBinding() {
         logger('- Error: Firebase FCM token must be specified');
         return false;
     }
-    // register(identity, address);
-    registerBinding(identity, firebaseFcmToken);
-}
-
-// -----------------------------------------------------------------
-// Register the binding with Twilio Notify
-function registerBinding(identity, address) {
-    var jqxhr = $.get("registerBinding?bindingType=fcm" + "&identity=" + identity + "&address=" + address, function (theResponse) {
-        // Sample: "+ Binding SID:BScacdf587aa405e7a2ddfea2de29abee7:"
+    // -----------------------------------------------------------------
+    // Request to register the binding with Twilio Notify.
+    var jqxhr = $.get("registerBinding?bindingType=fcm" + "&identity=" + identity + "&address=" + firebaseFcmToken, function (theResponse) {
         if (!theResponse.startsWith("+ Binding SID:")) {
             logger("- Error register the binding.");
             return;
@@ -55,6 +49,7 @@ function registerBinding(identity, address) {
         logger("Binding created.");
         document.getElementById("bindingSid").innerText = theResponse;
         console.log("+ Binding created, theResponse: " + theResponse);
+        // Sample: theResponse = "+ Binding SID:BScacdf587aa405e7a2ddfea2de29abee7:"
     });
 }
 
