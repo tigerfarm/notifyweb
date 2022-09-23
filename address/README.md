@@ -254,7 +254,7 @@ $ node sendFcmNotification.js
 + serverKeyToken: AAAA...x6r
 + deviceToken: cw...YX
 + theRequestUrl: https://fcm.googleapis.com/fcm/send
-+ theMessage: Hello there 1
++ theMessage: Hello1
 + body: {"multicast_id":7747101136704970000,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"c460e90f-09c9-4842-bed2-23764683d391"}]}
 +++ Exit.
 ````
