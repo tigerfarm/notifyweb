@@ -239,7 +239,7 @@ Or use a curl command using the Firebase Server key Token("AAAA...x6r") and the 
 ````
 curl -i -L -X POST 'https://fcm.googleapis.com/fcm/send' \
 -H 'Content-Type: application/json' \
--H 'Authorization: key=AAAA...Tx' \
+-H 'Authorization: key=AAAA...x6r' \
 --data-raw '{
   "to" : "cw...YX",
   "notification": {"title":"Sent using a Twilio Function","body":"Hello1"}

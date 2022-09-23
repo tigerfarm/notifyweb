@@ -1,24 +1,29 @@
-// This program needs to be converted from using Twilio Notify, to use a direct FCM HTTP request.
+console.log("+++ Send an FCM notification.");
 var request = require('request');
-var basicAuth = "Basic " + Buffer.from(process.env.MASTER_ACCOUNT_SID + ":" + process.env.MASTER_AUTH_TOKEN).toString("base64");
-console.log('+ basicAuth: ' + basicAuth);
-var theRequestUrl = "https://notify.twilio.com/v1/Services/" + process.env.MASTER_NOTIFY_SID + "/Notifications";
+var serverKeyToken = process.env.FCM_SERVER_KEY_TOKEN;
+console.log('+ serverKeyToken: ' + serverKeyToken);
+var deviceToken = process.env.FCM_DEVICE_TOKEN;
+console.log('+ deviceToken: ' + deviceToken);
+var theRequestUrl = "https://fcm.googleapis.com/fcm/send";
 console.log('+ theRequestUrl: ' + theRequestUrl);
-var ToBindings1 = "ToBinding=" + JSON.stringify({ "binding_type": "sms", "address": process.env.MY_PHONE_NUMBER });
-var ToBindings = ToBindings1 + "&ToBinding=" + JSON.stringify({ "binding_type": "sms", "address": process.env.MASTER_PHONE_NUMBER_1 });
-console.log('+ ToBindings: ' + ToBindings);
 var theMessage = "Hello there 1";
 console.log('+ theMessage: ' + theMessage);
 request({
     method: "POST",
-    headers: {
-        "Authorization": basicAuth,
-        'content-type': 'application/x-www-form-urlencoded'
-    },
     url: theRequestUrl,
-    body: ToBindings + "&Body=" + theMessage
+    headers: {
+        "Content-type": "application/json",
+        "Authorization": "key=" + serverKeyToken
+    },
+    json: {
+        "to": deviceToken,
+        "notification": {"title":"Sent using a command line program.","body":theMessage}
+    }
 }, function (error, response, body) {
-    console.log(body);
+    console.log("+ body: " + JSON.stringify(body));
+    // Sample success: + body: {"multicast_id":70031060372181420,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"ef9a795a-1105-415e-8c16-0eabe9e0ec2f"}]}
+    // console.log("- Error: " + error.code + " - " + error.message);
+    console.log("+++ Exit.");
 });
 
 // eof

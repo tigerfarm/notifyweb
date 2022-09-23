@@ -87,7 +87,7 @@ Go to the [Google project](https://console.firebase.google.com/)
 twilionotify.
 ````
 Firebase/Project Overview(click icon)/Project setting/Cloud Messaging
-Get value for the Server key Token, for example: AAAA...Tx.
+Get value for the Server key Token, for example: AAAA...x6r.
 ````
 
 ### Create a Notify Credential and Include the Firebase Server Key Token
