@@ -245,6 +245,20 @@ curl -i -L -X POST 'https://fcm.googleapis.com/fcm/send' \
   "notification": {"title":"Sent using a Twilio Function","body":"Hello1"}
 }'
 ````
+OR, use the command line HTTP request program.
+````
+$ export FCM_SERVER_KEY_TOKEN=AAAA...x6r
+$ export FCM_DEVICE_TOKEN=cw...YX
+$ node sendFcmNotification.js
++++ Send an FCM notification.
++ serverKeyToken: AAAA...x6r
++ deviceToken: cw...YX
++ theRequestUrl: https://fcm.googleapis.com/fcm/send
++ theMessage: Hello there 1
++ body: {"multicast_id":7747101136704970000,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"c460e90f-09c9-4842-bed2-23764683d391"}]}
++++ Exit.
+````
+
 The notification shows up:
 
 <img src="FCMsend.jpg" width="600"/>
