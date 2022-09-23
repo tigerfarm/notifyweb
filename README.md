@@ -81,7 +81,7 @@ listed in the Project settings/Cloud Messaging option.
 --------------------------------------------------------------------------------
 ## Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
-#### Get Firebase Server Key
+### Get Firebase Server Key
 
 Go to the [Google project](https://console.firebase.google.com/)
 twilionotify.
@@ -90,7 +90,7 @@ Firebase/Project Overview(click icon)/Project setting/Cloud Messaging
 Get value for the Server key Token, for example: AAAA...Tx.
 ````
 
-#### Create a Notify Credential and Include the Firebase Server Key Token
+### Create a Notify Credential and Include the Firebase Server Key Token
 
 Create a new Notify Credential: 
 [Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
@@ -103,7 +103,7 @@ FCM Secret: AAAA...Tx (Firebase Server key Token)
 ````
 Click Save.
 
-#### Create a Notify Service and Include the new Credential
+### Create a Notify Service and Include the new Credential
 
 Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
 
