@@ -180,7 +180,8 @@ Notification flow:
 --------------------------------------------------------------------------------
 Twilio Functions to send these notifications:
 + Create a new functions service in the Twilio Console and give it a name
-+ In the functions editor, add axios as a module to import
++ In the Functions Editor/Dependencies, add [axios with a recent version](https://www.npmjs.com/package/axios).
++ Add the following code into 
 + Add your FCM server key as an environment variable called FCMkey
 + Create a function in your service
 + Next we will use Axios to build out an HTTP request to the Firebase API
