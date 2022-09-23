@@ -99,7 +99,7 @@ For example:
 ````
 Friendly Name: twilionotify
 Type: FCM
-FCM Secret: AAAA...Tx (Firebase Server key Token)
+FCM Secret: AAAA...x6r (Firebase Server key Token)
 ````
 Click Save.
 

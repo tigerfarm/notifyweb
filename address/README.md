@@ -183,13 +183,15 @@ Notification flow:
 --------------------------------------------------------------------------------
 ## Send a Direct FCM Notification
 
+For reference, Firebase [Authorize HTTP requests](https://firebase.google.com/docs/cloud-messaging/auth-server#authorize-http-requests).
+
 Twilio Functions to send notifications:
 + Create a new functions service in the Twilio Console and give it a name: FCMsend.
 + In the Functions Editor/Dependencies, add [axios with a recent version](https://www.npmjs.com/package/axios).
 I'm using axios version: 0.27.2.
 + Rename the default "/welcome" function to "/send".
 + Add the below code into the "/send" function.
-+ In Environment Variables, add ServerKeyToken: your FCM server key token, example: AAAA...Tx.
++ In Environment Variables, add ServerKeyToken: your FCM server key token, example: "AAAA...x6r".
 + In Environment Variables, add deviceToken: your device's FCM token, example: "cw...YX".
 ````
 const axios = require('axios');
@@ -232,6 +234,16 @@ The Twilio Function's Environment Variables:
 Use the Twilio Function's URL with a message. For example:
 ````
 https://fcmsend-2357.twil.io/send?msg=Hello1
+````
+Or use a curl command using the Firebase Server key Token("AAAA...x6r") and the FCM device address token("cw...YX"):
+````
+curl -i -L -X POST 'https://fcm.googleapis.com/fcm/send' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: key=AAAA...Tx' \
+--data-raw '{
+  "to" : "cw...YX",
+  "notification": {"title":"Sent using a Twilio Function","body":"Hello1"}
+}'
 ````
 The notification shows up:
 
