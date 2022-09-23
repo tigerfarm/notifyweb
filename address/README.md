@@ -178,35 +178,40 @@ Notification flow:
 + Notification message text is processed on the device.
 
 --------------------------------------------------------------------------------
-Twilio Functions to send these notifications:
-+ Create a new functions service in the Twilio Console and give it a name
+## Send a Direct FCM Notification
+
+Twilio Functions to send notifications:
++ Create a new functions service in the Twilio Console and give it a name: FCMsend.
 + In the Functions Editor/Dependencies, add [axios with a recent version](https://www.npmjs.com/package/axios).
-+ Add the following code into 
-+ Add your FCM server key as an environment variable called FCMkey
-+ Create a function in your service
-+ Next we will use Axios to build out an HTTP request to the Firebase API
+I'm using axios version: 0.27.2.
++ Rename the default "/welcome" function to "/send".
++ Add the below code into the "/send" function.
++ In Environment Variables, add ServerKeyToken: your FCM server key token, example: AAAA...Tx.
++ In Environment Variables, add deviceToken: your device's FCM token, example: "cw...YX".
 ````
 const axios = require('axios');
 exports.handler = async (context, event, callback) => {
   try {
-    // capture any info provided in the query string (e.g. body)
-    var messageBody = event.body;
+    // capture any info provided in the query string (e.g. msg)
+    // https://abouttime-2357.twil.io/send?msg=Hello1
+    var sendMessage = event.msg;
     // build notification
     var notification = {
-        "title": "<NOTIFICATION_TITLE>",
-        "body": messageBody,
-        "click_action": "<URL_OF_ACTION>"
+        "title": "Sent using a Twilio Function",
+        "body": sendMessage
+        // , "click_action": "<URL_OF_ACTION>"
       };
-    var registrationToken = "<DESTINATION_TOKEN>";
-
+    console.log("+ Message to send: " + sendMessage);
+    console.log("+ Send message to: " + context.deviceToken);
+    console.log("+ Using ServerKeyToken: " + context.ServerKeyToken);
     const response = await axios.post('https://fcm.googleapis.com/fcm/send', {
       notification: notification,
-      to: registrationToken
+      to: context.deviceToken
     },
     { 
       headers: {
         "Content-Type": "application/json",
-        "Authorization": context.FCMkey
+        "Authorization": "key="+ context.ServerKeyToken
       }
     });
     return callback(null, response.data);
@@ -217,6 +222,17 @@ exports.handler = async (context, event, callback) => {
   }
 };
 ````
+The Twilio Function's Environment Variables:
+
+<img src="FCMsend.jpg" width="600"/>
+
+Use the Twilio Function's URL with a message. For example:
+````
+https://fcmsend-2357.twil.io/send?msg=Hello1
+````
+The notification shows up:
+
+<img src="FCMsend.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
 
