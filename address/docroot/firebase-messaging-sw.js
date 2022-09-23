@@ -12,6 +12,7 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js');
 
 // Initialize the Firebase app in the service worker with the Firebase project number(messagingSenderId).
+// + Firebase project Sender ID: messagingSenderId. This value was also used in index.html.
 firebase.initializeApp({
     'messagingSenderId': "696202644334"     // Matches the value in index.html.
 });

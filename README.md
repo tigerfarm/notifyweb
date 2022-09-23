@@ -1,4 +1,4 @@
-# Twilio Notify Web Application Implementation
+# Twilio Notify Web Application Configurations: Google Firebase and Twilio 
 
 This repository has 2 sample web applications to receive Twilio Notify notifications.
 + Directory [address](address) has a basic minimum sample web application.
@@ -30,15 +30,20 @@ Create and configure a Google Project and the matching Twilio configurations.
 
 + Create and configure a Google Firebase Project.
 + Create a Twilio Notify service and credentials.
-The credentials use the Google Firebase project Server key Token.
+The credentials include the Google Firebase project Server key Token.
 
-After completing the following steps in this readme file, implement one of the web applicaions.
+After completing the following steps in this readme file,
+implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
 
 --------------------------------------------------------------------------------
 ## Create a Google Firebase Project
 
+This section cover the connection:
++ From your program to Twilio.
++ From Twilio to the FCM network.
+
 Create a [Google Firebase project](https://console.firebase.google.com/)
-to handle the communications between the Google network (FCM) and the device (computer or phone)
+to handle the communications between the Google Firebase Cloud Messaging (FCM) network and the device (computer or phone)
 you will running the web application client.
 
 I used my personal Google account and went through the following steps.
@@ -73,12 +78,21 @@ listed in the Project settings/Cloud Messaging option.
 
 <img src="notifyFirebase.jpg" width="600"/>
 
+--------------------------------------------------------------------------------
 ## Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
 
-Get the [Google project](https://console.firebase.google.com/)
-twilionotify's Project Settings/Cloud messaging, Server key Token.
+#### Get Firebase Server Key
 
-Add the Server key Token value into a newly created/added
+Go to the [Google project](https://console.firebase.google.com/)
+twilionotify.
+````
+Firebase/Project Overview(click icon)/Project setting/Cloud Messaging
+Get value for the Server key Token, for example: AAAA...Tx.
+````
+
+#### Create a Notify Credential and Include the Firebase Server Key Token
+
+Create a new Notify Credential: 
 [Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
 
 For example:
@@ -89,7 +103,7 @@ FCM Secret: AAAA...Tx (Firebase Server key Token)
 ````
 Click Save.
 
-## Create a Notify Service
+#### Create a Notify Service and Include the new Credential
 
 Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
 
@@ -105,6 +119,11 @@ Example Notify Service SID:
 ````
 IS0e9b3863450252891f81f312a6e3a7d7
 ````
+
+--------------------------------------------------------------------------------
+## Next
+
+Implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
 
 --------------------------------------------------------------------------------
 ### Documentation Links

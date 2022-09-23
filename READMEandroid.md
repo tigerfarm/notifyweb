@@ -1,5 +1,24 @@
 # Twilio Notify Android Quickstart Notes
 
+I did testing using my Android Twilio Notify Quickstart app. Notifications are received:
++ When the app is in the foreground.
++ When the app is in the background.
+
+Notifications are not received:
++ When the app is closed.
+
+The messages are sent as data type messages.
+
+--------------------------------------------------------------------------------
+The sample Twilio Notify Android Quickstart app uses project:
++ Project ID: tignotify
++ Project number: 572828197431
++ Web API Key: AIzaSyDF_F11EDPBk6wP7GXzHD9mWFArgUhULdQ 
+
+To use the Notify service: IS0e9b3863450252891f81f312a6e3a7d7,
+change FCM CREDENTIAL SID from tignotifyweb to "Adroid Quickstart app".
+
+--------------------------------------------------------------------------------
 Following is the Android code that is similar to the notification web application.
 
 Firebase IDs used when retrieving a user token.
@@ -41,7 +60,7 @@ Following is the same in the web application method, "getToken()", that is used 
 ````
 
 ````
-.../fcm/NotifyFirebaseMessagingService.java
+.../app/src/main/java/com/twilio/notify/quickstart/fcm/NotifyFirebaseMessagingService.java
 ...
     public void onMessageReceived(RemoteMessage message) {
         /*
@@ -60,10 +79,16 @@ Following is the same in the web application method, "getToken()", that is used 
         ...
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         ...
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "CHANNEL_NAME", NotificationManager.IMPORTANCE_LOW
+            );
+        ...
         notificationManager.notify(0, notificationBuilder.build());
     }
 ...
 ````
+Note,"CHANNEL_NAME" shows up in my phone's Notify QUickstart Settings/Notifications
 
 Once the FCM ID is retrieved, an HTTP request is sent
 to the registration Twilio Function to create a Notify Binding.
@@ -111,8 +136,8 @@ exports.handler = function(context, event, callback) {
 ````
 Sample run log messages:
 ````
-event:{"BindingType":"fcm","identity":"davea","Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V"}:
-+ Binding SID:BS315f33c816d1f8485db6f80253978a5a:
+event:{"BindingType":"fcm","identity":"daves","Address":"faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V"}:
++ Binding SID:BS1c93a90d06471a757c26a9312df79712:
 ````
 View the Twilio Notify binding:
 ````
@@ -122,8 +147,40 @@ $ node listBindings.js
 + The listing:
 ++ Binding-SID bindingType(fcm,apn):identity<address>)
 ...
-++ BS41dbd62a57839201ba892cf40cf97264 fcm:davea<faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V>
+++ BS1c93a90d06471a757c26a9312df79712 fcm:daves<faReuVhz_gk:APA91bHsNzVpwfrRp_1zIfSr-qCdgM44FhMjFsYfAw6u91uEW0NsQ8ZC_ESnfsf1pU3cb2zpxfOZmfEXe-P_dGd9NuIcMbt3JI4JPW_dhVgk7H5Dka5DbjQ9yrHAFZAA7UKCqdZwws7V>
 ````
+
+--------------------------------------------------------------------------------
+### Sending Notifications
+
+Sample run:
+````
+$ node sendNotification.js 
++++ Start sending notifications to an identity.
++ notifyServiceSid: IS0e9b3863450252891f81f312a6e3a7d7 to theIdentity: daves
++ Sent: NT0604fa75d2136ecee0040a18906d2fb8
+````
+When the app is running in the foreground or background,
+the Notify NT0604fa75d2136ecee0040a18906d2fb8 logs show:
+````
+STATE: SENT
+````
+I closed/stopped the app using:
+Settings/Apps & Notifications/Notify Quickstart/Force Stop.
+
+When the app is not running,the Notify logs show,
+````
+STATE: SENT
+````
+Even though, the STATE shows SENT, the notification was not displayed.
+
+When I send using incorrect configurations, the Notify log show,
+````
+No rows to display
+````
+
+I reopened the app, and since the app already registered as "daves",
+when I send a notification, the notification is received.
 
 --------------------------------------------------------------------------------
 ### Documentation Links

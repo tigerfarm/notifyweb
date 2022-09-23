@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-console.log("+++ Send a notifications to an FCM token address or device address.");
+console.log("+++ Send a notifications to an FCM token address which is a device address.");
 const client = require('twilio')(process.env.MASTER_ACCOUNT_SID, process.env.MASTER_AUTH_TOKEN);
 const notifyServiceSid = process.env.MASTER_NOTIFY_SID;
 console.log("+ Twilio Notify service SID: " + notifyServiceSid);
@@ -7,7 +7,7 @@ console.log("+ Twilio Notify service SID: " + notifyServiceSid);
 client.notify.services(notifyServiceSid).notifications.create({
     body: 'Hello there 1',
     toBinding: [
-        JSON.stringify({"binding_type": "fcm", "address": "cnOdL7XsY4E:APA91bHJsF1ICmQKlQAV6Gh9TZsI81yggGU0hoAZl_mLluex-_k6rdBAQg1wS8t1EyxRo1jYWqXayrNLKMRmfGKu4Eq95QSNdpkpH0cLyejNwyz9L66q6kXSGGZ3us-PaudShvQXaMwL"})
+        JSON.stringify({"binding_type": "fcm", "address": "e1sSJhiVQHk:APA91bHc4lXUg0RQfvSPIrJysRN-Sin1uuk99ftgML20UvEQPFiBDt7hwvyM6bMO_YS8cm_Sntx4FQJEjdBEOoCe0Wj0SYkpq3dyOZUdm2DuIEWcVU46rH24kTjRxyYr6l8B-R2lSsM2"})
     ]
 }).then(notification => console.log("+ Sent, Twilio Notify log id: " + notification.sid))
         .catch(error => console.log("- Error: " + error));

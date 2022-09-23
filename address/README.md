@@ -8,12 +8,11 @@
 # Twilio Notify Web Application Implementation
 
 These are the steps to:
-+ Set up, configure, and run
-a simple sample web application to receive Twilio Notify notifications.
++ Go through the above [../README.md](../README.md)
++ Set up, configure, and run a simple sample web application to receive Twilio Notify notifications.
 + Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
-+ Use the token to send a notications using the included 
-Twilio Notify command line program.
-+ Notifications will be received by the browser application, or in the background.
++ Use the token to send a notications using the included Twilio Notify command line program.
++ Notifications will be received by the browser application, or in the background by the OS.
 
 FCM token("cwQ...") and a received notification displayed in the browser application:
 
@@ -28,7 +27,6 @@ v17.9.0
 ````
 
 ### Download the Web Application that can Receive Twilio Notify Notifications
-
 
 If you have the GitHub tools installed, you can clone this 
 [GitHub repository](https://github.com/tigerfarm/notifyweb)
@@ -51,23 +49,23 @@ $ cd notifyweb/address
 
 #### Use the Google Firebase Project Information in the Web Application
 
+In the index.html file,
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "6...4").
+Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "BBZ...HA").
+Both are listed under the Firebase project settings: Firebase/Project Overview(click icon)/Project setting/Cloud Messaging.
+````
+            var config = {
+                apiKey: "BBZ...HA",
+                messagingSenderId: "6...4"
+            };
+````
 In the file: firebase-messaging-sw.js,
 set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
 Its listed under the Firebase project settings: "Cloud Messaging".
 ````
 firebase.initializeApp({
-    'messagingSenderId': "5...1"
+    'messagingSenderId': "6...4"
 });
-````
-In the index.html file,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
-Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
-Both are listed under the Firebase project settings: "Cloud Messaging".
-````
-            var config = {
-                apiKey: "AI...Q",
-                messagingSenderId: "5...1"
-            };
 ````
 
 Install the Node Express modules.
@@ -103,9 +101,9 @@ if the web application tab is closed, or the browser is closed,
     notifications will be handled by the device's OS.
 ````
 
-Use the send notification program: [sendNotification.js](sendNotification.js), to send a notification to the device.
+Use the send notification program: [sendAddress.js](sendAddress.js), to send a notification to the device.
 
-In the file, sendNotification.js, set "address" to the above retrieved FCM token value(example: "cw...YX").
+In the file, sendAddress.js, set "address" to the above retrieved FCM token value(example: "cw...YX").
 
 For example:
 ````
@@ -178,6 +176,46 @@ Notification flow:
 + From Google(FCM) network to the destination application-user(ID: Firebase project token)
     that is(or was) running the application.
 + Notification message text is processed on the device.
+
+--------------------------------------------------------------------------------
+Twilio Functions to send these notifications:
++ Create a new functions service in the Twilio Console and give it a name
++ In the functions editor, add axios as a module to import
++ Add your FCM server key as an environment variable called FCMkey
++ Create a function in your service
++ Next we will use Axios to build out an HTTP request to the Firebase API
+````
+const axios = require('axios');
+exports.handler = async (context, event, callback) => {
+  try {
+    // capture any info provided in the query string (e.g. body)
+    var messageBody = event.body;
+    // build notification
+    var notification = {
+        "title": "<NOTIFICATION_TITLE>",
+        "body": messageBody,
+        "click_action": "<URL_OF_ACTION>"
+      };
+    var registrationToken = "<DESTINATION_TOKEN>";
+
+    const response = await axios.post('https://fcm.googleapis.com/fcm/send', {
+      notification: notification,
+      to: registrationToken
+    },
+    { 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": context.FCMkey
+      }
+    });
+    return callback(null, response.data);
+  } catch (error) {
+    // In the event of an error, return a 500 error and the error message
+    console.error(error);
+    return callback(error);
+  }
+};
+````
 
 --------------------------------------------------------------------------------
 
