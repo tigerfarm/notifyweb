@@ -1,9 +1,14 @@
 console.log("+++ Send an FCM notification.");
 var request = require('request');
+//
+// Before running, set the FCM project values.
+// $ export FCM_SERVER_KEY_TOKEN=AAAA...x6r
+// $ export FCM_DEVICE_TOKEN=cw...YX
 var serverKeyToken = process.env.FCM_SERVER_KEY_TOKEN;
 console.log('+ serverKeyToken: ' + serverKeyToken);
 var deviceToken = process.env.FCM_DEVICE_TOKEN;
 console.log('+ deviceToken: ' + deviceToken);
+//
 var theRequestUrl = "https://fcm.googleapis.com/fcm/send";
 console.log('+ theRequestUrl: ' + theRequestUrl);
 var theMessage = "Hello there 1";
