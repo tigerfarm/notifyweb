@@ -5,16 +5,19 @@
 - [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
 - [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
 
-# Twilio Notify Web Application Implementation
+# FCM Notification Web Application Implementation
 
-These are the steps to:
-+ Go through the above [../README.md](../README.md)
-+ Set up, configure, and run a simple sample web application to receive Twilio Notify notifications.
-+ Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token in the browser.
-+ Use the token to send a notications using the included Twilio Notify command line program.
+This web application can receive notifications sent from Twilio Notify or directly from an FCM HTTP request.
+
+These are the steps to implement and test:
++ Go through the above [../README.md](../README.md) to setup an FCM project and Twilio Notify configurations.
++ Set up, configure, and run the simple sample web application to generate an FCM device address token that is used to receive FCM notifications.
++ Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token(device address token) in the browser.
++ Use the token to send notications using the included Twilio Notify command line program.
++ Or, set up and use a Twilio Function, that makes an FCM HTTP request to send notications.
 + Notifications will be received by the browser application, or in the background by the OS.
 
-FCM token("cwQ...") and a received notification displayed in the browser application:
+Screen print of FCM generated token("cwQ...") and a received notification displayed in the browser application:
 
 <img src="notifyw1.jpg" width="600"/>
 
