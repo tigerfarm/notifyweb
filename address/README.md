@@ -224,7 +224,7 @@ exports.handler = async (context, event, callback) => {
 ````
 The Twilio Function's Environment Variables:
 
-<img src="FCMsend.jpg" width="600"/>
+<img src="FCMsendEnv.jpg" width="600"/>
 
 Use the Twilio Function's URL with a message. For example:
 ````
