@@ -1,7 +1,8 @@
 #### Files in the "address" directory
 
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
-- [sendAddress.js](sendAddress.js) : a NodeJS command line program to send a Twilio Notify notification using the device application address.
+- [sendAddress.js](sendAddress.js) : a NodeJS command line program to send a Twilio Notify notification using the device application address(FCM token).
+- [sendFcmNotification.js](sendFcmNotification.js) : a NodeJS command line program to send a Firebase notification(not using Twilio Notify) using the FCM token.
 - [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
 - [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
 
@@ -10,11 +11,11 @@
 This web application can receive notifications sent from Twilio Notify or directly from an FCM HTTP request.
 
 These are the steps to implement and test:
-+ Go through the above [../README.md](../README.md) to setup an FCM project and Twilio Notify configurations.
-+ Set up, configure, and run the simple sample web application to generate an FCM device address token that is used to receive FCM notifications.
++ Go through the other [../README.md](../README.md) to setup an FCM project and Twilio Notify configurations.
++ Set up, configure, and run the simple sample web application to request an FCM device address token that is used to receive FCM notifications.
 + Using the web application, you will retrieve a Firebase Cloud Messaging(FCM) token(device address token) in the browser.
-+ Use the token to send notications using the included Twilio Notify command line program.
-+ Or, set up and use a Twilio Function, that makes an FCM HTTP request to send notications.
++ Use the token to send notifactions using the included Twilio Notify command line program: [sendAddress.js](sendAddress.js) or [sendFcmNotification.js](sendFcmNotification.js).
++ Or, set up and use a Twilio Function, that makes an FCM HTTP request to send notications (see below).
 + Notifications will be received by the browser application, or in the background by the OS.
 
 Screen print of FCM generated token("cwQ...") and a received notification displayed in the browser application:
@@ -168,7 +169,7 @@ and, however, it was not received, the "address" maybe incorrect.
 The sending program notification parameters:
 + Twilio account SID and token
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
-    which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
+    which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET), FCM Secret: AAAA...x6r (Firebase Server key Token)
 + Destination address: the application-user Firebase project token(e2fFuMEwN78:APA9...dXV)
     that was retrieved in the browser(firebase.messaging().getToken()).
 + Message text: 'Hello there 1'
@@ -181,7 +182,7 @@ Notification flow:
 + Notification message text is processed on the device.
 
 --------------------------------------------------------------------------------
-## Send a Direct FCM Notification
+## Twilio Function to Send a Direct FCM Notification
 
 For reference, Firebase [Authorize HTTP requests](https://firebase.google.com/docs/cloud-messaging/auth-server#authorize-http-requests).
 
