@@ -17,6 +17,7 @@ These are the steps to implement and test:
 + Use the token to send notifactions using the included Twilio Notify command line program: [sendAddress.js](sendAddress.js) or [sendFcmNotification.js](sendFcmNotification.js).
 + Or, set up and use a Twilio Function, that makes an FCM HTTP request to send notications (see below).
 + Notifications will be received by the browser application, or in the background by the OS.
++ This application was use to test [Twilio Conversations](https://github.com/tigerfarm/tfpconversations) notifications.
 
 Screen print of FCM generated token("cwQ...") and a received notification displayed in the browser application:
 
