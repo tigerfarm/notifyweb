@@ -60,8 +60,8 @@ Set the value for apiKey, to the "Web Push certificates: key pair" value(example
 Both are listed under the Firebase project settings: Firebase/Project Overview(click icon)/Project setting/Cloud Messaging.
 ````
             var config = {
-                apiKey: "BBZ...HA",
-                messagingSenderId: "6...4"
+                apiKey: "BBZWL...qHA",
+                messagingSenderId: "69...4"
             };
 ````
 In the file: firebase-messaging-sw.js,
@@ -69,7 +69,7 @@ set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
 Its listed under the Firebase project settings: "Cloud Messaging".
 ````
 firebase.initializeApp({
-    'messagingSenderId': "6...4"
+    'messagingSenderId': "69...4"
 });
 ````
 

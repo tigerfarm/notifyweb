@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 console.log("+++ Create an FCM Binding.");
-const client = require('twilio')(process.env.MASTER_ACCOUNT_SID, process.env.MASTER_AUTH_TOKEN);
-const notifyServiceSid = process.env.MASTER_NOTIFY_SID;
+const client = require('twilio')(process.env.MAIN_ACCOUNT_SID, process.env.MAIN_AUTH_TOKEN);
+const notifyServiceSid = process.env.MAIN_NOTIFY_SID;
 console.log("+ Notify service SID: " + notifyServiceSid);
 //
 // Firebase token value from: firebase.messaging().getToken()

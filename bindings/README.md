@@ -3,7 +3,7 @@
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
 - [sendNotification.js](sendNotification.js) : a NodeJS command line program to send a Twilio Notify notification using the binding identity.
 - [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
-- [docroot/notify_actions.html](docroot/notify_actions.html) : Client HTML, includes Client JavaScript functions
+- [docroot/notify_actions.js](docroot/notify_actions.js) : Client JavaScript functions
 - [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
 
 # Twilio Notify Web Application Implementation
@@ -53,11 +53,11 @@ $ cd notifyweb/bindings
 #### Use the Google Firebase Project Information in the Web Application
 
 In the file: firebase-messaging-sw.js,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "69...4").
 Its listed under the Firebase project settings: "Cloud Messaging".
 ````
 firebase.initializeApp({
-    'messagingSenderId': "5...1"
+    'messagingSenderId': "69...4"
 });
 ````
 In the index.html file,
@@ -67,9 +67,9 @@ Both are listed under the Firebase project settings: "Cloud Messaging".
 Setting the projectId is optional. I use it to echo the Firebase project I was using.
 ````
             var config = {
-                apiKey: "AI...Q",
+                apiKey: "BBZWL...qHA",
                 projectId: "twilionotify",
-                messagingSenderId: "5...1"
+                messagingSenderId: "69...4"
             };
 ````
 
@@ -80,9 +80,9 @@ $ npm install --save twilio
 ````
 Set environment variables. Or, hardcode them into the program: websever.js.
 ````
-$ export MASTER_NOTIFY_SID=IS0e9b3863450252891f81f312a6e3a7d7
-$ export MASTER_ACCOUNT_SID=AC...
-$ export MASTER_AUTH_TOKEN=...
+$ export MAIN_NOTIFY_SID=IS0e9b3863450252891f81f312a6e3a7d7
+$ export MAIN_ACCOUNT_SID=AC...
+$ export MAIN_AUTH_TOKEN=...
 ````
 Run the web server. Default port is hardcoded to 8000.
 ````
@@ -172,11 +172,11 @@ $ node sendNotification.js
 ````
 Or, use a curl command.
 ````
-curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications \
+$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications \
     -d 'Identity=davew' \
     -d 'Body=Hello there 1' \
-    -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
-$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications     -d 'Identity=davew'     -d 'Body=Hello there 1'     -u $MASTER_ACCOUNT_SID:$MASTER_AUTH_TOKEN
+    -u $MAIN_ACCOUNT_SID:$MAIN_AUTH_TOKEN
+$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications -d 'Identity=davew' -d 'Body=Hello there 1' -u $MAIN_ACCOUNT_SID:$MAIN_AUTH_TOKEN
 {
 "account_sid": "ACa...3", 
 "sid": "NTea47fb9ca9bc391f923dd2c999153a06", 

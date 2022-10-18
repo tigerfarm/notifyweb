@@ -8,6 +8,45 @@ includes the "address" application funcationality, and uses Twilio Notify Bindin
     Twilio Notify Android [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android)
     notifications.
 
+--------------------------------------------------------------------------------
+### Google Firebase project Value Used in Notification Senders and Receivers
+
+For sending, the Google Firebase project server key Token: AAAA...x6r
++ The Server key Token, is the FCM Secret in a Twilio credential entry.
++ When sending a notification, the other address value is the receiver's device app token.
+
+For receiving, the Google Firebase project Web Push certificate's key pair: BBZWL...qHA
++ Used in the app when requesting a device app token.
++ Receiving also requires the Firebase sender id, which is also the project number: 69...4
+
+In the receiving web web app's index.html file:
+````
+var config = {
+    apiKey: "BBZWL...qHA",
+    messagingSenderId: "69...4"
+};
+firebase.initializeApp(config);
+````
+The firebase-messaging-sw.js also contains the Firebase sender id:
+````
+firebase.initializeApp({
+    'messagingSenderId': "69...4"     // Matches the value in index.html.
+});
+````
+
+### Setup 
+
+Sending requirements:
++ Create and configure a Google Firebase Project.
++ Create Twilio Notify credentials for sending notifications.
+    The credentials include the Google Firebase project Server key Token.
++ Create a Twilio Notify service includes the Twilio Notify credentials.
+
+Receiving requirements:
++ Implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
++ The web appication will include the Google Firebase project Web Push certificate's key pair, and sender id.
+
+--------------------------------------------------------------------------------
 ### Background Notifications
 
 If application is not running in the browser when a notification is received,
@@ -22,18 +61,6 @@ Go to the option: Apple/System Preferences.../Notifications & Focus.
 Select the browser, for example: Firefox.
 Enable: Allow notifications: When mirroring or sharing the display.
 ````
-
-### Setup 
-
-Do the following before working with samples applications.
-Create and configure a Google Project and the matching Twilio configurations.
-
-+ Create and configure a Google Firebase Project.
-+ Create a Twilio Notify service and credentials.
-The credentials include the Google Firebase project Server key Token.
-
-After completing the following steps in this readme file,
-implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
 
 --------------------------------------------------------------------------------
 ## Create a Google Firebase Project
@@ -111,6 +138,7 @@ For example:
 ````
 FRIENDLY NAME: twilionotify
 FCM CREDENTIAL SID: twilionotify (the above newly created credential entry)
+MESSAGING SERVICE SID: Default Twilio SMS message
 Logging: enabled
 ````
 Click Save.

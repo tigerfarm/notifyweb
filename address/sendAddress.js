@@ -5,9 +5,9 @@ const notifyServiceSid = process.env.MASTER_NOTIFY_SID;
 console.log("+ Twilio Notify service SID: " + notifyServiceSid);
 // For this web application, the "address" is the FCM token value from: index.html.
 client.notify.services(notifyServiceSid).notifications.create({
-    body: 'Hello there 5',
+    body: 'Hello there 1',
     toBinding: [
-        JSON.stringify({"binding_type": "fcm", "address": "ewS_m63oS5A:APA91bGhWj6gAerckij2bGuSmsSYuy81ktkKPJ0KNci92u69ak6uwmpLCUPGRTyrjAPIcSa3VYLSNTpG9ztU5cF8t50dJMC_0zAcICe8kbVF-2WzFWIRVLR8c5oENtTSDPZ_cOkPZ6E7"})
+        JSON.stringify({"binding_type": "fcm", "address": "dS-7xNu0ihE:APA91bEVpWpQwbZGnEA10rIRSfT5ox72PJqH0y_sETyfObo9LLd3bAqtnHHSZ_o2V4yTzD8b8AMUgUbmzoDkVvRCGHHAxT0xXanxxdcs3Xe-nN0JNWFknMr-Pvj7W7q03q_y2PY4YO6L"})
     ]
 }).then(notification => console.log("+ Sent, Twilio Notify log id: " + notification.sid))
         .catch(error => console.log("- Error: " + error));
