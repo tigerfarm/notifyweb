@@ -10,7 +10,12 @@ console.log("++ Binding-SID bindingType(fcm,apn):identity<address>)");
 client.notify.services(notifyServiceSid).bindings
         .list({limit: 20})
         .then(bindings => bindings.forEach(
-                    binding => console.log("++ " + binding.sid + " " + binding.bindingType + ":" + binding.identity + "<" + binding.address + ">")
+                    binding => console.log("++ " + binding.sid 
+                    + " " + binding.bindingType 
+                    + ":" + binding.identity 
+                    + " credentialSid:" + binding.credentialSid 
+                    // + "<" + binding.address + ">"
+                    )
             ));
 // 
 // -----------------------------------------------------------------------------

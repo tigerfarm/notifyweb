@@ -1,6 +1,6 @@
 # Twilio Notify Web Application Configurations: Google Firebase and Twilio 
 
-This repository has 2 sample web applications to receive Twilio Notify notifications.
+This repository has 2 sample web applications to receive FCM notification and Twilio Notify notifications.
 + Directory [address](address) has a basic minimum sample web application.
 + Directory [bindings](bindings) has a web application sample that 
 includes the "address" application funcationality, and uses Twilio Notify Bindings.

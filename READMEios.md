@@ -1,4 +1,4 @@
-# Twilio Notify iOS Notificaiont Notes
+# Twilio Notify iOS Notification Notes
 
 Documentation steps to 
 [Configure iOS Push Notifications](https://www.twilio.com/docs/notify/configure-ios-push-notifications)
@@ -13,6 +13,51 @@ This will enable your app to receive notifications.
 3. Use the certificate to create a credential for Twilio.
 
 4. Configure your Twilio Service to use your APNS credentials
+
+Summary of values used, by which participant in the sequence.
+
+Registration and configuration:
++ The app that is running on the device, using the APN app id when request a device token from APN.
++ The device app receives the token and sends the device APN app token to Twilio. Twilio will use the token when sending notifications.
++ The APN app certificate, contains the APN app id and is used to create Twilio credentials. Twilio will use the credentials when sending notifications to the device that has the app registered on the device.
+
+Sending a notification:
++ When Twilio sends a notification, it uses the device app token + the APN app credentials.
++ APN receives the notification send request, confirms the APN app credentials, and uses the device app token to deliver the notification to the app registered on the device.
+
+--------------------------------------------------------------------------------
+### Comparision of creating an Android FCM project and one for iOS APN.
+
+[Set up APNs for your iOS app (optional)](https://www.twilio.com/docs/verify/quickstarts/push-ios#set-up-apns-for-your-ios-app-optional)
+````
+Step 1 - Setup an App ID
+Option 1- Existing App ID
+Option 2- New App ID
+Step 2 - Create a Certificate
+
+Create a Push Credential
+Get your certificate and private key
++ Create a Certificate Key
++ Create a Private Key
++ Process the RSA key
+Create the push credential
++ Certicate
++ Private Certicate
++ Sandbox checked or not checked
+````
+[Set up FCM push notifications for your Android app (optional)](https://www.twilio.com/docs/verify/quickstarts/push-android#set-up-fcm-push-notifications-for-your-android-app-optional)
+````
+Create a Firebase project for your app
+Register your app with Firebase
+Add a Firebase configuration file
+Add Firebase SDK to your app
+Edit your app manifest
+
+Create a Push Credential
+Get your server key
+Create the push credential
++ FCM Secret (Firebase Server key Token)
+````
 
 --------------------------------------------------------------------------------
 ### Register the device with the APN service
@@ -96,6 +141,17 @@ $ node listBindings.js
 
 Configuring Android Push Notifications
 [documentation](https://www.twilio.com/docs/notify/configure-android-push-notifications).
+
+[Verify Push iOS Client Library Quickstart](https://www.twilio.com/docs/verify/quickstarts/push-ios)
+````
+1 Sign up for Twilio
+2 Configure Push Credential and Verify Service
+3 Embed the client SDK into your iOS app
+4 Setup your app backend
+5 Register a user and their device in Verify Push
+6 Configure webhooks
+7 Verify a user
+````
 
 --------------------------------------------------------------------------------
 
