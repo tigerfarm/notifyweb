@@ -3,10 +3,10 @@
 This repository has 2 sample web applications to receive FCM notification and Twilio Notify notifications.
 + Directory [address](address) has a basic minimum sample web application.
 + Directory [bindings](bindings) has a web application sample that 
-includes the "address" application funcationality, and uses Twilio Notify Bindings.
-+ [Notes](READMEandroid.md) on how web application notifications relates to 
-    Twilio Notify Android [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android)
-    notifications.
+includes the "address" application functionality, plus uses Twilio Notify Bindings.
++ [Notes](READMEandroid.md) on how web application notifications relates to Twilio Notify Android
+    [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android) notifications.
++ [Notes](READMEios.md) on Twilio Notify iOS Notification
 
 --------------------------------------------------------------------------------
 ### Google Firebase project Value Used in Notification Senders and Receivers
@@ -19,7 +19,7 @@ For receiving, the Google Firebase project Web Push certificate's key pair: BBZW
 + Used in the app when requesting a device app token.
 + Receiving also requires the Firebase sender id, which is also the project number: 69...4
 
-In the receiving web web app's index.html file:
+In the receiving web app's index.html file:
 ````
 var config = {
     apiKey: "BBZWL...qHA",
@@ -27,7 +27,7 @@ var config = {
 };
 firebase.initializeApp(config);
 ````
-The firebase-messaging-sw.js also contains the Firebase sender id:
+The firebase-messaging-sw.js file also contains the Firebase sender id:
 ````
 firebase.initializeApp({
     'messagingSenderId': "69...4"     // Matches the value in index.html.
@@ -117,12 +117,12 @@ Firebase/Project Overview(click icon)/Project setting/Cloud Messaging
 Get value for the Server key Token, for example: AAAA...x6r.
 ````
 
-### Create a Notify Credential and Include the Firebase Server Key Token
+### Create a Notify Credential Entry and Include the Firebase Server Key Token
 
 Create a new Notify Credential: 
 [Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
 
-For example:
+For example credential entry:
 ````
 Friendly Name: twilionotify
 Type: FCM
@@ -136,7 +136,7 @@ Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/c
 
 For example:
 ````
-FRIENDLY NAME: twilionotify
+FRIENDLY NAME: notifyweb
 FCM CREDENTIAL SID: twilionotify (the above newly created credential entry)
 MESSAGING SERVICE SID: Default Twilio SMS message
 Logging: enabled
