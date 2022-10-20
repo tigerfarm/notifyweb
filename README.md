@@ -33,7 +33,43 @@ firebase.initializeApp({
     'messagingSenderId': "69...4"     // Matches the value in index.html.
 });
 ````
+In webserver.js, when generating the conversation token, use the following environment variables.
+````
+$ echo $CONVERSATIONS_ACCOUNT_SID
+ACae...3
 
+$ echo $CONVERSATIONS_SERVICE_SID
+IS5c86b7d0d6e44133acb09734274f94f6
+
+$ echo $FCM_CREDENTIAL_SID
+CR5db9959c64d7b104c9cf50c1f65efff6
+````
+Add the conversation notification participant into the conversation.
+````
+$ node servicesConversationParticipantCreateChat.js
+++ Create an Chat participant for a conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
++ Participant Identity: davew
++ Created participant, SID: MBda9663986bf74a5099e0c68d72487fb3
+
+$ node servicesConversationParticipantsList.js
+++ List Participants for a Conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
+++ uniqueName:      note
+++ state:           active
++ Participant SID: MB48e7413647a8403384be00ecf2aca85a identity, Chat: dave
++ Participant SID: MBda9663986bf74a5099e0c68d72487fb3 identity, Chat: davew
+````
+Notification message title is set in: firebase-messaging-sw.js
+````
+messaging.setBackgroundMessageHandler(function(payload) {
+    ...
+    const notificationTitle = 'Conversation Notification Web App';   // Notification background Message Title.
+    ...
+}
+````
 ### Setup 
 
 Sending requirements:
