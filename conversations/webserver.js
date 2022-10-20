@@ -92,66 +92,6 @@ app.get('/generateToken', function (req, res) {
 });
 
 // -----------------------------------------------------------------------------
-function addParticipantToConversation(res, conversationId, participantIdentity) {
-    sayMessage("+ Add the participant: " + participantIdentity + ", into conversationId: " + conversationId);
-    client.conversations.services(CONVERSATIONS_SERVICE_SID).conversations(conversationId)
-            .participants
-            .create({
-                identity: participantIdentity,
-                attributes: JSON.stringify({name: participantIdentity})
-            })
-            .then(participant => {
-                console.log("+ Participant added into the conversation, participant SID: " + participant.sid);
-                res.send("1");
-            }).catch(function (err) {
-        if (err.toString().indexOf('Participant already exists') > 0) {
-            console.log("+ Participant already exists.");
-            res.send("0");
-        } else if (err) {
-// If the conversation does not exist:
-// - Error: The requested resource /Services/IS4ebcc2d46cda47958628e59af9e53e55/Conversations/abc6/Participants was not found
-            console.error("- " + err);
-            res.send("-2");
-        }
-    });
-}
-
-app.get('/joinConversation', function (req, res) {
-    // Can join a conversation using either the SID or unique name.
-    // localhost:8000/joinConversation?identity=dave3&conversationid=CH52652cb27e81490bbb5cc67c223b857a
-    // localhost:8000/joinConversation?identity=dave3&conversationid=abc
-    sayMessage("+ Join a participant into a conversation.");
-    if (req.query.identity) {
-        if (req.query.conversationid) {
-            participantIdentity = req.query.identity;
-            conversationId = req.query.conversationid;
-            sayMessage("+ Parameter identity: " + participantIdentity + ", conversationId: " + conversationId);
-            //
-            // Determine if the conversation exists.
-            client.conversations.services(CONVERSATIONS_SERVICE_SID).conversations(conversationId)
-                    .fetch()
-                    .then(conversation => {
-                        console.log(
-                                "+ Conversation exits, SID: " + conversation.sid
-                                + " " + conversation.uniqueName
-                                + " " + conversation.friendlyName
-                                );
-                        addParticipantToConversation(res, conversationId, participantIdentity);
-                    })
-                    .catch(function (err) {
-                        console.log("+ Conversation does NOT exist, cannot join it.");
-                    });
-        } else {
-            sayMessage("- Parameter required: conversationid.");
-            res.status(400).send('HTTP Error 400. Parameter required: conversationid.');
-        }
-    } else {
-        sayMessage("- Parameter required: identity.");
-        res.status(400).send('HTTP Error 400. Parameter required: identity.');
-    }
-});
-
-// -----------------------------------------------------------------------------
 app.get('/hello', function (req, res) {
     res.send('+ hello there.');
 });

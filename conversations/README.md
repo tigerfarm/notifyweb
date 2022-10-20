@@ -17,6 +17,66 @@ Receiving a notification in the browser application:
 
 <img src="notifyWebNotification.jpg" width="600"/>
 
+--------------------------------------------------------------------------------
+## Configurations and Running a Test
+
+In the web application, webserver.js:
+````
+Create a Conversations access token using:
+Twilio Account:                 CONVERSATIONS_ACCOUNT_SID
+Notifications to the service:   CONVERSATIONS_SERVICE_SID
+For sending notifications:      FCM_CREDENTIAL_SID
+````
+In the web application, notify_actions.js:
+````
+Get a Firebase FCM message token:           firebaseFcmToken = e1sS...sM2
+Get a Conversations identity token:         userIdentity = davew
+Create a Conversations conversation object using the Conversations token.
+Set the conversation object to receive notifications.
+    thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
+    Ties togeather: conversations service + web app client to FCM project.
+    Now can receive tokens.
+````
+The participant(userIdentity=davew) needs to join a channel, name: note.
+````
+$ node servicesConversationParticipantCreateChat.js
+++ Create an Chat participant for a conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
++ Participant Identity: davew
++ Created participant, SID: MBa76d8408645d44dcb6529f182da0ba9e
+````
+Add another participant(davep1) to the channel, name: note.
+This participant will send messages to the channel.
+````
+$ node servicesConversationParticipantCreateChat.js
+++ Create an Chat participant for a conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
++ Participant Identity: davep1
++ Created participant, SID: MBf098e8d382e7461eaadb362f190d7904
+
+$ node servicesConversationParticipantsList.js
+++ List Participants for a Conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
+++ uniqueName:      note
+++ state:           active
++ Participant SID: MBa76d8408645d44dcb6529f182da0ba9e identity, Chat: davew
++ Participant SID: MBf098e8d382e7461eaadb362f190d7904 identity, Chat: davep1
+````
+Create a message in the channel, note, with author davep1.
+````
+$ node servicesConversationMsgCreate.js
+++ Create a text message for a Conversation.
++ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
++ Participant Identity: davep1 messageText: msg1a
++ Created message, SID: IM8528c6bec4394d05816acc2641f58c9b
+````
+Message is created and notfication is sent, and displayed.
+
+--------------------------------------------------------------------------------
 ## Impliment the Web Application
 
 To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
