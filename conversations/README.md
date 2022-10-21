@@ -1,10 +1,19 @@
 #### Files in the "address" directory
 
+Web application files:
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
-- [sendNotification.js](sendNotification.js) : a NodeJS command line program to send a Twilio Notify notification using the binding identity.
 - [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
 - [docroot/notify_actions.js](docroot/notify_actions.js) : Client JavaScript functions
 - [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
+
+Command line programs for testing:
+- [servicesConversationFetchOne.js](servicesConversationMsgCreate.js) : Fetch a Twilio Conversations conversation's information.
+- [servicesConversationMsgCreate.js](servicesConversationMsgCreate.js) : create/send a conversation message.
+- [servicesConversationMsgListAll.js](servicesConversationMsgListAll.js) : list all messages in a conversation.
+- [servicesConversationMsgRemoveAll.js](servicesConversationMsgRemoveAll.js) : remove all messages from a conversation.
+- [servicesConversationParticipantCreateChat.js](servicesConversationParticipantCreateChat.js) : create a conversation chat participant.
+- [servicesConversationParticipantRemove.js](servicesConversationParticipantRemove.js) : remove a conversation's participant.
+- [servicesConversationParticipantsList.js](servicesConversationParticipantsList.js) : list all participant for a conversation.
 
 # Twilio Conversations Notification Web Application Implementation
 
