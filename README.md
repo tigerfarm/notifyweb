@@ -159,6 +159,18 @@ Get value for the Server key Token, for example: AAAA...x6r.
 
 Create a new Notify Credential: 
 [Push Credential entry](https://console.twilio.com/us1/account/keys-credentials/credentials?frameUrl=/console/[…]&_ga=2.106700427.985900128.1666307041-1107974050.1665436152).
+````
+Twilio Console, Account, select Credentials.
+Verify to enter the management page.
+Public Keys are for APN.
+Click, Push Credentials to view the list.
+````
+Or,
+````
+Twilio Console, Notify/Services, click a service.
+Click "here", in any of the services, for example: Create an FCM Credential here.
+````
+From the management page, can add or change a credential.
 
 For example credential entry:
 ````

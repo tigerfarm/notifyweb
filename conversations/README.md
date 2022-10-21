@@ -15,6 +15,7 @@ Command line programs for testing:
 - [servicesConversationParticipantRemove.js](servicesConversationParticipantRemove.js) : remove a conversation's participant.
 - [servicesConversationParticipantsList.js](servicesConversationParticipantsList.js) : list all participant for a conversation.
 
+--------------------------------------------------------------------------------
 # Twilio Conversations Notification Web Application Implementation
 
 These are the steps to set up, configure, and run 
@@ -24,7 +25,7 @@ browser that is running the web notification application.
 
 Receiving a notification in the browser application: 
 
-<img src="notifyWebNotification.jpg" width="600"/>
+<img src="conversationsWeb.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
 ## Configurations
