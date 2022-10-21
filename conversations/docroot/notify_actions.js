@@ -74,10 +74,10 @@ function setNotifications() {
         return;
     }
     logger("+ Pass FCM token to the conversationClientInstance to register for push notifications.");
-    document.getElementById("notificationsConversationsEnabled").innerText = "Not enabled";
+    document.getElementById("notificationsConversationsEnabled").innerText = "Not set";
     thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
     logger('+ This web app is registered to receive Conversations push notifications.');
-    document.getElementById("notificationsConversationsEnabled").innerText = "Enabled";
+    document.getElementById("notificationsConversationsEnabled").innerText = "Set";
 }
 
 // -----------------------------------------------------------------------------
