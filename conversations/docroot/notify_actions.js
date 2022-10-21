@@ -2,15 +2,14 @@
 // 
 
 // For Conversations.
-let userIdentity = "davew";
+let userIdentity = "";
 let thisConversationClient = "";
 let thisToken;
+var firebaseFcmToken = "";
 
 // -----------------------------------------------------------------------------
 // Initialize Firebase
 // Get a Firebase token to identify this client: device application address token.
-//
-var firebaseFcmToken = "";
 //
 function GetMessagingToken() {
     if (firebase && firebase.messaging()) {
@@ -33,17 +32,15 @@ function GetMessagingToken() {
     }
 }
 
-// -------------------------------
+// -----------------------------------------------------------------------------
 function setConversation() {
+    userIdentity = document.forms["binding_form"]["identity_field"].value;
     if (userIdentity === "") {
         logger("Required: Conversation identity.");
+        document.getElementById("setConversationsEnabled").innerText = "Required: Conversation identity.";
         return;
     }
-    if (userIdentity === "") {
-        logger("Required: Firebase FCM message token.");
-        return;
-    }
-    document.getElementById("notificationsConversations").innerText = "Not enabled";
+    document.getElementById("setConversationsEnabled").innerText = "Not created";
     logger("+ Use a server side routine to refresh the token using client id: " + userIdentity);
     var jqxhr = $.get("generateToken?identity=" + userIdentity, function (token) {
         if (token === "0") {
@@ -57,15 +54,30 @@ function setConversation() {
             logger("Conversations client created: thisConversationClient.");
             thisConversationClient = conversationClient;
             logger("+ Conversation client created for the user, identity: " + userIdentity);
-            //
-            logger("+ Pass FCM token to the conversationClientInstance to register for push notifications.");
-            thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
-            logger('+ This web app is registered to receive Conversations push notifications.');
-            document.getElementById("notificationsConversations").innerText = "Enabled";
+            document.getElementById("setConversationsEnabled").innerText = "Created";
         });
     }).fail(function () {
         logger("- Error refreshing the token and creating the chat client object.");
     });
+}
+
+// -----------------------------------------------------------------------------
+function setNotifications() {
+    if (userIdentity === "") {
+        document.getElementById("notificationsConversationsEnabled").innerText = "Required: Twilio Conversations instance, created.";
+        logger("Required: Twilio Conversations instance must first be created.");
+        return;
+    }
+    if (firebaseFcmToken === "") {
+        document.getElementById("notificationsConversationsEnabled").innerText = "Required: Firebase FCM message token.";
+        logger("Required: Firebase FCM message token.");
+        return;
+    }
+    logger("+ Pass FCM token to the conversationClientInstance to register for push notifications.");
+    document.getElementById("notificationsConversationsEnabled").innerText = "Not enabled";
+    thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
+    logger('+ This web app is registered to receive Conversations push notifications.');
+    document.getElementById("notificationsConversationsEnabled").innerText = "Enabled";
 }
 
 // -----------------------------------------------------------------------------

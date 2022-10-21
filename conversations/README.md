@@ -27,7 +27,7 @@ Receiving a notification in the browser application:
 <img src="notifyWebNotification.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
-## Configurations and Running a Test
+## Configurations
 
 In the web application, webserver.js:
 ````
@@ -54,16 +54,6 @@ $ node servicesConversationParticipantCreateChat.js
 + Conversation SID: CHdb2a97f48028474da2eb168e7801df21
 + Participant Identity: davew
 + Created participant, SID: MBa76d8408645d44dcb6529f182da0ba9e
-````
-Add another participant(davep1) to the channel, name: note.
-This participant will send messages to the channel.
-````
-$ node servicesConversationParticipantCreateChat.js
-++ Create an Chat participant for a conversation.
-+ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
-+ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
-+ Participant Identity: davep1
-+ Created participant, SID: MBf098e8d382e7461eaadb362f190d7904
 
 $ node servicesConversationParticipantsList.js
 ++ List Participants for a Conversation.
@@ -72,9 +62,11 @@ $ node servicesConversationParticipantsList.js
 ++ uniqueName:      note
 ++ state:           active
 + Participant SID: MBa76d8408645d44dcb6529f182da0ba9e identity, Chat: davew
-+ Participant SID: MBf098e8d382e7461eaadb362f190d7904 identity, Chat: davep1
 ````
-Create a message in the channel, note, with author davep1.
+
+### Run a Test
+
+Create a message in the channel: note, with author davep1.
 ````
 $ node servicesConversationMsgCreate.js
 ++ Create a text message for a Conversation.
@@ -84,6 +76,20 @@ $ node servicesConversationMsgCreate.js
 + Created message, SID: IM8528c6bec4394d05816acc2641f58c9b
 ````
 Message is created and notfication is sent, and displayed.
+
+Note,since the message is sent from a program, the author does not need to be a participant in the channel.
+
+#### Modify the notification messages structure.
+In the Twilio console, go to 
+````
+Develop/Conversations/Manage/Services, services are listed.
+Click your service Friendly Name.
+Click left menu item: Push configuration.
+Modify: Notification Text,
+    From:   ${CONVERSATION}:${PARTICIPANT}: ${MESSAGE}
+    To:     Test: ${CONVERSATION}:${PARTICIPANT}: ${MESSAGE}
+````
+Create another message in the conversation, and you'll see the modify notification.
 
 --------------------------------------------------------------------------------
 ## Impliment the Web Application
