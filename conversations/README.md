@@ -1,7 +1,7 @@
 #### Files in the "address" directory
 
 Web application files:
-- [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
+- [webserver.js](webserver.js) : a NodeJS Express HTTP web server that serves the client files.
 - [docroot/index.html](docroot/index.html) : Client HTML, includes Client JavaScript functions
 - [docroot/notify_actions.js](docroot/notify_actions.js) : Client JavaScript functions
 - [docroot/firebase-messaging-sw.js](docroot/firebase-messaging-sw.js) : Background notification processing
@@ -25,6 +25,79 @@ can receive Twilio Conversations notifications.
 Client running in the browser: 
 
 <img src="../conversationsWeb.jpg" width="600"/>
+
+--------------------------------------------------------------------------------
+## Impliment the Web Application
+
+To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
+````
+$ node -v
+v17.9.0
+````
+
+### Download the Web Application that can Receive Twilio Notify Notifications
+
+If you have the GitHub tools installed, you can clone this repository to your disk.
+````
+cd /.../Projects/
+$ git clone https://github.com/tigerfarm/notifyweb
+...
+$ cd notifyweb/conversations
+````
+
+Or, download the ZIP into a working directory, and unzip it.
+````
+cd /Users/<user>/Projects/
+$ mkdir notifyweb
+$ mkdir notifyweb/conversations
+$ cd notifyweb/conversations
+````
+
+#### Use the Google Firebase Project Information in the Web Application
+
+In the file: firebase-messaging-sw.js,
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "69...4").
+Its listed under the Firebase project settings: "Cloud Messaging".
+````
+firebase.initializeApp({
+    'messagingSenderId': "69...4"
+});
+````
+In the index.html file,
+set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
+Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
+Both are listed under the Firebase project settings: "Cloud Messaging".
+Setting the projectId is optional. I use it to echo the Firebase project I was using.
+````
+            var config = {
+                apiKey: "BBZWL...qHA",
+                projectId: "twilionotify",
+                messagingSenderId: "69...4"
+            };
+````
+
+Install the Express and Twilio modules.
+````
+$ npm install --save express
+$ npm install --save twilio
+````
+Set environment variables. Or, hardcode them into the program: websever.js.
+````
+$ export CONVERSATIONS_ACCOUNT_SID=AC...
+$ export CONVERSATIONS_API_KEY=SK...
+$ export CONVERSATIONS_API_KEY_SECRET=...
+$ export CONVERSATIONS_SERVICE_SID=IS5c86b7d0d6e44133acb09734274f94f6
+$ export FCM_CREDENTIAL_SID=CR5d...f6
+````
+Run the web server. Default port is hardcoded to 8000.
+````
+$ node websever.js
++++ Twilio Conversations web application server is starting up.
++ Twilio ACCOUNT_SID: ACae...a3
++ Twilio CONVERSATIONS_SERVICE_SID: IS5c86b7d0d6e44133acb09734274f94f6
++ Twilio FCM_CREDENTIAL_SID :CR5d...f6:
++ Listening on port: 8000
+````
 
 --------------------------------------------------------------------------------
 ## Configurations
@@ -97,77 +170,9 @@ Modify: Notification Text,
 ````
 Create another message in the conversation, and you'll see the modify notification.
 
+
 --------------------------------------------------------------------------------
-## Impliment the Web Application
-
-To run the Web Application, you will need to Node installed and available. I'm using Node version 17.9.0.
-````
-$ node -v
-v17.9.0
-````
-
-### Download the Web Application that can Receive Twilio Notify Notifications
-
-If you have the GitHub tools installed, you can clone this repository to your disk.
-````
-cd /.../Projects/
-$ git clone https://github.com/tigerfarm/notifyweb
-...
-$ cd notifyweb/conversations
-````
-
-Or, download the ZIP into a working directory, and unzip it.
-````
-cd /Users/<user>/Projects/
-$ mkdir notifyweb
-$ mkdir notifyweb/conversations
-$ cd notifyweb/conversations
-````
-
-#### Use the Google Firebase Project Information in the Web Application
-
-In the file: firebase-messaging-sw.js,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "69...4").
-Its listed under the Firebase project settings: "Cloud Messaging".
-````
-firebase.initializeApp({
-    'messagingSenderId': "69...4"
-});
-````
-In the index.html file,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "5...1").
-Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
-Both are listed under the Firebase project settings: "Cloud Messaging".
-Setting the projectId is optional. I use it to echo the Firebase project I was using.
-````
-            var config = {
-                apiKey: "BBZWL...qHA",
-                projectId: "twilionotify",
-                messagingSenderId: "69...4"
-            };
-````
-
-Install the Express and Twilio modules.
-````
-$ npm install --save express
-$ npm install --save twilio
-````
-Set environment variables. Or, hardcode them into the program: websever.js.
-````
-$ export MAIN_NOTIFY_SID=IS0e9b3863450252891f81f312a6e3a7d7
-$ export MAIN_ACCOUNT_SID=AC...
-$ export MAIN_AUTH_TOKEN=...
-````
-Run the web server. Default port is hardcoded to 8000.
-````
-$ node websever.js
-+++ Notify web application server is starting up.
-+ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
-+ Twilio client object created for Twilio account: ACa...3
-+ Listening on port: 8000
-````
-
-## Register/Create a Twilio Notify Binding
+## Register/Create ...
 
 In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
