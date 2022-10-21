@@ -48,15 +48,17 @@ $ cd notifyweb/conversations
 #### Use the Google Firebase Project Information in the Web Application
 
 If you haven't, go through the steps in the higher level [README](../README.md):
-+ Create a [Google Firebase project](https://console.firebase.google.com/).
++ Create a [Google Firebase project](https://console.firebase.google.com/). I'm using: twilionotify.
 + Create a [Twilio Mobile Push Credentials](https://console.twilio.com/us1/develop/notify/try-it-out?frameUrl=%2Fconsole%2Fnotify%2Fcredentials%3F__override_layout__%3Dembed%26bifrost%3Dtrue%26x-target-region%3Dus1) entry.
 
 In the index.html file,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "69...4").
-Set the value for apiKey, to the "Web Push certificates: key pair" value(example: "AI...Q").
-Both are listed under the Firebase project settings: "Cloud Messaging".
-Setting the projectId is optional. I use it to echo the Firebase project I was using.
 ````
+Set the value for apiKey. In the [Google Firebase console](https://console.firebase.google.com/)
+    Project: twilionotify
+    Firebase/Project Overview/Project settings/Cloud Messaging/Web configuration/Web configuration,
+    Web Push certificates: key pair, example: "BBZWL...qHA".
+Set the messagingSenderId value, to the Firebase "Sender ID", example: "69...4".
+Setting the projectId is optional. I use it to echo the Firebase project I was using.
             var config = {
                 apiKey: "BBZWL...qHA",
                 projectId: "twilionotify",
@@ -64,9 +66,8 @@ Setting the projectId is optional. I use it to echo the Firebase project I was u
             };
 ````
 In the file: firebase-messaging-sw.js,
-set the messagingSenderId value, to the Firebase "Sender ID"(example: "69...4").
-Its listed under the Firebase project settings: "Cloud Messaging".
 ````
+Set the messagingSenderId value, to the Firebase "Sender ID", example: "69...4".
 firebase.initializeApp({
     'messagingSenderId': "69...4"
 });
@@ -89,17 +90,24 @@ $ export CONVERSATIONS_API_KEY_SECRET=...
 $ export CONVERSATIONS_SERVICE_SID=IS5c86b7d0d6e44133acb09734274f94f6
 $ export FCM_CREDENTIAL_SID=CR5d...f6
 ````
-Variables in the web server program, webserver.js:
+Variables to generate Conversations access tokens,
 ````
-Variables to generate Conversations access token,
 Twilio Account:                 CONVERSATIONS_ACCOUNT_SID
                                 CONVERSATIONS_API_KEY
                                 CONVERSATIONS_API_KEY_SECRET
 Conversations service SID:      CONVERSATIONS_SERVICE_SID
 Twilio push credential SID:     FCM_CREDENTIAL_SID
 ````
-The participant(userIdentity=davew) needs to join a channel, name: note.
+Set up Conversations components using command line programs.
 ````
+Create a conversations.
+$ node servicesConversationCreate.js 
+++ Create a conversation.
++ Messaging Service SID: IS5c86b7d0d6e44133acb09734274f94f6, Friendly and unique Name: Test notifications
++ Conversation SID: CHdb2a97f48028474da2eb168e7801df21 Test notifications
+
+Create a Conversations participant into the conversation.
+The participant(userIdentity=davew) needs to join a channel, name: note.
 $ node servicesConversationParticipantCreateChat.js
 ++ Create an Chat participant for a conversation.
 + Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
@@ -116,7 +124,8 @@ $ node servicesConversationParticipantsList.js
 + Participant SID: MBa76d8408645d44dcb6529f182da0ba9e identity, Chat: davew
 ````
 
-### Run a Test
+--------------------------------------------------------------------------------
+## Run a Test
 
 Install the Express and Twilio modules.
 ````
@@ -133,19 +142,21 @@ $ node websever.js
 + Twilio FCM_CREDENTIAL_SID :CR5d...f6:
 + Listening on port: 8000
 ````
-
-In the web application, notify_actions.js:
+In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
 ````
-Get a Firebase FCM message token:           firebaseFcmToken = e1sS...sM2
-Get a Conversations identity token:         userIdentity = davew
-Create a Conversations conversation object using the Conversations token.
-Set the conversation object to receive notifications.
+Get a Firebase FCM message token, for example:  firebaseFcmToken = e1sS...sM2
+Enter an identity to use, for example:          davew
+Create a Conversations conversation object
+    Get a new Conversations token,              userIdentity = davew
+    using the token instatiate a Conversations instance.
+Set the conversation instance to receive notifications.
     thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
-    Ties togeather: conversations service + web app client to FCM project.
-    Now can receive tokens.
 ````
+Now can receive tokens.
 
-Create a message in the channel: note, with author davep1.
+### Create a message in the channel.
+
+The program creates a mess using author: davep1.
 ````
 $ node servicesConversationMsgCreate.js
 ++ Create a text message for a Conversation.
@@ -156,7 +167,7 @@ $ node servicesConversationMsgCreate.js
 ````
 Message is created and notfication is sent, and displayed.
 
-Note,since the message is sent from a program, the author does not need to be a participant in the channel.
+Note, since the message is sent from a program, the author does not need to be a participant in the channel.
 
 #### Modify the notification messages structure.
 In the Twilio console, go to 
@@ -169,110 +180,6 @@ Modify: Notification Text,
     To:     Test: ${CONVERSATION}:${PARTICIPANT}: ${MESSAGE}
 ````
 Create another message in the conversation, and you'll see the modify notification.
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-## Register/Create ...
-
-In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
-````
-Click "Get Firebase FCM message token".
-    The token is displayed.
-Enter an Identity such as "davew".
-Click "Create Twilio Notify binding".
-    The Twilio Notify Binding id is displayed.
-````
-The binding is created using the identity and the FCM message token.
-
-Sample run:
-
-<img src="notifyWebNotification.jpg" width="400"/>
-
-Use a command line program to list the newly created binding.
-Note the above environment variables are required.
-
-## Send a notification:
-
-Once the FCM token is retrieved and the Twilio binding created,
-notifications can be sent to the device using the binding identity.
-````
-if the web application is running in the browser, 
-    notifications will be handled by the application (see above).
-if the web application tab is closed, or the browser is closed,
-    notifications will be handled by the device's OS (see below).
-````
-
-Use the send notification program(sendNotification.js) to send a notification to the app user.
-
-In the file, sendNotification.js, set identity to the Twilio Notify registered identity.
-
-For example:
-````
-const theIdentity = 'davew';
-client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.create({
-    identity: theIdentity,
-    body: 'Hello there 1'
-})
-````
-
-Sample program run:
-````
-$ node sendNotification.js 
-+++ Start sending notifications to an identity.
-+ Sent: NTea47fb9ca9bc391f923dd2c999153a06
-````
-Or, use a curl command.
-````
-$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications \
-    -d 'Identity=davew' \
-    -d 'Body=Hello there 1' \
-    -u $MAIN_ACCOUNT_SID:$MAIN_AUTH_TOKEN
-$ curl -X POST https://notify.twilio.com/v1/Services/IS0e9b3863450252891f81f312a6e3a7d7/Notifications -d 'Identity=davew' -d 'Body=Hello there 1' -u $MAIN_ACCOUNT_SID:$MAIN_AUTH_TOKEN
-{
-"account_sid": "ACa...3", 
-"sid": "NTea47fb9ca9bc391f923dd2c999153a06", 
-"service_sid": "IS0e9b3863450252891f81f312a6e3a7d7", 
-"identities": ["davew"],
-"body": "Hello there 1", 
-"sms": null, "gcm": null, "fcm": null, "apn": null, "alexa": null, "facebook_messenger": null, 
-"ttl": 2419200,
-"priority": "high", 
-"data": null, 
-"action": null, "date_created": "2022-06-09T20:23:10Z", 
-"sound": null, "tags": [], "title": null, "segments": [], 
-}
-/Users/dave/conversations
-````
-The notification will be received on the device where the Twilio Notify binding was registered.
-Either handled in the application, or handled by the OS in the background.
-
-Sample send where the NOtify request was successful, but nothing was sent.
-````
-$ node sendNotification.js 
-+++ Start sending notifications to an identity.
-+ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
-+ Sent: NT10483e690f1df0fc20dca87447b59ede
-````
-If the logs do not show any thing for a Notify log id (Twilio Console: No rows to display), 
-then the binding may not exist.
-
-### About the Send
-
-The sending program notification parameters:
-+ Twilio account SID and token
-+ Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
-    which has the FCM CREDENTIAL SID (type: FCM, and FCM SECRET)
-+ Destination address: the application-user Firebase project token(e2fFuMEwN78:APA9...dXV)
-    that was retrieved in the browser(firebase.messaging().getToken()).
-+ Message text: 'Hello there 1'
-
-Notification flow:
-+ From your sending program(Twilio account SID and token) to Twilio.
-+ From Twilio(FCM access: FCM SECRET) to the Google(FCM) network.
-+ From Google(FCM) network to the destination application-user(ID: Firebase project token)
-    that is(or was) running the application.
-+ Notification message text is processed on the device.
 
 --------------------------------------------------------------------------------
 
