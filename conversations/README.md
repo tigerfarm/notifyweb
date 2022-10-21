@@ -29,7 +29,11 @@ Receiving a notification in the browser application:
 --------------------------------------------------------------------------------
 ## Configurations
 
-In the web application, webserver.js:
+First, go through the steps in the higher level [README](../README.md):
++ Create a [Google Firebase project](https://console.firebase.google.com/).
++ Create a [Twilio Mobile Push Credentials](https://console.twilio.com/us1/develop/notify/try-it-out?frameUrl=%2Fconsole%2Fnotify%2Fcredentials%3F__override_layout__%3Dembed%26bifrost%3Dtrue%26x-target-region%3Dus1) entery.
+
+For use by the web application program, webserver.js, create environment variables:
 ````
 Create a Conversations access token using:
 Twilio Account:                 CONVERSATIONS_ACCOUNT_SID

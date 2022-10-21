@@ -1,6 +1,5 @@
 // -----------------------------------------------------------------------------
 // Notify notification testing web server
-// + Twilio client is created and used to add a Notify binding.
 // 
 // Easy to use.
 // Install modules.
@@ -11,7 +10,7 @@
 //  $ node websever.js
 // 
 // -----------------------------------------------------------------------------
-console.log("+++ Notify web application server is starting up.");
+console.log("+++ Twilio Conversations web application server is starting up.");
 //
 // -----------------------------------------------------------------------------
 // Web server interface to call functions.
@@ -27,22 +26,20 @@ const PORT = process.env.PORT || 8000;
 var app = express();
 
 // -----------------------------------------------------------------------------
+// Variables required to generate Twilio Conversations access tokens.
+
 // Set program variables using environment variables.
-
 const ACCOUNT_SID = process.env.CONVERSATIONS_ACCOUNT_SID;
-var client = require('twilio')(ACCOUNT_SID, process.env.MAIN_AUTH_TOKEN);
-console.log("+ Twilio client object created for Twilio account: " + ACCOUNT_SID);
-
 var API_KEY = process.env.CONVERSATIONS_API_KEY;
 var API_KEY_SECRET = process.env.CONVERSATIONS_API_KEY_SECRET;
-
 var CONVERSATIONS_SERVICE_SID = process.env.CONVERSATIONS_SERVICE_SID;
 var FCM_CREDENTIAL_SID = process.env.FCM_CREDENTIAL_SID;
-console.log("+ CONVERSATIONS_SERVICE_SID: " + CONVERSATIONS_SERVICE_SID);
-console.log("+ FCM_CREDENTIAL_SID :" + FCM_CREDENTIAL_SID + ":");
+console.log("+ Twilio ACCOUNT_SID: " + ACCOUNT_SID);
+console.log("+ Twilio CONVERSATIONS_SERVICE_SID: " + CONVERSATIONS_SERVICE_SID);
+console.log("+ Twilio FCM_CREDENTIAL_SID :" + FCM_CREDENTIAL_SID + ":");
 
 // -----------------------------------------------------------------------------
-// Respond with a generated Conversations conversation token.
+// Respond with a generated Conversations service token.
 //
 // Documentation: https://www.twilio.com/docs/iam/access-tokens
 
@@ -72,9 +69,6 @@ function generateToken(theIdentity) {
     }
     token.addGrant(chatGrant);
     token.identity = theIdentity;
-    // token.ttl = 1200; // Token time to live, in seconds. 1200 = 20 minutes.
-    token.ttl = 600; // Token time to live, in seconds. 600 = 5 minutes. For testing token update.
-    //
     // Output the token.
     theToken = token.toJwt();
     // console.log("+ theToken " + theToken);

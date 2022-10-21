@@ -1,9 +1,10 @@
 # Twilio Notify Web Application Configurations: Google Firebase and Twilio 
 
-This repository has 2 sample web applications to receive FCM notification and Twilio Notify notifications.
+This repository has 3 sample web applications to receive FCM notification and Twilio Notify notifications.
 + Directory [address](address) has a basic minimum sample web application.
 + Directory [bindings](bindings) has a web application sample that 
 includes the "address" application functionality, plus uses Twilio Notify Bindings.
++ Directory [conversations](conversations) has a basic minimum Twilio Conversations sample web application.
 + [Notes](READMEandroid.md) on how web application notifications relates to Twilio Notify Android
     [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android) notifications.
 + [Notes](READMEios.md) on Twilio Notify iOS Notification
@@ -79,7 +80,8 @@ Sending requirements:
 + Create a Twilio Notify service includes the Twilio Notify credentials.
 
 Receiving requirements:
-+ Implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
++ Implement one of the web applications: [address](address), Twilio Notify [bindings](bindings),
+    or Twilio Conversations [conversations](conversations).
 + The web appication will include the Google Firebase project Web Push certificate's key pair, and sender id.
 
 --------------------------------------------------------------------------------
@@ -156,7 +158,7 @@ Get value for the Server key Token, for example: AAAA...x6r.
 ### Create a Notify Credential Entry and Include the Firebase Server Key Token
 
 Create a new Notify Credential: 
-[Push Credential entry](https://www.twilio.com/console/notify/credentials/create).
+[Push Credential entry](https://console.twilio.com/us1/account/keys-credentials/credentials?frameUrl=/console/[…]&_ga=2.106700427.985900128.1666307041-1107974050.1665436152).
 
 For example credential entry:
 ````
@@ -165,6 +167,8 @@ Type: FCM
 FCM Secret: AAAA...x6r (Firebase Server key Token)
 ````
 Click Save.
+
+Or, use command line programs to [manage push credentials](https://www.twilio.com/docs/conversations/api/credential-resource).
 
 ### Create a Notify Service and Include the new Credential
 
@@ -187,7 +191,8 @@ IS0e9b3863450252891f81f312a6e3a7d7
 --------------------------------------------------------------------------------
 ## Next
 
-Implement one of the web applications: [address](address) or Twilio Notify [bindings](bindings).
+Implement one of the web applications: [address](address), Twilio Notify [bindings](bindings),
+    or Twilio Conversations [conversations](conversations).
 
 --------------------------------------------------------------------------------
 ### Documentation Links
