@@ -25,7 +25,7 @@ browser that is running the web notification application.
 
 Receiving a notification in the browser application: 
 
-<img src="conversationsWeb.jpg" width="600"/>
+<img src="../conversationsWeb.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
 ## Configurations
