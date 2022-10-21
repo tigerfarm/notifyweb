@@ -16,14 +16,13 @@ Command line programs for testing:
 - [servicesConversationParticipantsList.js](servicesConversationParticipantsList.js) : list all participant for a conversation.
 
 --------------------------------------------------------------------------------
-# Twilio Conversations Notification Web Application Implementation
+# Web Application Implementation
 
 These are the steps to set up, configure, and run 
-a sample Twilio Notify notification web application.
-Once running, you can use a command line program to send notifications to the
-browser that is running the web notification application.
+a sample web application where the client, that runs in a browser,
+can receive Twilio Conversations notifications.
 
-Receiving a notification in the browser application: 
+Client running in the browser: 
 
 <img src="../conversationsWeb.jpg" width="600"/>
 
@@ -32,14 +31,16 @@ Receiving a notification in the browser application:
 
 First, go through the steps in the higher level [README](../README.md):
 + Create a [Google Firebase project](https://console.firebase.google.com/).
-+ Create a [Twilio Mobile Push Credentials](https://console.twilio.com/us1/develop/notify/try-it-out?frameUrl=%2Fconsole%2Fnotify%2Fcredentials%3F__override_layout__%3Dembed%26bifrost%3Dtrue%26x-target-region%3Dus1) entery.
++ Create a [Twilio Mobile Push Credentials](https://console.twilio.com/us1/develop/notify/try-it-out?frameUrl=%2Fconsole%2Fnotify%2Fcredentials%3F__override_layout__%3Dembed%26bifrost%3Dtrue%26x-target-region%3Dus1) entry.
 
-For use by the web application program, webserver.js, create environment variables:
+Create environment variables for web server program, webserver.js:
 ````
-Create a Conversations access token using:
+Variables to generate Conversations access token,
 Twilio Account:                 CONVERSATIONS_ACCOUNT_SID
-Notifications to the service:   CONVERSATIONS_SERVICE_SID
-For sending notifications:      FCM_CREDENTIAL_SID
+                                CONVERSATIONS_API_KEY
+                                CONVERSATIONS_API_KEY_SECRET
+Conversations service SID:      CONVERSATIONS_SERVICE_SID
+Twilio push credential SID:     FCM_CREDENTIAL_SID
 ````
 In the web application, notify_actions.js:
 ````
