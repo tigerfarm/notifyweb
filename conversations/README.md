@@ -100,14 +100,14 @@ Twilio push credential SID:     FCM_CREDENTIAL_SID
 ````
 Set up Conversations components using command line programs.
 ````
-Create a conversations.
+Create a conversation.
 $ node servicesConversationCreate.js 
 ++ Create a conversation.
 + Messaging Service SID: IS5c86b7d0d6e44133acb09734274f94f6, Friendly and unique Name: Test notifications
 + Conversation SID: CHdb2a97f48028474da2eb168e7801df21 Test notifications
 
-Create a Conversations participant into the conversation.
-The participant(userIdentity=davew) needs to join a channel, name: note.
+Create a conversation chat participant in the conversation.
+The participant(davew) needs to join the conversation(note).
 $ node servicesConversationParticipantCreateChat.js
 ++ Create an Chat participant for a conversation.
 + Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
@@ -152,7 +152,7 @@ Create a Conversations conversation object
 Set the conversation instance to receive notifications.
     thisConversationClient.setPushRegistrationId('fcm', firebaseFcmToken);
 ````
-Now can receive tokens.
+Now can receive notifications.
 
 ### Create a message in the channel.
 
@@ -179,7 +179,7 @@ Modify: Notification Text,
     From:   ${CONVERSATION}:${PARTICIPANT}: ${MESSAGE}
     To:     Test: ${CONVERSATION}:${PARTICIPANT}: ${MESSAGE}
 ````
-Create another message in the conversation, and you'll see the modify notification.
+Create another message in the conversation, and you'll see the modified notification message.
 
 --------------------------------------------------------------------------------
 

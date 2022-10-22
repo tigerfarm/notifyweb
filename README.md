@@ -10,97 +10,6 @@ includes the "address" application functionality, plus uses Twilio Notify Bindin
 + [Notes](READMEios.md) on Twilio Notify iOS Notification
 
 --------------------------------------------------------------------------------
-### Google Firebase project Value Used in Notification Senders and Receivers
-
-For sending, the Google Firebase project server key Token: AAAA...x6r
-+ The Server key Token, is the FCM Secret in a Twilio credential entry.
-+ When sending a notification, the other address value is the receiver's device app token.
-
-For receiving, the Google Firebase project Web Push certificate's key pair: BBZWL...qHA
-+ Used in the app when requesting a device app token.
-+ Receiving also requires the Firebase sender id, which is also the project number: 69...4
-
-In the receiving web app's index.html file:
-````
-var config = {
-    apiKey: "BBZWL...qHA",
-    messagingSenderId: "69...4"
-};
-firebase.initializeApp(config);
-````
-The firebase-messaging-sw.js file also contains the Firebase sender id:
-````
-firebase.initializeApp({
-    'messagingSenderId': "69...4"     // Matches the value in index.html.
-});
-````
-In webserver.js, when generating the conversation token, use the following environment variables.
-````
-$ echo $CONVERSATIONS_ACCOUNT_SID
-ACae...3
-
-$ echo $CONVERSATIONS_SERVICE_SID
-IS5c86b7d0d6e44133acb09734274f94f6
-
-$ echo $FCM_CREDENTIAL_SID
-CR5db9959c64d7b104c9cf50c1f65efff6
-````
-Add the conversation notification participant into the conversation.
-````
-$ node servicesConversationParticipantCreateChat.js
-++ Create an Chat participant for a conversation.
-+ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
-+ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
-+ Participant Identity: davew
-+ Created participant, SID: MBda9663986bf74a5099e0c68d72487fb3
-
-$ node servicesConversationParticipantsList.js
-++ List Participants for a Conversation.
-+ Conversations service SID: IS5c86b7d0d6e44133acb09734274f94f6
-+ Conversation SID: CHdb2a97f48028474da2eb168e7801df21
-++ uniqueName:      note
-++ state:           active
-+ Participant SID: MB48e7413647a8403384be00ecf2aca85a identity, Chat: dave
-+ Participant SID: MBda9663986bf74a5099e0c68d72487fb3 identity, Chat: davew
-````
-Notification message title is set in: firebase-messaging-sw.js
-````
-messaging.setBackgroundMessageHandler(function(payload) {
-    ...
-    const notificationTitle = 'Conversation Notification Web App';   // Notification background Message Title.
-    ...
-}
-````
-### Setup 
-
-Sending requirements:
-+ Create and configure a Google Firebase Project.
-+ Create Twilio Notify credentials for sending notifications.
-    The credentials include the Google Firebase project Server key Token.
-+ Create a Twilio Notify service includes the Twilio Notify credentials.
-
-Receiving requirements:
-+ Implement one of the web applications: [address](address), Twilio Notify [bindings](bindings),
-    or Twilio Conversations [conversations](conversations).
-+ The web appication will include the Google Firebase project Web Push certificate's key pair, and sender id.
-
---------------------------------------------------------------------------------
-### Background Notifications
-
-If application is not running in the browser when a notification is received,
-the notification is handled in the background.
-
-<img src="address/notifyw2.jpg" width="400"/>
-
-Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
-to receive background notifications, 
-````
-Go to the option: Apple/System Preferences.../Notifications & Focus.
-Select the browser, for example: Firefox.
-Enable: Allow notifications: When mirroring or sharing the display.
-````
-
---------------------------------------------------------------------------------
 ## Create a Google Firebase Project
 
 This section cover the connection:
@@ -144,7 +53,7 @@ listed in the Project settings/Cloud Messaging option.
 <img src="notifyFirebase.jpg" width="600"/>
 
 --------------------------------------------------------------------------------
-## Add the Firebase Server Key into a New Twilio Notify Push Credential Entry
+## Add the Firebase Server Key into a New Twilio Push Credential Entry
 
 ### Get Firebase Server Key
 
@@ -172,7 +81,7 @@ Click "here", in any of the services, for example: Create an FCM Credential here
 ````
 From the management page, can add or change a credential.
 
-For example credential entry:
+Example credential entry:
 ````
 Friendly Name: twilionotify
 Type: FCM
@@ -183,6 +92,9 @@ Click Save.
 Or, use command line programs to [manage push credentials](https://www.twilio.com/docs/conversations/api/credential-resource).
 
 ### Create a Notify Service and Include the new Credential
+
+This step is not required for Twilio Conversations notifications
+because Conversations manages the bindings in the background.
 
 Create a Notify Service Instance: [Twilio Console link](https://www.twilio.com/console/notify/services). 
 
@@ -201,10 +113,61 @@ IS0e9b3863450252891f81f312a6e3a7d7
 ````
 
 --------------------------------------------------------------------------------
+### Add Firebase project Values into the Web Appication Programs
+
+For sending, use the Google Firebase project server key Token: AAAA...x6r
++ The Server key Token is the FCM Secret in a Twilio credential entry.
++ When sending a notification, the other address value is the receiver's device app token.
+
+For receiving, from the same Google Firebase project, use the Web Push certificate's key pair: BBZWL...qHA
++ It's used in the app when requesting a device app token.
++ Receiving also requires the Firebase sender id, which is also the project number: 69...4
+
+In the receiving web app's index.html file:
+````
+var config = {
+    apiKey: "BBZWL...qHA",
+    messagingSenderId: "69...4"
+};
+firebase.initializeApp(config);
+````
+The firebase-messaging-sw.js file also contains the Firebase sender id:
+````
+firebase.initializeApp({
+    'messagingSenderId': "69...4"     // Matches the value in index.html.
+});
+````
+The notification message title is set in: firebase-messaging-sw.js
+````
+messaging.setBackgroundMessageHandler(function(payload) {
+    ...
+    const notificationTitle = 'Notification Web App';   // Notification background Message Title.
+    ...
+}
+````
+--------------------------------------------------------------------------------
+### Background Notifications
+
+If application is not running in the browser when a notification is received,
+the notification is handled in the background.
+
+<img src="address/notifyw2.jpg" width="400"/>
+
+Note, when using a Mac with screen mirroring (which I'm using, laptop closed, external monitor),
+to receive background notifications, 
+````
+Go to the option: Apple/System Preferences.../Notifications & Focus.
+Select the browser, for example: Firefox.
+Enable: Allow notifications: When mirroring or sharing the display.
+````
+
+--------------------------------------------------------------------------------
 ## Next
 
-Implement one of the web applications: [address](address), Twilio Notify [bindings](bindings),
-    or Twilio Conversations [conversations](conversations).
+Implement one of the web applications to receive notifications:
++ [address](address)
++ Twilio Notify [bindings](bindings),
++ Twilio Conversations [conversations](conversations).
 
 --------------------------------------------------------------------------------
 ### Documentation Links
