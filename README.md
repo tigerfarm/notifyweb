@@ -5,9 +5,11 @@ This repository has 3 sample web applications to receive FCM notification and Tw
 + Directory [bindings](bindings) has a web application sample that 
 includes the "address" application functionality, plus uses Twilio Notify Bindings.
 + Directory [conversations](conversations) has a basic minimum Twilio Conversations sample web application.
-+ [Notes](READMEandroid.md) on how web application notifications relates to Twilio Notify Android
+
+Notes,
++ [Android](READMEandroid.md) on how web application notifications relates to Twilio Notify Android
     [quickstart app](https://github.com/TwilioDevEd/notifications-quickstart-android) notifications.
-+ [Notes](READMEios.md) on Twilio Notify iOS Notification
++ [iOS](READMEios.md) on Twilio Notify iOS Notification
 
 --------------------------------------------------------------------------------
 ## Create a Google Firebase Project
@@ -113,15 +115,12 @@ IS0e9b3863450252891f81f312a6e3a7d7
 ````
 
 --------------------------------------------------------------------------------
-### Add Firebase project Values into the Web Appication Programs
+### Web Appication Program Firebase Settings
 
-For sending, use the Google Firebase project server key Token: AAAA...x6r
-+ The Server key Token is the FCM Secret in a Twilio credential entry.
-+ When sending a notification, the other address value is the receiver's device app token.
+Sending, use the Google Firebase project server key Token: AAAA...x6r
 
-For receiving, from the same Google Firebase project, use the Web Push certificate's key pair: BBZWL...qHA
-+ It's used in the app when requesting a device app token.
-+ Receiving also requires the Firebase sender id, which is also the project number: 69...4
+Receiving, from the same Google Firebase project, use the Web Push certificate's key pair: BBZWL...qHA
+and the project number: 69...4.
 
 In the receiving web app's index.html file:
 ````
@@ -165,8 +164,8 @@ Enable: Allow notifications: When mirroring or sharing the display.
 ## Next
 
 Implement one of the web applications to receive notifications:
-+ [address](address)
-+ Twilio Notify [bindings](bindings),
++ FCM [address](address)
++ Twilio Notify [bindings](bindings)
 + Twilio Conversations [conversations](conversations).
 
 --------------------------------------------------------------------------------
