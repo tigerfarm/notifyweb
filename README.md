@@ -1,7 +1,7 @@
 # Web Application Receive Notifications
 
 This repository has 3 sample web applications to receive FCM notification and Twilio Notify notifications.
-+ Directory [address](address) has a basic minimum sample web application.
++ Directory [address](address) has a basic minimum sample web application, using FCM only, not using the Twilio Notify service.
 + Directory [bindings](bindings) has a web application sample that 
 includes the "address" application functionality, plus uses Twilio Notify Bindings.
 + Directory [conversations](conversations) has a basic minimum Twilio Conversations sample web application.

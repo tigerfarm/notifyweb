@@ -7,7 +7,7 @@
             // -----------------------------------------------------------------
             // Get a Firebase Cloud Messaging(FCM) token to identify this client.
             // Token is the device address.
-            function GetMessagingToken() {
+            function GetFirebaseToken() {
                 if (firebase && firebase.messaging()) {
                     // requesting permission to use push notifications
                     firebase.messaging().requestPermission().then(() => {
@@ -41,7 +41,7 @@
         <h2>Minimum Notification Web Application</h2>
         <table>
             <tr>
-                <td><input style="width: 260px" class="abutton" type="button" onclick="GetMessagingToken()" value="Get Firebase FCM message token"></td>
+                <td><input style="width: 260px" class="abutton" type="button" onclick="GetFirebaseToken()" value="Get Firebase FCM message token"></td>
                 <td style="height:60px"><span id="fcmToken"></span></td>
             </tr>
         </table>

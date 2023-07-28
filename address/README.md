@@ -87,13 +87,44 @@ $ node webserver.js
 
 ## Get a Google Firebase Token
 
-In a web browser, goto the [link](http://localhost:8000/)(http://localhost:8000/).
+In a web browser, goto the [link](http://localhost:8000/index.html)(http://localhost:8000/).
+
+The index.html file loads the following Google Firebase librares.
+````
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+````
+
+Have the JavaScript function request a Google Firebase Token.
 ````
 Click "Get Firebase FCM message token".
     The token is displayed, for example: "cw...YX".
 ````
 The program passes the Firebase Sender ID and Web Push certificate key pair value
 to the Google Firebase library which returns the token.
+The token is displayed on the webpage.
+
+Function to request and receive a Google Firebase token.
+````
+            function GetFirebaseToken() {
+                if (firebase && firebase.messaging()) {
+                    // requesting permission to use push notifications
+                    firebase.messaging().requestPermission().then(() => {
+                        // getting FCM token
+                        firebase.messaging().getToken().then((fcmToken) => {
+                            document.getElementById("fcmToken").innerText = fcmToken;
+                        }).catch((err) => {
+                            logger("- Error: Can't get token: " + err);
+                        });
+                    }).catch((err) => {
+                        logger("- Error: user has not granted permission.");
+                        logger(err);
+                    });
+                } else {
+                    logger("- Error: Firebase library not initialized.");
+                }
+            }
+````
 
 ## Send a notification:
 

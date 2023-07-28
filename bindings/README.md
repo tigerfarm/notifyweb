@@ -1,4 +1,4 @@
-#### Files in the "address" directory
+#### Files in the "bindings" directory
 
 - [webserver.js](webserver.js) : a NodeJS Express HTTP Server that serves the client files.
 - [sendBinding.js](sendBinding.js) : a NodeJS command line program to send a Twilio Notify notification using the binding identity.
@@ -86,7 +86,7 @@ $ export MAIN_AUTH_TOKEN=...
 ````
 Run the web server. Default port is hardcoded to 8000.
 ````
-$ node websever.js
+$ node webserver.js
 +++ Notify web application server is starting up.
 + Notify service SID: IS0e9b3863450252891f81f312a6e3a7d7
 + Twilio client object created for Twilio account: ACa...3
@@ -166,7 +166,7 @@ client.notify.services("IS0e9b3863450252891f81f312a6e3a7d7").notifications.creat
 
 Sample program run:
 ````
-$ node sendNotification.js 
+$ node sendBinding.js 
 +++ Start sending notifications to an identity.
 + Sent: NTea47fb9ca9bc391f923dd2c999153a06
 ````
