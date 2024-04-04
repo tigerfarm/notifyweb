@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="https://media.twiliocdn.com/sdk/js/conversations/releases/2.1.0/twilio-conversations.min.js"></script>
+        <!-- For FCM -->
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+        <script src="notify_actions.js"></script>
+        <link rel="stylesheet" href="custom/format.css">
+        <title>Conversations Notifications</title>
+    </head>
+    <body>
+        <h1>Conversations Notification Web Application</h1>
+        <h2>Use Twilio Conversations Binding</h2>
+        <form id="binding_form">
+            <table>
+                <tr>
+                    <td><input class="abutton" type="button" onclick="GetMessagingToken()" value="Get Firebase FCM message token"></td>
+                    <td style="height:60px"><span id="fcmToken"></span></td>
+                </tr>
+                <tr>
+                    <td>Conversation identity:</td>
+                    <td><input type="text" name="identity_field"></td>
+                </tr>
+                <tr>
+                    <td><input class="abutton" type="button" onclick="setConversation()" value="Create Conversations instance"></td>
+                    <td><span id="setConversationsEnabled"></span></td>
+                </tr>
+                <tr>
+                    <td><input class="abutton" type="button" onclick="setNotifications()" value="Set instance to receive notifications"></td>
+                    <td><span id="notificationsConversationsEnabled"></span></td>
+                </tr>
+            </table>
+        </form>
+        <div id="logBox">
+            <div class="panelTitle">
+                Log messages
+            </div>
+            <div class="panelArea">
+                <textarea id="log"></textarea>
+            </div>
+            <div class="panelArea">
+                <table>
+                    <tr>
+                        <td><button class="abutton" id="clearLog" onclick="clearTextAreas();">Clear</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            // -----------------------------------------------------------------
+            // Firebase project, using the Project settings:
+            // + Web API Key as apiKey.
+            // + Project number as messagingSenderId. This value was also used in firebase-messaging-sw.js.
+            var config = {
+                apiKey: "BBZWLqhbPGsB56YsVE2nMZ-ar6hg0O9fN2f2_baIg_xaKmoTw_gU7OHJEZlWLIbG-bMPLTqEFP-G1aLZo9YoqHA",
+                messagingSenderId: "696202644334",
+                projectId: "twilionotify"
+            };
+            logger('+ firebase.initializeApp(config), Firebase Project: ' + config.projectId);
+            //
+            // Initialize Firebase Messaging object.
+            firebase.initializeApp(config);
+            const messaging = firebase.messaging();
+            //
+            // Listener for incomming notifications.
+            // This works when this is running in the browser.
+            //  If not running in the browser,
+            //      messaging.setBackgroundMessageHandler( ... )
+            //      in firebase-messaging-sw.js.
+            messaging.onMessage(function (payload) {
+                console.log('+ Message received payload.', payload);
+                logger('+ Payload notification message received:       ' + payload.data.twi_body);
+                logger('+ Payload notification message from sender id: ' + payload.from);
+            });
+           // GetMessagingToken();
+        </script>
+    </body>
+</html>

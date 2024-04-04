@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-messaging.js"></script>
+        <title>FCM Notifications</title>
+        <script src="addFCM.js"></script>
+    </head>
+    <body>
+        <h2>Minimum Notification Web Application</h2>
+        <table>
+            <tr>
+                <td><input style="width: 260px" class="abutton" type="button" onclick="GetFirebaseToken()" value="Get Firebase FCM message token"></td>
+                <td style="height:60px"><span id="fcmToken"></span></td>
+            </tr>
+        </table>
+        <div id="logBox">
+            <div class="panelTitle">
+                Log messages
+            </div>
+            <div class="panelArea">
+                <textarea id="log" style="height: 290px; width: 624px;"></textarea>
+            </div>
+            <div class="panelArea">
+                <table>
+                    <tr>
+                        <td><button class="abutton" id="clearLog" onclick="clearTextAreas();">Clear</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Initialize FCM -->
+        <script>
+            initFirebase();
+        </script>
+    </body>
+</html>

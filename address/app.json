@@ -1,0 +1,8 @@
+{
+  "name": "Sample Twilio JavaScript Video Application",
+  "description": "Twilio JavaScript Video client web application.",
+  "repository": "https://github.com/tigerfarm/tfpvideo",
+  "logo": "http://tigerfarmpress.com/images/topImgLeft.jpg",
+  "keywords": ["node", "express", "heroku", "Twilio", "video", "JavaScript"],
+    "env": {}
+}
