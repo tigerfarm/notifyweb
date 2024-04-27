@@ -48,7 +48,7 @@
             // + Project number as messagingSenderId. This value was also used in firebase-messaging-sw.js.
             var config = {
                 apiKey: "BBZWLqhbPGsB56YsVE2nMZ-ar6hg0O9fN2f2_baIg_xaKmoTw_gU7OHJEZlWLIbG-bMPLTqEFP-G1aLZo9YoqHA",
-                messagingSenderId: "696202644334",
+                messagingSenderId: "696202644334", // Matches the value in firebase-messaging-sw.js. Same for old type of credentials and new FCM HTTP v1 API.
                 projectId: "tignotify"
             };
             logger('+ firebase.initializeApp(config), Firebase Project: ' + config.projectId);

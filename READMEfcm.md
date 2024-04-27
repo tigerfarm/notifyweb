@@ -13,7 +13,7 @@ https://cloud.google.com/iam/docs/creating-custom-roles
 Short form to confirm the project and enable.
 ---
 
---------------------
+--------------------------------------------------------------------------------
 Step 1: Create a Custom Role for FCM in Google Cloud Console
 1. Go to the IAM & Admin section.
 https://console.cloud.google.com/iam-admin
@@ -26,6 +26,7 @@ The following is for:
 Click "Roles" on the left menu which goes to:
 https://console.cloud.google.com/iam-admin/roles
 Click "Create Role".
+
 3. Add only the "cloudmessaging.messages.create" permission to the role. This is the only role we need.
 Current form matches the Twilio doc.
 I set the form values to match the doc: custom-fcm-role, CustomFcmRole, ...
@@ -73,8 +74,10 @@ Create New Credentials,
 + Name: twilionotify2024, FCM Push credential >> Credential SID: CR3551bd299871fb5ca942d8417e0e04cb
 + Name: twilionotify2, FCM Push credential >> Credential SID: CRc75055a32cede84b70494b0669d3e02c
 
---------------------
+--------------------------------------------------------------------------------
 ++ Application testing
+
+Note, my recent tests only worked with my Chrome browser, didn't work with my Firefox browser.
 
 In Twilio Console,
 Develop/Notify/Services/notifyweb: IS0e9b3863450252891f81f312a6e3a7d7
