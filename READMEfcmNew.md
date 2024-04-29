@@ -3,6 +3,9 @@
 Updating Twilio Push for FCM HTTP v1 API
 https://help.twilio.com/articles/20768292997147-Updating-Twilio-Push-for-FCM-HTTP-v1-API
 
+Send custom notifications by channel, payload override:
+https://www.twilio.com/docs/notify/api/notification-resource#send-custom-notifications-by-channel
+
 Below, is the steps I went through.
 ````
 

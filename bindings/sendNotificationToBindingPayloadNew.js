@@ -7,7 +7,7 @@ const theIdentity = 'batman';      // Use listBindings.js to get identities.
 console.log("+ Notify service SID: " + notifyServiceSid + ', To identity: ' + theIdentity);
 client.notify.services(notifyServiceSid).notifications.create({
     identity: theIdentity,
-    body: 'Hello ' + theIdentity + " #2co",
+    body: 'Hello ' + theIdentity + " #1co",
     data: {
         custom_key1: 'custom value 1',
         custom_key2: 'custom value 2'
@@ -16,7 +16,7 @@ client.notify.services(notifyServiceSid).notifications.create({
         message: {
             notification: {
                 title: 'Custom Payload Override',
-                body: 'Hello Dave 2.'
+                body: 'Hello Dave 3.'
             }
         }
     }
