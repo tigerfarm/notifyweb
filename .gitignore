@@ -1,7 +1,5 @@
 # Ignore adding the following to the repository.
 #
 .DS_Store
-/docroot/index.html
-/docroot1/index.html
-createBindingActual.js
+fcmNewJSON.md
 #

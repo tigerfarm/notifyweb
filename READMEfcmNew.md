@@ -6,6 +6,18 @@ https://help.twilio.com/articles/20768292997147-Updating-Twilio-Push-for-FCM-HTT
 Send custom notifications by channel, payload override:
 https://www.twilio.com/docs/notify/api/notification-resource#send-custom-notifications-by-channel
 
+Note, FCM custom payload notifications require updates when using the new Google credentials: FCM HTTP v1 API.
+See programs:
+````
+sendNotificationToBindingPayloadLegacy.js
+sendNotificationToBindingPayloadNew.js
+````
+
+For reference,
+[Google Firebase project](https://console.firebase.google.com/) link for legacy configurations.
+
+
+--------------------------------------------------------------------------------
 Below, is the steps I went through.
 ````
 
@@ -106,6 +118,21 @@ which is the same project used in the receiving notification application.
 Change to:
 FCM CREDENTIAL SID: notifyweb2
 sendNotificationToBinding succeeds.
+
+--------------------------------------------------------------------------------
+++ Custom payload
+
+++ Use the legacy credentials from the old tested FCM project
+which is the same project used in the receiving notification application.
+Change to:
+FCM CREDENTIAL SID: twilionotify
+sendNotificationToBindingPayloadLegacy.js.js succeeds.
+
+++ Use the new credential from the old tested FCM project
+which is the same project used in the receiving notification application.
+Change to:
+FCM CREDENTIAL SID: twilionotify2 (also twilionotify3)
+sendNotificationToBindingPayloadNew.js succeeds.
 
 ````
 --------------------------------------------------------------------------------

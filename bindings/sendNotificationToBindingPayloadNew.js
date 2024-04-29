@@ -13,7 +13,7 @@ client.notify.services(notifyServiceSid).notifications.create({
         custom_key2: 'custom value 2'
     },
     fcm: {
-        message: {
+        message: {              // This is the new part for the new Google credentials: FCM HTTP v1 API.
             notification: {
                 title: 'Custom Payload Override',
                 body: 'Hello Dave 3.'
