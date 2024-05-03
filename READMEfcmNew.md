@@ -139,7 +139,7 @@ sendNotificationToBinding succeeds.
 which is the same project used in the receiving notification application.
 Change to:
 FCM CREDENTIAL SID: twilionotify
-sendNotificationToBindingPayloadLegacy.js.js succeeds.
+sendNotificationToBindingPayloadLegacy.js succeeds.
 
 ++ Use the new credential from the old tested FCM project
 which is the same project used in the receiving notification application.
@@ -147,8 +147,7 @@ Change to:
 FCM CREDENTIAL SID: twilionotify2 (also twilionotify3)
 sendNotificationToBindingPayloadNew.js succeeds.
 ````
-Note, FCM custom payload notifications require updates when using the new Google credentials: FCM HTTP v1 API.
-See programs:
+Links to the sample programs:
 + [bindings/sendNotificationToBindingPayloadLegacy.js](bindings/sendNotificationToBindingPayloadLegacy.js)
 + [bindings/sendNotificationToBindingPayloadNew.js](bindings/sendNotificationToBindingPayloadNew.js)
 
