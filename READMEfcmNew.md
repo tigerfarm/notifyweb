@@ -101,7 +101,8 @@ Create New Credentials,
 ````
 ### Application testing
 
-Note, my recent tests only worked with my Chrome browser, didn't work with my Firefox browser.
+Note, my recent tests only worked with my Chrome browser, 
+didn't work with my Firefox browser which maybe because of a setting I have in Firefox.
 ````
 
 In Twilio Console,
@@ -145,8 +146,12 @@ which is the same project used in the receiving notification application.
 Change to:
 FCM CREDENTIAL SID: twilionotify2 (also twilionotify3)
 sendNotificationToBindingPayloadNew.js succeeds.
-
 ````
+Note, FCM custom payload notifications require updates when using the new Google credentials: FCM HTTP v1 API.
+See programs:
++ [bindings/sendNotificationToBindingPayloadLegacy.js](bindings/sendNotificationToBindingPayloadLegacy.js)
++ [bindings/sendNotificationToBindingPayloadNew.js](bindings/sendNotificationToBindingPayloadNew.js)
+
 --------------------------------------------------------------------------------
 
 Cheers...
