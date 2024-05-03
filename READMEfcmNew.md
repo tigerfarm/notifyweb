@@ -16,7 +16,7 @@ For reference,
 
 
 --------------------------------------------------------------------------------
-Below, is the steps I went through.
+### Below, is the steps I went through.
 
 First, confirm that your project is enable for Firebase Cloud Messaging API (V1).
 Goto [Google Firebase projects](https://console.firebase.google.com/) and click your project.
