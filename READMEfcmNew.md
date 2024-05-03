@@ -8,8 +8,8 @@ https://www.twilio.com/docs/notify/api/notification-resource#send-custom-notific
 
 Note, FCM custom payload notifications require updates when using the new Google credentials: FCM HTTP v1 API.
 See programs:
-+ [bindings/sendNotificationToBindingPayloadLegacy.js]
-+ [sendNotificationToBindingPayloadNew.js]
++ [bindings/sendNotificationToBindingPayloadLegacy.js](bindings/sendNotificationToBindingPayloadLegacy.js)
++ [bindings/sendNotificationToBindingPayloadNew.js](bindings/sendNotificationToBindingPayloadNew.js)
 
 For reference,
 [Google Firebase project](https://console.firebase.google.com/) link for legacy configurations.
