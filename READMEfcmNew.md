@@ -98,9 +98,11 @@ Create New Credentials,
 + Name: twilionotify2, FCM Push credential >> Credential SID: CRc75055a32cede84b70494b0669d3e02c
 
 --------------------------------------------------------------------------------
-++ Application testing
+````
+### Application testing
 
 Note, my recent tests only worked with my Chrome browser, didn't work with my Firefox browser.
+````
 
 In Twilio Console,
 Develop/Notify/Services/notifyweb: IS0e9b3863450252891f81f312a6e3a7d7
@@ -128,8 +130,10 @@ FCM CREDENTIAL SID: notifyweb2
 sendNotificationToBinding succeeds.
 
 --------------------------------------------------------------------------------
-++ Custom payload
+````
+### Custom payload
 
+````
 ++ Use the legacy credentials from the old tested FCM project
 which is the same project used in the receiving notification application.
 Change to:
