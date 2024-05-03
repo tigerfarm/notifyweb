@@ -17,15 +17,25 @@ For reference,
 
 --------------------------------------------------------------------------------
 Below, is the steps I went through.
-````
 
+Confirm that your project is enable fore Firebase Cloud Messaging API (V1).
+Goto [Google Firebase projects](https://console.firebase.google.com/) and click your project.
+Project Overview/Project Settings.
+Click Cloud Messageing tab. Confirm Firebase Cloud Messaging API (V1) is enabled.
+````
+Firebase Cloud Messaging API (V1) Enabled
+````
+The following may have enabled it for me:
+````
 ---
-This is likely not required:
+I think the following is required:
 From the following page, under Before you begin/Enable the IAM API, click Enable the API. 
 https://cloud.google.com/iam/docs/creating-custom-roles
 Short form to confirm the project and enable.
 ---
 
+Documentation steps:
+````
 --------------------------------------------------------------------------------
 Step 1: Create a Custom Role for FCM in Google Cloud Console
 1. Go to the IAM & Admin section.
