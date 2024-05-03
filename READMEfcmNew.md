@@ -108,7 +108,7 @@ didn't work with my Firefox browser which maybe because of a setting I have in F
 
 In Twilio Console,
 Develop/Notify/Services/notifyweb: IS0e9b3863450252891f81f312a6e3a7d7
-Current, legacy:
+Current, legacy credential:
 Configure/Properties, FCM CREDENTIAL SID: notifyweb
 
 In the sample application: notifyweb/bindings.
@@ -117,7 +117,7 @@ sendNotificationToBinding.js uses, notifyweb: IS0e9b3863450252891f81f312a6e3a7d7
 ------
 ++ Use the new credential from the new FCM project.
 Change from:
-FCM CREDENTIAL SID: notifyweb
+FCM CREDENTIAL SID: notifyweb, same credential: twilionotify 
 To:
 FCM CREDENTIAL SID: notifyweb2024
 sendNotificationToBinding
@@ -128,7 +128,7 @@ Failed because the receiving notification application uses different Google proj
 ++ Use the new credential from the old tested FCM project
 which is the same project used in the receiving notification application.
 Change to:
-FCM CREDENTIAL SID: notifyweb2
+FCM CREDENTIAL SID: notifyweb2, same credential: twilionotify2 and twilionotify3
 sendNotificationToBinding succeeds.
 
 --------------------------------------------------------------------------------
