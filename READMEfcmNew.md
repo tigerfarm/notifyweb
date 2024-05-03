@@ -119,8 +119,8 @@ Change from:
 FCM CREDENTIAL SID: notifyweb
 To:
 FCM CREDENTIAL SID: notifyweb2024
-sendNotificationToBinding fails:
-FAILED	52109: GCM/FCM API key is revoked or invalid
+sendNotificationToBinding
+> Fails, error: FAILED 52109: GCM/FCM API key is revoked or invalid
 Failed because the receiving notification application uses different Google project ids.
 
 ------
@@ -139,13 +139,20 @@ sendNotificationToBinding succeeds.
 which is the same project used in the receiving notification application.
 Change to:
 FCM CREDENTIAL SID: twilionotify
-sendNotificationToBindingPayloadLegacy.js succeeds.
+sendNotificationToBindingPayloadLegacy.js
+> Succeeds.
 
 ++ Use the new credential from the old tested FCM project
 which is the same project used in the receiving notification application.
 Change to:
 FCM CREDENTIAL SID: twilionotify2 (also twilionotify3)
-sendNotificationToBindingPayloadNew.js succeeds.
+sendNotificationToBindingPayloadLegacy.js
+> Fails, error: FAILED 52111 GCM/FCM returned unknown error.
+Fails because the custom payload needs to updated for FCM API v1.
+
+++ Run with FCM HTTP v1 API credential and updated custom payload:
+sendNotificationToBindingPayloadNew.js
+> Succeeds.
 ````
 Links to the sample programs:
 + [bindings/sendNotificationToBindingPayloadLegacy.js](bindings/sendNotificationToBindingPayloadLegacy.js)
