@@ -18,10 +18,10 @@ For reference,
 --------------------------------------------------------------------------------
 Below, is the steps I went through.
 
-Confirm that your project is enable fore Firebase Cloud Messaging API (V1).
+Confirm that your project is enable for Firebase Cloud Messaging API (V1).
 Goto [Google Firebase projects](https://console.firebase.google.com/) and click your project.
 Project Overview/Project Settings.
-Click Cloud Messageing tab. Confirm Firebase Cloud Messaging API (V1) is enabled.
+Click Cloud Messaging tab. Confirm Firebase Cloud Messaging API (V1) is enabled.
 ````
 Firebase Cloud Messaging API (V1) Enabled
 ````
@@ -33,7 +33,7 @@ From the following page, under Before you begin/Enable the IAM API, click Enable
 https://cloud.google.com/iam/docs/creating-custom-roles
 Short form to confirm the project and enable.
 ---
-
+````
 Documentation steps:
 ````
 --------------------------------------------------------------------------------
